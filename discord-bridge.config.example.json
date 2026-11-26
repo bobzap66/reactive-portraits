@@ -1,0 +1,5 @@
+{
+  "token": "PASTE_DISCORD_BOT_TOKEN_HERE",
+  "guildId": "PASTE_DISCORD_SERVER_ID_HERE",
+  "speakingDelayMs": 500
+}

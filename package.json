@@ -1,0 +1,18 @@
+{
+  "name": "reactive-portraits",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A local controller and OBS overlay for reactive campaign portraits, with an optional Discord voice bridge.",
+  "main": "server.cjs",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.cjs",
+    "bridge": "node discord-bridge.cjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@discordjs/voice": "^0.19.2",
+    "@snazzah/davey": "^0.1.6",
+    "discord.js": "^14.24.2"
+  }
+}

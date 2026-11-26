@@ -1,0 +1,26 @@
+{
+  "campaigns": [
+    {
+      "id": "example-campaign",
+      "label": "Example Campaign",
+      "title": "The Adventuring Party",
+      "channelId": "",
+      "people": [
+        {
+          "id": "gm",
+          "name": "Game Master",
+          "role": "GM",
+          "image": "assets/portrait-placeholder.svg",
+          "discordId": ""
+        },
+        {
+          "id": "hero-one",
+          "name": "Hero One",
+          "role": "Player Character",
+          "image": "assets/portrait-placeholder.svg",
+          "discordId": ""
+        }
+      ]
+    }
+  ]
+}
