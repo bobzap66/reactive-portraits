@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reactive Portraits</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div><h1>Reactive Portraits</h1><p>Campaign portrait controller and OBS overlay</p></div>
+      <div class="header-actions">
+        <label class="campaign-label">Campaign <select id="campaignSelect"></select></label>
+        <button id="manageCampaigns" class="button secondary">Manage campaigns</button>
+        <a id="overlayLink" class="button" target="_blank" rel="noreferrer">Open OBS overlay</a>
+      </div>
+    </header>
+    <div id="notice" class="notice" role="status"></div>
+    <section id="cards" class="cards" aria-live="polite"></section>
+    <footer>Click a portrait to mark the speaker. Use the controls below each portrait to dim absent players and adjust crops.</footer>
+  </main>
+
+  <dialog id="manager">
+    <form id="campaignForm" method="dialog">
+      <div class="dialog-heading"><div><h2 id="formHeading">Manage campaigns</h2><p>Campaigns and portraits stay on this computer.</p></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div>
+      <div id="managerList"></div>
+      <div class="dialog-actions"><button type="button" id="newCampaign" class="button secondary">Add campaign</button></div>
+      <section id="editor" hidden>
+        <h3 id="editorHeading">Campaign settings</h3>
+        <div class="form-grid">
+          <label>Campaign name<input id="campaignLabel" required maxlength="80"></label>
+          <label>Overlay heading<input id="campaignTitle" maxlength="100"></label>
+          <label>Discord voice channel ID <span class="optional">(optional)</span><input id="channelId" inputmode="numeric" placeholder="Used by the Discord bridge"></label>
+        </div>
+        <div class="people-heading"><h3>Participants</h3><button type="button" id="addPerson" class="button secondary small">Add participant</button></div>
+        <div id="peopleEditor" class="people-editor"></div>
+        <div class="dialog-actions"><button type="button" id="deleteCampaign" class="button danger">Remove campaign</button><span class="spacer"></span><button type="button" id="cancelEdit" class="button secondary">Cancel</button><button type="button" id="saveCampaign" class="button">Save campaign</button></div>
+      </section>
+    </form>
+  </dialog>
+  <script src="/app.js" defer></script>
+</body>
+</html>

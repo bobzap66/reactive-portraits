@@ -1,0 +1,61 @@
+/* Optional CSS template for Discord's StreamKit Voice widget.
+   Replace the sample user ID and portrait URL with your own values. */
+
+html, body { background: transparent !important; overflow: hidden !important; }
+
+ul.voice_states {
+  position: absolute !important;
+  left: 4% !important;
+  right: 4% !important;
+  bottom: 2% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  gap: 10px !important;
+  width: auto !important;
+  height: 220px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+li.voice_state {
+  position: relative !important;
+  flex: 1 1 0 !important;
+  max-width: 180px !important;
+  height: 210px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 2px solid rgba(109, 76, 99, .9) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  background: #201722 !important;
+  transition: transform .2s, filter .2s, box-shadow .2s !important;
+}
+
+li.voice_state img.voice_avatar {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  filter: saturate(.82) brightness(.72) !important;
+  transform: scale(1.6) !important;
+  transform-origin: 50% 18% !important;
+}
+
+li.voice_state:not(.wrapper_speaking) { filter: saturate(.78) brightness(.82) !important; }
+li.voice_state.wrapper_speaking {
+  transform: translateY(-9px) !important;
+  border-color: #e1bd72 !important;
+  box-shadow: 0 0 0 2px rgba(225,189,114,.65), 0 15px 35px rgba(0,0,0,.75) !important;
+}
+li.voice_state.wrapper_speaking img.voice_avatar { filter: saturate(1.12) brightness(1.08) !important; }
+li.voice_state .voice_name,
+li.voice_state .voice_username,
+li.voice_state .voice_state_name { display: none !important; }
+
+/* Example: li.voice_state[data-userid="YOUR_DISCORD_USER_ID"] img.voice_avatar {
+     content: url("http://127.0.0.1:8766/assets/your-character.png") !important;
+   } */
