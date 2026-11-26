@@ -1,12 +1,14 @@
 # Reactive Portraits
 
-A self-hosted controller and OBS browser overlay for tabletop campaigns. Mark a speaker manually, or run the optional Discord bot bridge to highlight whoever is speaking. Manage campaigns and participants in the controller instead of editing source code.
+A self-hosted controller and OBS browser overlay for tabletop campaigns. Mark a speaker manually, or use the optional Discord desktop RPC bridge or bot bridge to highlight whoever is speaking. Manage campaigns and participants in the controller instead of editing source code.
 
 ## What it does
 
 - Add, edit, and remove campaigns in the web interface.
 - Add participants, assign Discord user IDs, and point each portrait to an image in `assets/`.
 - Use one controller to switch campaigns; the bridge follows the selected campaign's Discord voice channel.
+- Choose local Discord RPC speaker detection without adding a bot to your voice channel, or use the bot bridge as an alternative.
+- Load current voice channel members into a participant dropdown and map them to portraits.
 - Mark a speaker manually, dim absent players, and adjust each portrait's zoom and crop.
 - Open a separate, transparent OBS overlay for the selected campaign.
 - Store campaign setup and portrait adjustments locally on the streaming computer.
@@ -17,7 +19,8 @@ The server binds to `127.0.0.1` and is intended for use on the same computer as 
 
 - Node.js 20 or newer.
 - OBS Studio, if you want to use the overlay.
-- A Discord bot application, only if you want automatic voice activity.
+- A Discord application configured for RPC, only if you want local RPC voice activity.
+- A Discord bot application, only if you choose the bot voice bridge.
 
 ## Start the controller
 
@@ -42,6 +45,23 @@ Keep the controller and overlay on the same machine. Both connect to the local s
 
 ## Enable automatic Discord speaker detection
 
+### Local Discord RPC (recommended for a single stream computer)
+
+This connects to the Discord desktop app running on the same computer. It does not join voice or send audio as a bot. Discord's RPC interface can emit speaking start/stop events for a subscribed voice channel. RPC access for an unapproved application is limited to application testers, so each person using this app must be on the app's tester list unless Discord approves the application. See [Discord's RPC documentation](https://discord.com/developers/docs/topics/rpc).
+
+1. In the [Discord Developer Portal](https://discord.com/developers/applications), create an application. Copy its Application ID and client secret.
+2. In the application's RPC settings, register the RPC origin `http://127.0.0.1:8766` and redirect URI `http://127.0.0.1/callback`.
+3. Copy `discord-rpc.config.example.json` to `discord-rpc.config.json`, then enter the Application ID and client secret. Keep the listed scopes, including `rpc.voice.read`.
+4. In the controller, set the campaign voice channel ID. Start Discord desktop, join the channel, and start the local controller.
+5. Run `npm run rpc` in a second terminal and approve the authorization prompt from Discord.
+6. In **Manage campaigns**, click **Load Discord users**, then choose the matching Discord user from each participant's **Discord speaker** dropdown. Save the campaign.
+
+The RPC bridge only maps accounts that are presently visible in the selected voice channel's member list. Load users again when you need to assign a person who is not currently in the channel. When switching campaigns, RPC follows the selected campaign's channel.
+
+Never share or commit `discord-rpc.config.json`. It contains your application client secret and is excluded from Git. Discord may require you to add yourself as an application tester before the authorization flow works.
+
+### Discord bot bridge
+
 The optional bridge uses a bot that joins the configured voice channel and listens for Discord's voice activity events. The bot does not transmit audio. Each participant is matched using their Discord user ID.
 
 1. Create a bot in the [Discord Developer Portal](https://discord.com/developers/applications), copy its token, and invite it to your server with permission to view and connect to the campaign voice channels.
@@ -62,16 +82,21 @@ The bridge follows whichever campaign is selected in the controller and switches
 | `reactive-state.json` | Current campaign, absent flags, and crop adjustments | No |
 | `discord-bridge.config.example.json` | Bot configuration template | Yes |
 | `discord-bridge.config.json` | Your bot token and server ID | No |
+| `discord-rpc.config.example.json` | Discord RPC configuration template | Yes |
+| `discord-rpc.config.json` | Your Discord application credentials | No |
 | `assets/` | Portrait images | Yes, if you choose to add and share them |
 
-The project uses Discord's bot voice connection for automatic speaker detection. Discord also documents a local RPC interface that can emit voice speaker events, but RPC access for an unapproved app is restricted to a tester list; this package does not depend on it.
+Use one automatic speaker source at a time. The RPC bridge requires the Discord desktop client; the bot bridge joins voice as a bot. Manual speaker selection remains available with either bridge stopped.
 
 ## Troubleshooting
 
 - **Page does not open:** make sure `npm start` is still running and that port `8766` is free.
 - **Image is missing:** verify the relative path in the campaign editor and that the image exists under `assets/`.
 - **Bridge does not connect:** verify the token, server ID, voice channel ID, and bot permissions. Start the local controller before starting the bridge.
-- **A participant never lights up:** verify that their Discord user ID is correct and that it is entered on that participant's campaign row.
+- **RPC bridge cannot connect:** make sure Discord desktop is running, the RPC origin and redirect URI exactly match the application settings, and the application is approved or your account is listed as a tester.
+- **RPC authorization fails:** check the application ID, client secret, configured redirect URI, and required RPC scopes.
+- **Discord user dropdown is empty:** start either automatic speaker bridge, wait a few seconds, and click **Load Discord users** again. The RPC bridge lists the members Discord currently shows in the selected voice channel.
+- **A participant never lights up:** verify that the correct Discord account is selected in that participant's **Discord speaker** dropdown.
 
 ## License
 

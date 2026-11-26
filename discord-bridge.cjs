@@ -41,6 +41,16 @@ function campaignById(id) { return campaignConfig.campaigns.find(campaign => cam
 function personForUser(campaignId, discordId) {
   return campaignById(campaignId)?.people.find(person => String(person.discordId || '') === String(discordId));
 }
+function publishRoster(channel) {
+  const users = [...(channel?.members?.values?.() || [])].map(member => ({
+    id: String(member.id),
+    label: `${member.displayName || member.user.globalName || member.user.username}${member.user.username && member.displayName !== member.user.username ? ` (@${member.user.username})` : ''} — ${member.id}`
+  }));
+  const body = JSON.stringify({ users });
+  const req = http.request({ hostname: '127.0.0.1', port: 8766, path: '/api/discord/users', method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) } }, response => response.resume());
+  req.on('error', error => console.error('Could not update the Discord user list:', error.message));
+  req.end(body);
+}
 function sendSpeaking(person, campaignId) {
   if (!person || currentSpeaker === person.id) return;
   currentSpeaker = person.id;
@@ -81,6 +91,7 @@ async function refresh() {
     const guild = await client.guilds.fetch(privateConfig.guildId);
     const channel = await guild.channels.fetch(channelId);
     if (!channel?.isVoiceBased()) throw new Error(`The channel configured for “${campaign.label}” is not a voice channel.`);
+    publishRoster(channel);
     connection = joinVoiceChannel({ channelId: channel.id, guildId: guild.id, adapterCreator: guild.voiceAdapterCreator, selfDeaf: false, selfMute: true });
     currentChannelId = channel.id;
     currentCampaignId = activeCampaign;
@@ -116,6 +127,10 @@ async function refresh() {
 }
 
 client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+client.on('voiceStateUpdate', state => {
+  if (state.channelId && state.channelId === currentChannelId) publishRoster(state.channel);
+  else if (state.oldState?.channelId === currentChannelId) publishRoster(state.oldState.channel);
+});
 client.once('clientReady', async () => {
   console.log(`Logged in as ${client.user.tag}`);
   await refresh();

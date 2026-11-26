@@ -13,6 +13,7 @@ if (!config) {
   writeJson(configFile, config);
 }
 let state = readJson(stateFile, { campaign: config.campaigns[0]?.id || '', sessions: {} });
+let discordUsers = [];
 
 function readJson(file, fallback) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
@@ -87,6 +88,13 @@ const server = http.createServer(async (req, res) => {
       return send(res, 204);
     }
     if (pathname === '/api/state' && req.method === 'GET') return send(res, 200, JSON.stringify(state), 'application/json; charset=utf-8');
+    if (pathname === '/api/discord/users' && req.method === 'GET') return send(res, 200, JSON.stringify(discordUsers), 'application/json; charset=utf-8');
+    if (pathname === '/api/discord/users' && req.method === 'POST') {
+      const value = await readBody(req);
+      if (!Array.isArray(value.users)) return send(res, 400, 'Expected a users array');
+      discordUsers = value.users.filter(user => user && user.id && user.label).map(user => ({ id: String(user.id), label: String(user.label) }));
+      return send(res, 204);
+    }
     if (pathname === '/api/state' && req.method === 'POST') {
       const value = await readBody(req);
       if (!value || typeof value !== 'object' || !value.sessions || typeof value.sessions !== 'object') return send(res, 400, 'Invalid state');

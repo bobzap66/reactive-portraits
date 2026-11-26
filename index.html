@@ -31,9 +31,9 @@
         <div class="form-grid">
           <label>Campaign name<input id="campaignLabel" required maxlength="80"></label>
           <label>Overlay heading<input id="campaignTitle" maxlength="100"></label>
-          <label>Discord voice channel ID <span class="optional">(optional)</span><input id="channelId" inputmode="numeric" placeholder="Used by the Discord bridge"></label>
+          <label>Discord voice channel ID <span class="optional">(optional)</span><input id="channelId" inputmode="numeric" placeholder="Used by automatic speaker detection"></label>
         </div>
-        <div class="people-heading"><h3>Participants</h3><button type="button" id="addPerson" class="button secondary small">Add participant</button></div>
+        <div class="people-heading"><h3>Participants</h3><div><button type="button" id="loadDiscordUsers" class="button secondary small">Load Discord users</button> <button type="button" id="addPerson" class="button secondary small">Add participant</button></div></div>
         <div id="peopleEditor" class="people-editor"></div>
         <div class="dialog-actions"><button type="button" id="deleteCampaign" class="button danger">Remove campaign</button><span class="spacer"></span><button type="button" id="cancelEdit" class="button secondary">Cancel</button><button type="button" id="saveCampaign" class="button">Save campaign</button></div>
       </section>

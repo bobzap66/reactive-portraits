@@ -2,5 +2,6 @@ node_modules/
 campaigns.json
 reactive-state.json
 discord-bridge.config.json
+discord-rpc.config.json
 .env
 *.log
