@@ -1,0 +1,7 @@
+{
+  "clientId": "PASTE_DISCORD_APPLICATION_ID_HERE",
+  "clientSecret": "PASTE_DISCORD_APPLICATION_SECRET_HERE",
+  "redirectUri": "http://127.0.0.1/callback",
+  "scopes": ["rpc", "identify", "rpc.voice.read"],
+  "speakingDelayMs": 500
+}

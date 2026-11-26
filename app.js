@@ -12,6 +12,7 @@ let config = { campaigns: [] };
 let state = { campaign: '', sessions: {} };
 let editingId = null;
 let saveTimer = null;
+let discordUsers = [];
 
 function activeCampaign() { return config.campaigns.find(item => item.id === state.campaign) || config.campaigns[0]; }
 function currentSession(campaignId = state.campaign) {
@@ -128,7 +129,8 @@ $('#saveCampaign').onclick = async () => {
   const label = $('#campaignLabel').value.trim();
   if (!label) return $('#campaignLabel').focus();
   const people = [...peopleEditor.querySelectorAll('.person-row')].map(row => {
-    const [name, role, image, discordId] = [...row.querySelectorAll('input')].map(input => input.value.trim());
+    const [name, role, image] = [...row.querySelectorAll('input')].map(input => input.value.trim());
+    const discordId = row.querySelector('select').value;
     const id = row.dataset.id || slug(name) || 'participant';
     return { id, name, role, image, discordId };
   }).filter(person => person.name);
@@ -161,6 +163,19 @@ $('#deleteCampaign').onclick = async () => {
   try { await saveConfig(); editor.hidden = true; editingId = null; manager.close(); render(); }
   catch (error) { alert(`Could not remove campaign: ${error.message}`); }
 };
+$('#loadDiscordUsers').onclick = async () => {
+  try {
+    const response = await fetch('/api/discord/users', { cache: 'no-store' });
+    discordUsers = await response.json();
+    if (!discordUsers.length) setNotice('No Discord users are available yet. Start the RPC bridge and have Discord joined to the campaign voice channel, then try again.');
+    else setNotice(`Loaded ${discordUsers.length} Discord voice channel member${discordUsers.length === 1 ? '' : 's'}.`);
+    for (const row of peopleEditor.querySelectorAll('.person-row')) {
+      const select = row.querySelector('select');
+      const selected = select.value;
+      fillDiscordOptions(select, selected);
+    }
+  } catch (error) { setNotice(`Could not load Discord users: ${error.message}`); }
+};
 
 function slug(value) { return value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
 function renderManager() {
@@ -187,9 +202,24 @@ function beginEdit(campaign) {
 }
 function addPersonRow(person) {
   const row=document.createElement('div'); row.className='person-row'; row.dataset.id=person.id || '';
-  const fields=[['Name',person.name||'','Participant name'],['Role',person.role||'','Optional label'],['Portrait file',person.image||'assets/portrait-placeholder.svg','For example: assets/alex.png'],['Discord user ID',person.discordId||'','Optional; enable the bridge']];
+  const fields=[['Name',person.name||'','Participant name'],['Role',person.role||'','Optional label'],['Portrait file',person.image||'assets/portrait-placeholder.svg','For example: assets/alex.png']];
   fields.forEach(([label,value,placeholder])=>{const wrap=document.createElement('label');wrap.textContent=label;const input=document.createElement('input');input.value=value;input.placeholder=placeholder;wrap.append(input);row.append(wrap)});
+  const discordWrap=document.createElement('label');discordWrap.textContent='Discord speaker';
+  const discordSelect=document.createElement('select');
+  fillDiscordOptions(discordSelect, person.discordId || '');
+  discordWrap.append(discordSelect);row.append(discordWrap);
   const remove=document.createElement('button');remove.type='button';remove.className='button danger remove-person';remove.textContent='Remove';remove.onclick=()=>row.remove();row.append(remove);peopleEditor.append(row);
+}
+function fillDiscordOptions(select, selectedId) {
+  select.replaceChildren();
+  const none=document.createElement('option');none.value='';none.textContent='Not assigned';select.append(none);
+  if (selectedId && !discordUsers.some(user => user.id === selectedId)) {
+    const current=document.createElement('option');current.value=selectedId;current.textContent=`Saved Discord ID ${selectedId}`;select.append(current);
+  }
+  for (const user of discordUsers) {
+    const option=document.createElement('option');option.value=user.id;option.textContent=user.label;select.append(option);
+  }
+  select.value=selectedId || '';
 }
 
 loadAll().then(() => {
