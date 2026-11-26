@@ -20,8 +20,8 @@ const speakingDelayMs = Number(privateConfig.speakingDelayMs ?? 500);
 const scopes = privateConfig.scopes || ['rpc', 'identify', 'rpc.voice.read'];
 const socketPaths = process.platform === 'win32'
   ? Array.from({ length: 10 }, (_, i) => `\\\\?\\pipe\\discord-ipc-${i}`)
-  : [process.env.XDG_RUNTIME_DIR, process.env.TMPDIR, process.env.TMP, process.env.TEMP, '/tmp']
-    .filter(Boolean).map(dir => path.join(dir, 'discord-ipc-0'));
+  : [...new Set([process.env.XDG_RUNTIME_DIR, process.env.TMPDIR, process.env.TMP, process.env.TEMP, '/tmp'].filter(Boolean))]
+    .flatMap(dir => Array.from({ length: 10 }, (_, i) => path.join(dir, `discord-ipc-${i}`)));
 
 let config = { campaigns: [] };
 let activeCampaign = '';
