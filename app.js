@@ -336,26 +336,38 @@ loadAll().then(() => {
   }, 600);
 }).catch(error => setNotice(error.message));
 
-const obsRoles={intro:"Starting Soon",gameplay:"Gameplay",break:"Break",ending:"Ending",artwork:"Artwork",cinematic:"Cinematic"};
-let obsEditingCampaign=null;
+const obsRoles={standby:"Starting Soon — Standby",intro:"Starting Soon",gameplay:"Gameplay",break:"Break",technical:"Technical Difficulties",ending:"Ending",artwork:"Artwork",cinematic:"Cinematic"};
+let obsEditingCampaign=null,obsPoll=null,obsRevision=0,obsSaving=false;
 async function obsFetch(path,body){
  const response=await fetch('/api/obs/'+path,body===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
  if(!response.ok)throw Error(await response.text());return response.status===204?null:response.json();
 }
-async function loadOBS({connection=false}={}){
+async function loadOBS({connection=false,preserve=false}={}){
+ const revision=++obsRevision,campaign=obsEditingCampaign;
  const d=await obsFetch('config'),s=d.status;
+ if(revision!==obsRevision||campaign!==obsEditingCampaign)return;
  if(connection){$('#obsEnabled').checked=d.enabled;$('#obsPort').value=d.port;$('#obsPassword').value='';$('#obsClearPassword').checked=false;}
  $('#obsConnectionStatus').textContent=s.connected?'Connected — '+s.scene+' · '+(s.streaming?'LIVE':'Not streaming')+' · '+(s.recording?'REC':'Not recording'):d.enabled?'Waiting for OBS — '+(s.error||'connecting'):'OBS integration disabled';
- const list=$('#obsMappings');list.replaceChildren();
- const current=d.campaigns[obsEditingCampaign]||{};
- for(const [role,label] of Object.entries(obsRoles)){
-  const row=document.createElement('label');row.textContent=label;const select=document.createElement('select');select.dataset.role=role;
-  for(const scene of ['',...new Set([...(s.scenes||[]),...(current[role]?[current[role]]:[])])]){const opt=document.createElement('option');opt.value=scene;opt.textContent=scene||'Not mapped';select.append(opt);}
-  select.value=current[role]||'';row.append(select);list.append(row);
+ const list=$('#obsMappings'),current=d.campaigns[campaign]||{};
+ const draft=preserve?Object.fromEntries([...list.querySelectorAll('select')].map(x=>[x.dataset.role,x.value])):current;
+ const signature=JSON.stringify([s.scenes,current,campaign]);
+ if(!preserve||list.dataset.signature!==signature){
+  list.replaceChildren();list.dataset.signature=signature;
+  for(const [role,label] of Object.entries(obsRoles)){
+   const row=document.createElement('label');row.textContent=label;const select=document.createElement('select');select.dataset.role=role;
+   const selected=draft[role]??current[role]??'';
+   for(const scene of ['',...new Set([...(s.scenes||[]),...(selected?[selected]:[])])]){const opt=document.createElement('option');opt.value=scene;opt.textContent=scene||'Not mapped';select.append(opt);}
+   select.value=selected;row.append(select);list.append(row);
+  }
  }
- $('#obsSaveMappings').disabled=!s.connected||!obsEditingCampaign;
+ $('#obsSaveMappings').disabled=obsSaving||!s.connected||!campaign;
 }
-$('#obsSetup').onclick=async()=>{try{const campaign=activeCampaign();obsEditingCampaign=campaign?.id||null;$('#obsCampaignLabel').textContent=campaign?.label||'No campaign';await loadOBS({connection:true});$('#obsDialog').showModal();}catch(e){setNotice(e.message);}};
-$('#obsSave').onclick=async()=>{try{await obsFetch('config',{enabled:$('#obsEnabled').checked,port:Number($('#obsPort').value),password:$('#obsPassword').value,clearPassword:$('#obsClearPassword').checked});await loadOBS({connection:true});}catch(e){$('#obsConnectionStatus').textContent=e.message;}};
-$('#obsRefresh').onclick=async()=>{try{await loadOBS();}catch(e){$('#obsConnectionStatus').textContent=e.message;}};
-$('#obsSaveMappings').onclick=async()=>{try{await obsFetch('mapping',{campaign:obsEditingCampaign,mappings:Object.fromEntries([...$('#obsMappings').querySelectorAll('select')].map(s=>[s.dataset.role,s.value]))});$('#obsConnectionStatus').textContent='Scene mappings saved';}catch(e){$('#obsConnectionStatus').textContent=e.message;}};
+function startOBSPoll(){
+ clearInterval(obsPoll);
+ obsPoll=setInterval(()=>{if($('#obsDialog').open&&!obsSaving)void loadOBS({preserve:true}).catch(e=>{$('#obsConnectionStatus').textContent=e.message;$('#obsSaveMappings').disabled=true;});},1500);
+}
+$('#obsDialog').addEventListener('close',()=>{clearInterval(obsPoll);obsPoll=null;obsRevision++;$('#obsPassword').value='';});
+$('#obsSetup').onclick=async()=>{try{const campaign=activeCampaign();obsEditingCampaign=campaign?.id||null;$('#obsCampaignLabel').textContent=campaign?.label||'No campaign';await loadOBS({connection:true});$('#obsDialog').showModal();startOBSPoll();}catch(e){setNotice(e.message);}};
+$('#obsSave').onclick=async()=>{if(obsSaving)return;obsSaving=true;obsRevision++;try{await obsFetch('config',{enabled:$('#obsEnabled').checked,port:Number($('#obsPort').value),password:$('#obsPassword').value,clearPassword:$('#obsClearPassword').checked});await loadOBS({connection:true,preserve:true});}catch(e){$('#obsConnectionStatus').textContent=e.message;}finally{obsSaving=false;}};
+$('#obsRefresh').onclick=async()=>{if(obsSaving)return;try{await loadOBS({preserve:true});}catch(e){$('#obsConnectionStatus').textContent=e.message;}};
+$('#obsSaveMappings').onclick=async()=>{if(obsSaving)return;obsSaving=true;obsRevision++;try{await obsFetch('mapping',{campaign:obsEditingCampaign,mappings:Object.fromEntries([...$('#obsMappings').querySelectorAll('select')].map(s=>[s.dataset.role,s.value]))});await loadOBS();$('#obsConnectionStatus').textContent='Scene mappings saved';}catch(e){$('#obsConnectionStatus').textContent=e.message;}finally{obsSaving=false;}};
