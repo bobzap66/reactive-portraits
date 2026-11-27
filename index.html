@@ -12,6 +12,7 @@
       <div><h1>Reactive Portraits</h1><p>Campaign portrait controller and OBS overlay</p></div>
       <div class="header-actions">
         <label class="campaign-label">Campaign <select id="campaignSelect"></select></label>
+        <span id="foundryStatus" role="status" class="foundry-status">Foundry: waiting</span>
         <button id="foundryPair" class="button secondary">Pair Foundry</button>
         <button id="manageCampaigns" class="button secondary">Manage campaigns</button>
         <a id="overlayLink" class="button" target="_blank" rel="noreferrer">Open OBS overlay</a>
@@ -22,7 +23,7 @@
     <footer>Click a portrait to mark the speaker. Use the controls below each portrait to dim absent players and adjust crops.</footer>
   </main>
 
-  <dialog id="pairDialog"><form method="dialog"><h2>Foundry bridge pairing</h2><p>Copy these values into the Reactive Portraits Chrome extension on the Foundry GM tab. Keep the key private; it changes when the server restarts.</p><label>Campaign ID<input id="pairCampaign" readonly></label><label>Pairing key<input id="pairKey" readonly></label><div class="dialog-actions"><button type="button" id="rotatePair">Rotate key</button><button>Close</button></div></form></dialog>
+  <dialog id="pairDialog"><form method="dialog"><h2>Foundry bridge pairing</h2><p>Copy these values into the Reactive Portraits Chrome extension on the Foundry GM tab. Keep the key private; it is saved locally and remains valid until rotated. Pair each Foundry world once.</p><label>Campaign ID<input id="pairCampaign" readonly></label><label>Pairing key<input id="pairKey" readonly></label><div class="dialog-actions"><button type="button" id="rotatePair">Revoke all keys</button><button>Close</button></div></form></dialog>
   <datalist id="foundryActors"></datalist>
   <dialog id="manager">
     <form id="campaignForm" method="dialog">
