@@ -1,4 +1,4 @@
-// One explicitly paired observer tab. Secrets stay in extension session storage.
+// One explicitly paired GM tab. Secrets stay in extension session storage.
 const endpoint="http://127.0.0.1:8766/api/foundry";
 let queue=Promise.resolve();
 async function send(b,snapshot){
@@ -14,7 +14,7 @@ async function install(b){
  },args:[b.channel]});
  await chrome.scripting.executeScript({target:{tabId:b.tabId},world:"MAIN",func:(channel)=>{
   globalThis.__rpFoundryCleanup?.();
-  const api=globalThis.game?.modules?.get("greene-gaming-stream-director")?.api?.integration;
+  const api=globalThis.game?.modules?.get("greene-gaming-stream-director")?.api?.gmIntegration;
   if(!api)throw Error("Stream Director API unavailable");
   const emit=snapshot=>window.postMessage({kind:"rp-foundry",channel,snapshot},location.origin);
   const stop=api.subscribe(emit);
@@ -24,7 +24,7 @@ async function install(b){
 }
 async function read(tabId){
  const [r]=await chrome.scripting.executeScript({target:{tabId},world:"MAIN",func:()=>{
-  const g=globalThis.game,api=g?.modules?.get("greene-gaming-stream-director")?.api?.integration;
+  const g=globalThis.game,api=g?.modules?.get("greene-gaming-stream-director")?.api?.gmIntegration;
   return api?.getSnapshot?.()??null;
  }});
  return r?.result;
@@ -41,7 +41,7 @@ async function tick(){
   const s=await read(b.tabId);if(!s)throw Error("Stream Director API unavailable");
   await send(b,s);
   await install(b);
-  b.status=s.available?"Connected":"Observer API unavailable";
+  b.status=s.available?"Connected":"GM portrait API unavailable";
  }catch(e){b.status=e.message;await detach(b);}
  await chrome.storage.session.set({bridge:b});
 }
@@ -54,7 +54,7 @@ chrome.runtime.onMessage.addListener((msg,sender,reply)=>{
  }
  serial(async()=>{
   if(msg.kind==="connect"){
-   const s=await read(msg.tabId);if(!s?.available)throw Error("Open the designated observer and enable the Stream Director API first");
+   const s=await read(msg.tabId);if(!s?.available)throw Error("Open the GM browser and enable Stream Director GM portrait integration first");
    const {bridge:old}=await chrome.storage.session.get("bridge");await detach(old);
    const b={tabId:msg.tabId,campaign:msg.campaign,secret:msg.secret,channel:crypto.randomUUID(),status:"Connected"};
    await send(b,s);await chrome.storage.session.set({bridge:b});await install(b);
