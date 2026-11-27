@@ -47,7 +47,11 @@ function publishRoster(channel) {
     label: `${member.displayName || member.user.globalName || member.user.username}${member.user.username && member.displayName !== member.user.username ? ` (@${member.user.username})` : ''} — ${member.id}`
   }));
   const body = JSON.stringify({ users });
-  const req = http.request({ hostname: '127.0.0.1', port: 8766, path: '/api/discord/users', method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) } }, response => response.resume());
+  const req = http.request({ hostname: '127.0.0.1', port: 8766, path: '/api/discord/users', method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) } }, response => {
+    response.resume();
+    if (response.statusCode === 204) console.log(`Published ${users.length} Discord channel member${users.length === 1 ? '' : 's'} to the controller.`);
+    else console.error(`Could not publish Discord users: controller returned HTTP ${response.statusCode}.`);
+  });
   req.on('error', error => console.error('Could not update the Discord user list:', error.message));
   req.end(body);
 }
@@ -115,7 +119,10 @@ async function refresh() {
       pendingSpeakers.delete(String(userId));
       clearSpeaking(person, campaignId);
     });
-    connection.once(VoiceConnectionStatus.Ready, () => console.log(`Listening in ${channel.name} for ${campaign.label}.`));
+    connection.once(VoiceConnectionStatus.Ready, () => {
+      console.log(`Listening in ${channel.name} for ${campaign.label}.`);
+      publishRoster(channel);
+    });
     connection.on('error', error => console.error('Discord voice error:', error.message));
     connection.on(VoiceConnectionStatus.Disconnected, async () => {
       try { await Promise.race([entersState(connection, VoiceConnectionStatus.Signalling, 5_000), entersState(connection, VoiceConnectionStatus.Connecting, 5_000)]); }
@@ -127,9 +134,9 @@ async function refresh() {
 }
 
 client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
-client.on('voiceStateUpdate', state => {
-  if (state.channelId && state.channelId === currentChannelId) publishRoster(state.channel);
-  else if (state.oldState?.channelId === currentChannelId) publishRoster(state.oldState.channel);
+client.on('voiceStateUpdate', (oldState, newState) => {
+  if (newState.channelId === currentChannelId) publishRoster(newState.channel);
+  else if (oldState.channelId === currentChannelId) publishRoster(oldState.channel);
 });
 client.once('clientReady', async () => {
   console.log(`Logged in as ${client.user.tag}`);
