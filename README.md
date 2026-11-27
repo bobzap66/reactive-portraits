@@ -80,10 +80,10 @@ Requires Greene Gaming Stream Director v0.4.9 and Chrome on the same computer as
 1. Start the local controller at its default port 8766. Select the campaign, open Manage campaigns and enable Foundry integration, with health bars and active-turn indicators as desired. Save.
 2. In Foundry GM settings, enable **GM portrait integration API**, select the approved PCs, and optionally enable health. The observer API and observer roster-mode switch are not required; the observer can remain entirely in OBS.
 3. In Chrome, open chrome://extensions, enable Developer mode, choose Load unpacked and select this project's extension folder.
-4. On the local controller click Pair Foundry. Copy the campaign ID and pairing key. On the Foundry GM tab open the extension popup, paste both values and click Connect this GM tab.
+4. On the local controller click Pair Foundry. Copy the campaign ID and pairing key. On the Foundry GM tab open the extension popup, paste both values and click Pair this GM world. Grant access to that Foundry site when prompted.
 5. In the campaign editor click Load Foundry actors. In each participant's Foundry actor UUID field select the matching UUID (or paste manually). Save the campaign. Leave the GM unmapped.
 
-The extension accesses only the explicitly selected GM browser tab, uses Stream Director's event subscription and sends a short heartbeat to the loopback server. Data expires after 12 seconds without updates; no HP is saved to disk. The extension pairing is session-local; reconnect after Chrome or server restarts, navigation/refresh if the permission is lost, or switching campaigns. Rotate the key in the pairing dialog to revoke previous bridges. No external service, remote server or Foundry account credential is used. The extension is unpacked development software, not a Chrome Web Store release. Live testing on Forge and OBS is required.
+The extension remembers explicitly approved origin + Foundry world ID to campaign mappings in Chrome local extension storage. Site access is requested per origin, not granted globally. Reopening a paired GM world, refreshing, restarting Chrome or restarting the controller automatically reconnects on tab load or the 30-second retry; the three-second heartbeat and live event subscription keep snapshots fresh. Multiple paired worlds may connect independently; the bridge does not change the selected portrait campaign or Discord voice channel. Data expires after 12 seconds without updates; no HP is saved to disk. The controller displays connection status for the selected campaign. Unpair a world in the extension popup to remove its saved mapping, or use Revoke all keys in the controller to invalidate all credentials. The key is stored in ignored foundry-pairing.json; do not publish it. Existing session-only pairings require a one-time re-pair after upgrading. No external service, remote server or Foundry account credential is used. The extension is unpacked development software, not a Chrome Web Store release. Live testing on Forge and OBS is required.
 
 ## Configuration and files
 
@@ -91,6 +91,7 @@ The extension accesses only the explicitly selected GM browser tab, uses Stream 
 | --- | --- | --- |
 | `campaigns.example.json` | Safe starter data | Yes |
 | `campaigns.json` | Your campaign and participant setup | No |
+| `foundry-pairing.json` | Persistent local bridge credential | No |
 | `reactive-state.json` | Current campaign, absent flags, and crop adjustments | No |
 | `discord-bridge.config.example.json` | Bot configuration template | Yes |
 | `discord-bridge.config.json` | Your bot token and server ID | No |

@@ -4,12 +4,15 @@ const http = require('node:http');
 const { randomBytes } = require('node:crypto');
 const { matchesSecret, createStore } = require('./foundry-state.cjs');
 const foundryStore = createStore();
-let pairingKey = randomBytes(32).toString('hex');
 
 const root = __dirname;
 const port = Number(process.env.PORT || 8766);
 const configFile = path.join(root, 'campaigns.json');
 const stateFile = path.join(root, 'reactive-state.json');
+const pairingFile = path.join(root, 'foundry-pairing.json');
+let pairingKey = readJson(pairingFile, null)?.key;
+if (typeof pairingKey !== 'string' || !/^[a-f0-9]{64}$/.test(pairingKey)) { pairingKey = randomBytes(32).toString('hex'); persistPairingKey(pairingKey); }
+function persistPairingKey(key) { fs.writeFileSync(pairingFile+'.tmp', JSON.stringify({key}), {mode:0o600}); fs.renameSync(pairingFile+'.tmp', pairingFile); }
 const assetsRoot = path.join(root, 'assets');
 const defaultConfig = { campaigns: [] };
 let config = readJson(configFile, null);
@@ -82,7 +85,7 @@ function staticFile(urlPath, res) {
   catch { return send(res, 400, 'Bad path'); }
   if (decoded === '/') decoded = '/index.html';
   const file = path.resolve(root, `.${decoded}`);
-  if (!['/index.html','/app.js','/styles.css'].includes(decoded) && !decoded.startsWith('/assets/')) return send(res, 404, 'Not found');
+  if (!['/index.html','/app.js','/styles.css'].includes(decoded) && !file.startsWith(assetsRoot + path.sep)) return send(res, 404, 'Not found');
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'Not found');
   const ext = path.extname(file).toLowerCase();
   const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.avif': 'image/avif' };
@@ -111,7 +114,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (pathname === '/api/foundry/pair' && req.method === 'POST') {
       if ((origin && !localOrigins.includes(origin)) || req.headers['sec-fetch-site'] !== 'same-origin') return send(res,403,'Local controller only');
-      pairingKey=randomBytes(32).toString('hex');foundryStore.clear();
+      const nextKey=randomBytes(32).toString('hex');persistPairingKey(nextKey);pairingKey=nextKey;foundryStore.clear();
       return send(res,204);
     }
     if (pathname === '/api/foundry' && req.method === 'GET') {
