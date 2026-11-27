@@ -135,7 +135,7 @@ const server = http.createServer(async (req, res) => {
         const v=await readBody(req,4096);if(!config.campaigns.some(c=>c.id===v.campaign))throw Error('Unknown campaign');
         if(!foundryStore.get(v.campaign).available)throw Error('GM bridge unavailable');
         const target=targetFor({enabled:obsConfig.enabled,activeCampaign:state.campaign,campaign:v.campaign,mappings:obsConfig.campaigns[v.campaign],status:obs.getStatus(),role:v.role,expectedScene:v.expectedScene});
-        await obs.switchScene(target);return json(obsStatus(v.campaign));
+        await obs.switchScene(target,v.expectedScene,()=>obsConfig.enabled&&state.campaign===v.campaign&&foundryStore.get(v.campaign).available&&obsConfig.campaigns[v.campaign]?.[v.role]===target&&matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),pairingKey));return json(obsStatus(v.campaign));
       }
       return send(res,404,'Not found');
     }
