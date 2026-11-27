@@ -5,7 +5,7 @@ A self-hosted controller and OBS browser overlay for tabletop campaigns. Mark a 
 ## What it does
 
 - Add, edit, and remove campaigns in the web interface.
-- Add participants, assign Discord user IDs, and point each portrait to an image in `assets/`.
+- Add participants, assign Discord user IDs, and select portraits from each campaign's asset folder.
 - Use one controller to switch campaigns; the bridge follows the selected campaign's Discord voice channel.
 - Choose local Discord RPC speaker detection without adding a bot to your voice channel, or use the bot bridge as an alternative.
 - Load current voice channel members into a participant dropdown and map them to portraits.
@@ -30,7 +30,7 @@ The server binds to `127.0.0.1` and is intended for use on the same computer as 
 4. Open [http://127.0.0.1:8766](http://127.0.0.1:8766) in a browser.
 5. Click **Manage campaigns** to edit the example campaign or create your own.
 
-To use a portrait, copy its image into the project's `assets/` folder and enter a relative path such as `assets/aragorn.png`. PNG, JPG, WebP, GIF, AVIF, and SVG images are supported. The repository includes a generic placeholder image.
+To use a portrait, copy its image into `assets/<campaign-id>/`. The campaign editor shows the folder path and lists its images in the **Portrait** dropdown. Campaign IDs are based on the campaign name (for example, `Curtain Call` uses `assets/curtain-call/`). PNG, JPG, WebP, GIF, AVIF, and SVG images are supported. The repository includes a generic placeholder image.
 
 The controller creates `campaigns.json` and `reactive-state.json` on first run. Both files are local runtime data and are excluded from Git. Back them up if you want to preserve your campaign list and crop settings.
 
@@ -84,14 +84,14 @@ The bridge follows whichever campaign is selected in the controller and switches
 | `discord-bridge.config.json` | Your bot token and server ID | No |
 | `discord-rpc.config.example.json` | Discord RPC configuration template | Yes |
 | `discord-rpc.config.json` | Your Discord application credentials | No |
-| `assets/` | Portrait images | Yes, if you choose to add and share them |
+| `assets/<campaign-id>/` | Portrait images for one campaign | Yes, if you choose to add and share them |
 
 Use one automatic speaker source at a time. The RPC bridge requires the Discord desktop client; the bot bridge joins voice as a bot. Manual speaker selection remains available with either bridge stopped.
 
 ## Troubleshooting
 
 - **Page does not open:** make sure `npm start` is still running and that port `8766` is free.
-- **Image is missing:** verify the relative path in the campaign editor and that the image exists under `assets/`.
+- **Image is missing from the Portrait dropdown:** verify the image is in the selected campaign's `assets/<campaign-id>/` folder and has a supported image extension. Reopen the campaign editor to refresh the list.
 - **Bridge does not connect:** verify the token, server ID, voice channel ID, and bot permissions. Start the local controller before starting the bridge.
 - **RPC bridge cannot connect:** make sure Discord desktop is running, the RPC origin and redirect URI exactly match the application settings, and the application is approved or your account is listed as a tester.
 - **RPC authorization fails:** check the application ID, client secret, configured redirect URI, and required RPC scopes.
