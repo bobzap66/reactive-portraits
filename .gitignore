@@ -5,3 +5,6 @@ discord-bridge.config.json
 discord-rpc.config.json
 .env
 *.log
+
+foundry-pairing.json
+foundry-pairing.json.tmp
