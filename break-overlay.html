@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Break countdown</title><style>
+html,body{margin:0;background:transparent;color:#fff;overflow:hidden;font-family:Georgia,serif}
+#timer{display:flex;align-items:center;justify-content:center;height:100vh;font-size:clamp(24px,22vh,160px);font-variant-numeric:tabular-nums;text-align:center;text-shadow:0 2px 6px #000;font-weight:bold}
+</style></head><body><div id="timer"></div><script>
+const campaign=new URLSearchParams(location.search).get('campaign')||'',node=document.getElementById('timer');
+let timer=null,received=0,polling=false;
+function draw(){if(!timer||Date.now()-received>3500){node.textContent='';return;}if(timer.mode==='indefinite'){node.textContent='Intermission';return;}const ms=Math.max(0,timer.remainingMs-(timer.mode==='running'?Date.now()-received:0)),n=Math.ceil(ms/1000);node.textContent=n===0?'Resuming Shortly':Math.floor(n/60)+':'+String(n%60).padStart(2,'0')+(timer.mode==='paused'?' · Paused':'');}
+async function poll(){if(polling)return;polling=true;try{const r=await fetch('/api/obs/break-overlay?campaign='+encodeURIComponent(campaign),{cache:'no-store',signal:AbortSignal.timeout(2000)});if(!r.ok)throw Error();timer=(await r.json()).timer;received=Date.now();}catch{timer=null;}finally{polling=false;draw();}}
+setInterval(draw,200);setInterval(poll,1000);poll();
+</script></body></html>
