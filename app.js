@@ -23,7 +23,7 @@ function currentSession(campaignId = state.campaign) {
   current.crops ||= {};
   return current;
 }
-function defaultCrop(person) { return { zoom: 1.5, x: 50, y: 18, ...(person.crop || {}) }; }
+function defaultCrop(person) { return { zoom: 1, x: 50, y: 18, ...(person.crop || {}) }; }
 function setNotice(message = '') { notice.textContent = message; }
 async function loadAll() {
   const [configResponse, stateResponse] = await Promise.all([fetch('/api/config'), fetch('/api/state')]);
