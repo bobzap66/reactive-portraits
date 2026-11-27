@@ -13,6 +13,9 @@ let state = { campaign: '', sessions: {} };
 let editingId = null;
 let saveTimer = null;
 let discordUsers = [];
+let foundryState = null;
+let foundryCampaign = null;
+let foundryRequest = false;
 let assetRefreshSequence = 0;
 
 function activeCampaign() { return config.campaigns.find(item => item.id === state.campaign) || config.campaigns[0]; }
@@ -76,6 +79,7 @@ function render() {
   campaign.people.forEach(person => {
     const crop = session.crops[person.id] ||= defaultCrop(person);
     const card = document.createElement('article');
+    card.dataset.personId=person.id;
     card.className = `portrait-card${session.active === person.id ? ' speaking' : ''}${session.absent[person.id] ? ' absent' : ''}`;
     const button = document.createElement('button');
     button.className = 'portrait-button';
@@ -91,7 +95,11 @@ function render() {
     const shade = document.createElement('span'); shade.className = 'portrait-shade';
     const name = document.createElement('span'); name.className = 'portrait-name'; name.textContent = person.name;
     const role = document.createElement('span'); role.className = 'portrait-role'; role.textContent = person.role || '';
-    button.append(image, shade, name, role);
+    const turn=document.createElement('span');turn.className='foundry-turn';turn.textContent='ACTIVE TURN';turn.hidden=true;
+    const hp=document.createElement('span');hp.className='foundry-health';hp.hidden=true;
+    const fill=document.createElement('span');fill.className='foundry-health-fill';const temp=document.createElement('span');temp.className='foundry-health-temp';hp.append(fill,temp);
+    button.append(image, shade, name, role, turn, hp);
+
     button.onclick = async () => { session.active = session.active === person.id ? null : person.id; render(); await saveState(); };
     card.append(button);
     if (!params.has('overlay')) {
@@ -120,6 +128,7 @@ function render() {
     }
     cards.append(card);
   });
+  renderFoundry();
 }
 
 campaignSelect.onchange = async () => { state.campaign = campaignSelect.value; await saveState(); render(); };
@@ -132,13 +141,14 @@ $('#saveCampaign').onclick = async () => {
   if (!label) return $('#campaignLabel').focus();
   const people = [...peopleEditor.querySelectorAll('.person-row')].map(row => {
     const [name, role] = [...row.querySelectorAll('input')].map(input => input.value.trim());
+    const foundryActorUuid = row.querySelector('.foundry-actor').value.trim();
     const image = row.querySelector('.portrait-select').value;
     const discordId = row.querySelector('.discord-select').value;
     const id = row.dataset.id || slug(name) || 'participant';
-    return { id, name, role, image, discordId };
+    return { id, name, role, image, discordId, foundryActorUuid };
   }).filter(person => person.name);
   if (!people.length) return alert('Add at least one participant.');
-  const campaign = { id: editingId || slug(label), label, title: $('#campaignTitle').value.trim(), channelId: $('#channelId').value.trim(), people };
+  const campaign = { foundryEnabled:$('#foundryEnabled').checked, foundryHealth:$('#foundryHealth').checked, foundryTurn:$('#foundryTurn').checked, id: editingId || slug(label), label, title: $('#campaignTitle').value.trim(), channelId: $('#channelId').value.trim(), people };
   if (!campaign.id) campaign.id = `campaign-${Date.now()}`;
   if (!editingId && config.campaigns.some(item => item.id === campaign.id)) campaign.id = `${campaign.id}-${Date.now().toString(36)}`;
   if (config.campaigns.some(item => item.id !== editingId && item.id === campaign.id)) return alert('A campaign with that name already exists.');
@@ -197,6 +207,9 @@ async function beginEdit(campaign) {
   $('#campaignLabel').value = campaign.label || '';
   $('#campaignTitle').value = campaign.title || '';
   $('#channelId').value = campaign.channelId || '';
+  $('#foundryEnabled').checked=campaign.foundryEnabled===true;
+  $('#foundryHealth').checked=campaign.foundryHealth!==false;
+  $('#foundryTurn').checked=campaign.foundryTurn!==false;
   updateAssetHint();
   $('#deleteCampaign').hidden = !editingId;
   peopleEditor.replaceChildren();
@@ -217,6 +230,7 @@ function addPersonRow(person) {
   const discordSelect=document.createElement('select');discordSelect.className='discord-select';
   fillDiscordOptions(discordSelect, person.discordId || '');
   discordWrap.append(discordSelect);row.append(discordWrap);
+  const actorWrap=document.createElement('label');actorWrap.textContent='Foundry actor UUID';const actorInput=document.createElement('input');actorInput.className='foundry-actor';actorInput.value=person.foundryActorUuid||'';actorInput.placeholder='Actor.abc123 (optional)';actorInput.setAttribute('list','foundryActors');actorWrap.append(actorInput);row.append(actorWrap);
   const remove=document.createElement('button');remove.type='button';remove.className='button danger remove-person';remove.textContent='Remove';remove.onclick=()=>row.remove();row.append(remove);peopleEditor.append(row);
 }
 function editorCampaignId() { return editingId || slug($('#campaignLabel').value.trim()); }
@@ -267,7 +281,40 @@ function fillDiscordOptions(select, selectedId) {
   select.value=selectedId || '';
 }
 
+function renderFoundry(){
+ const campaign=activeCampaign();
+ const data=campaign?.foundryEnabled&&foundryCampaign===campaign.id&&foundryState?.available?foundryState:null;
+ for(const card of cards.querySelectorAll('.portrait-card')){
+  const person=campaign?.people.find(p=>p.id===card.dataset.personId);
+  const matches=data?.characters.filter(c=>c.actorUuid===person?.foundryActorUuid)||[];
+  const actor=matches.find(c=>c.activeTurn)||matches.find(c=>c.inCombat)||matches[0];
+  const combat=data?.combat.active&&actor?.inCombat&&!card.classList.contains('absent');
+  const turn=card.querySelector('.foundry-turn'),hp=card.querySelector('.foundry-health');
+  turn.hidden=!(combat&&actor.activeTurn&&campaign.foundryTurn!==false);
+  hp.hidden=!(combat&&actor.health&&campaign.foundryHealth!==false);
+  if(!hp.hidden){
+   const h=actor.health;hp.querySelector('.foundry-health-fill').style.width=Math.min(100,100*h.value/h.max)+'%';
+   hp.querySelector('.foundry-health-temp').style.width=Math.min(100,100*(h.temp||0)/h.max)+'%';
+   hp.title=h.value+'/'+h.max+' HP'+(h.temp?' + '+h.temp+' temporary HP':'');
+  }
+ }
+}
+async function refreshFoundry(){
+ const campaign=activeCampaign();
+ if(!campaign?.foundryEnabled){foundryState=null;renderFoundry();return;}
+ if(foundryRequest)return;foundryRequest=true;
+ try{const response=await fetch('/api/foundry?campaign='+encodeURIComponent(campaign.id),{cache:'no-store'});if(!response.ok)throw Error('Unavailable');const next=await response.json();if(activeCampaign()?.id===campaign.id){foundryCampaign=campaign.id;foundryState=next;renderFoundry();}}catch{foundryState=null;renderFoundry();}finally{foundryRequest=false;}
+}
+$('#foundryPair').onclick=async()=>{
+ try{const response=await fetch('/api/foundry/pair');if(!response.ok)throw Error('Pairing unavailable');const data=await response.json();$('#pairCampaign').value=data.campaign;$('#pairKey').value=data.key;$('#pairDialog').showModal();}catch(e){setNotice(e.message);}
+};
+$('#rotatePair').onclick=async()=>{const response=await fetch('/api/foundry/pair',{method:'POST'});if(response.ok){$('#pairDialog').close();$('#foundryPair').click();}};
+$('#loadFoundryActors').onclick=async()=>{
+ try{const response=await fetch('/api/foundry?campaign='+encodeURIComponent(editingId||state.campaign));const data=await response.json();const list=$('#foundryActors');list.replaceChildren();for(const actor of data.characters||[]){const option=document.createElement('option');option.value=actor.actorUuid;option.label=actor.name;list.append(option);}setNotice(data.characters?.length?'Foundry actors loaded. Select a UUID in each participant row.':'No Foundry actor data. Connect the observer bridge first.');}catch(e){setNotice(e.message);}
+};
 loadAll().then(() => {
+  void refreshFoundry();setInterval(refreshFoundry,600);
+
   if (params.has('overlay')) campaignSelect.hidden = true;
   setInterval(async () => {
     if (!params.has('overlay') && manager.open) return;

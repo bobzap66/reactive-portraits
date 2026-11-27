@@ -1,6 +1,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
+const { randomBytes } = require('node:crypto');
+const { matchesSecret, createStore } = require('./foundry-state.cjs');
+const foundryStore = createStore();
+let pairingKey = randomBytes(32).toString('hex');
 
 const root = __dirname;
 const port = Number(process.env.PORT || 8766);
@@ -78,6 +82,7 @@ function staticFile(urlPath, res) {
   catch { return send(res, 400, 'Bad path'); }
   if (decoded === '/') decoded = '/index.html';
   const file = path.resolve(root, `.${decoded}`);
+  if (!['/index.html','/app.js','/styles.css'].includes(decoded) && !decoded.startsWith('/assets/')) return send(res, 404, 'Not found');
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'Not found');
   const ext = path.extname(file).toLowerCase();
   const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.avif': 'image/avif' };
@@ -89,7 +94,32 @@ const server = http.createServer(async (req, res) => {
   const pathname = new URL(req.url, 'http://127.0.0.1').pathname;
   try {
     const origin = req.headers.origin;
-    if (req.method === 'POST' && origin && !['http://127.0.0.1:8766', 'http://localhost:8766'].includes(origin)) return send(res, 403, 'Local requests only');
+    const localOrigins = ['http://127.0.0.1:'+port, 'http://localhost:'+port];
+    const localHost = ['127.0.0.1:'+port, 'localhost:'+port].includes(req.headers.host);
+    if (!localHost) return send(res, 403, 'Local host only');
+    if (pathname === '/api/foundry' && req.method === 'POST') {
+      if (origin && !/^chrome-extension:\/\/[a-p]{32}$/.test(origin)) return send(res, 403, 'Extension requests only');
+      if (!matchesSecret(req.headers.authorization?.replace(/^Bearer /,''), pairingKey)) return send(res, 401, 'Invalid pairing key');
+      const value = await readBody(req, 65536);
+      if (!config.campaigns.some(c => c.id === value.campaign)) return send(res, 400, 'Unknown campaign');
+      foundryStore.put(value.campaign, value.snapshot);
+      return send(res, 204);
+    }
+    if (pathname === '/api/foundry/pair' && req.method === 'GET') {
+      if ((origin && !localOrigins.includes(origin)) || !['same-origin','none'].includes(req.headers['sec-fetch-site'] || 'none')) return send(res, 403, 'Local controller only');
+      return send(res, 200, JSON.stringify({key:pairingKey, campaign:state.campaign}), 'application/json; charset=utf-8');
+    }
+    if (pathname === '/api/foundry/pair' && req.method === 'POST') {
+      if ((origin && !localOrigins.includes(origin)) || req.headers['sec-fetch-site'] !== 'same-origin') return send(res,403,'Local controller only');
+      pairingKey=randomBytes(32).toString('hex');foundryStore.clear();
+      return send(res,204);
+    }
+    if (pathname === '/api/foundry' && req.method === 'GET') {
+      const campaign = new URL(req.url,'http://127.0.0.1').searchParams.get('campaign');
+      return send(res,200,JSON.stringify(foundryStore.get(campaign)),'application/json; charset=utf-8');
+    }
+
+    if (req.method === 'POST' && origin && !localOrigins.includes(origin)) return send(res, 403, 'Local requests only');
     if (pathname === '/api/config' && req.method === 'GET') return send(res, 200, JSON.stringify(config), 'application/json; charset=utf-8');
     if (pathname === '/api/config' && req.method === 'POST') {
       const nextConfig = validateConfig(await readBody(req));

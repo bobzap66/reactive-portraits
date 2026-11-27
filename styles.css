@@ -13,3 +13,7 @@
 .overlay .portrait-card.speaking:after{inset:4px;border-radius:13px}
 
 .asset-hint{color:var(--muted);font-size:13px;margin:8px 0 10px}
+
+.foundry-turn{position:absolute;right:7px;top:7px;background:#164c66;color:#e9faff;padding:4px 7px;font-size:10px;font-weight:700;border:1px solid #83d9ff;border-radius:4px}.foundry-health{position:absolute;bottom:2px;left:8px;right:8px;height:7px;background:#451f25;border:1px solid #ffffff55;border-radius:3px;overflow:hidden}.foundry-health-fill{display:block;height:100%;background:#4ba975;transition:width .2s}.foundry-health-temp{position:absolute;right:0;top:0;height:3px;background:#69b8ff}.foundry-turn[hidden],.foundry-health[hidden]{display:none}.foundry-options{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;align-items:center}.foundry-options input{width:auto}
+
+.person-row{grid-template-columns:repeat(2,minmax(0,1fr))}.person-row .remove-person{justify-self:end}.overlay .foundry-health{bottom:2px;left:16px;right:16px}.overlay .foundry-turn{top:40px;right:10px}

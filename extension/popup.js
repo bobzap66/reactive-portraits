@@ -1,0 +1,4 @@
+const $=id=>document.getElementById(id);
+(async()=>{const {bridge}=await chrome.storage.session.get("bridge");if(bridge){$("campaign").value=bridge.campaign;$("status").textContent="Paired to tab "+bridge.tabId+"; "+(bridge.status||"waiting");}})();
+$("connect").onclick=async()=>{try{const [tab]=await chrome.tabs.query({active:true,currentWindow:true});const campaign=$("campaign").value.trim(),secret=$("secret").value.trim();if(!campaign||!secret)throw Error("Enter campaign and key");const r=await chrome.runtime.sendMessage({kind:"connect",tabId:tab.id,campaign,secret});$("status").textContent=r.error||r.status;$("secret").value="";}catch(e){$("status").textContent=e.message;}};
+$("disconnect").onclick=async()=>{const r=await chrome.runtime.sendMessage({kind:"disconnect"});$("status").textContent=r.error||"Disconnected";};
