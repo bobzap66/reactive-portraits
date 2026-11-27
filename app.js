@@ -85,20 +85,27 @@ function render() {
     button.className = 'portrait-button';
     button.type = 'button';
     button.title = `Mark ${person.name} as the current speaker`;
+    const backdrop = document.createElement('img');
+    backdrop.className = 'portrait-backdrop';
+    backdrop.alt = '';
+    backdrop.setAttribute('aria-hidden', 'true');
     const image = document.createElement('img');
     image.src = person.image || 'assets/portrait-placeholder.svg';
+    backdrop.src = image.src;
     image.alt = person.name;
     image.style.setProperty('--zoom', crop.zoom);
     image.style.setProperty('--x', `${crop.x}%`);
     image.style.setProperty('--y', `${crop.y}%`);
-    image.onerror = () => { image.src = 'assets/portrait-placeholder.svg'; };
+    image.onerror = () => { image.src = 'assets/portrait-placeholder.svg'; backdrop.src = image.src; };
     const shade = document.createElement('span'); shade.className = 'portrait-shade';
     const name = document.createElement('span'); name.className = 'portrait-name'; name.textContent = person.name;
-    const role = document.createElement('span'); role.className = 'portrait-role'; role.textContent = person.role || '';
+    const role = document.createElement('span');
+    role.className = `portrait-role${(person.role || '').trim().toLowerCase() === 'player character' ? ' player-character-role' : ''}`;
+    role.textContent = person.role || '';
     const turn=document.createElement('span');turn.className='foundry-turn';turn.textContent='ACTIVE TURN';turn.hidden=true;
     const hp=document.createElement('span');hp.className='foundry-health';hp.hidden=true;
     const fill=document.createElement('span');fill.className='foundry-health-fill';const temp=document.createElement('span');temp.className='foundry-health-temp';hp.append(fill,temp);
-    button.append(image, shade, name, role, turn, hp);
+    button.append(backdrop, image, shade, name, role, turn, hp);
 
     button.onclick = async () => { session.active = session.active === person.id ? null : person.id; render(); await saveState(); };
     card.append(button);
@@ -110,10 +117,11 @@ function render() {
       const reset = document.createElement('button'); reset.className = 'button secondary'; reset.textContent = 'Reset crop';
       reset.onclick = async () => { session.crops[person.id] = defaultCrop({}); render(); await saveState(); };
       tools.append(reset);
-      for (const [key, label, min, max, step] of [['zoom','Zoom',1,3.5,.05],['x','Horizontal',0,100,1],['y','Vertical',0,100,1]]) {
+      for (const [key, label, min, max, step] of [['zoom','Zoom',1,3.5,.05],['x','Horizontal',0,100,1],['y','Vertical',-50,100,1]]) {
         const description = document.createElement('label'); description.className='tool-label'; description.textContent = `${label}: ${key === 'zoom' ? `${Number(crop[key]).toFixed(2)}×` : `${crop[key]}%`}`;
         const slider = document.createElement('input'); slider.type='range'; slider.min=min; slider.max=max; slider.step=step; slider.value=crop[key]; slider.setAttribute('aria-label', `${label} crop for ${person.name}`);
-        if (key === 'x' || key === 'y') slider.title = 'At low zoom, there may be little room to pan. Increase Zoom to move a square portrait within the frame.';
+        if (key === 'x') slider.title = 'At low zoom, there may be little room to pan. Increase Zoom to move a square portrait within the frame.';
+        if (key === 'y') slider.title = 'Negative values move the portrait down to add space above the character’s head. Increase Zoom if you need more room to pan.';
         slider.oninput = () => {
           crop[key] = Number(slider.value);
           image.style.setProperty('--zoom', crop.zoom);
