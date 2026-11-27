@@ -16,6 +16,7 @@ let discordUsers = [];
 let foundryState = null;
 let foundryCampaign = null;
 let foundryRequest = false;
+let assetRefreshSequence = 0;
 
 function activeCampaign() { return config.campaigns.find(item => item.id === state.campaign) || config.campaigns[0]; }
 function currentSession(campaignId = state.campaign) {
@@ -26,7 +27,7 @@ function currentSession(campaignId = state.campaign) {
   current.crops ||= {};
   return current;
 }
-function defaultCrop(person) { return { zoom: 1.5, x: 50, y: 18, ...(person.crop || {}) }; }
+function defaultCrop(person) { return { zoom: 1.25, x: 50, y: 18, ...(person.crop || {}) }; }
 function setNotice(message = '') { notice.textContent = message; }
 async function loadAll() {
   const [configResponse, stateResponse] = await Promise.all([fetch('/api/config'), fetch('/api/state')]);
@@ -98,6 +99,7 @@ function render() {
     const hp=document.createElement('span');hp.className='foundry-health';hp.hidden=true;
     const fill=document.createElement('span');fill.className='foundry-health-fill';const temp=document.createElement('span');temp.className='foundry-health-temp';hp.append(fill,temp);
     button.append(image, shade, name, role, turn, hp);
+
     button.onclick = async () => { session.active = session.active === person.id ? null : person.id; render(); await saveState(); };
     card.append(button);
     if (!params.has('overlay')) {
@@ -111,6 +113,7 @@ function render() {
       for (const [key, label, min, max, step] of [['zoom','Zoom',1,3.5,.05],['x','Horizontal',0,100,1],['y','Vertical',0,100,1]]) {
         const description = document.createElement('label'); description.className='tool-label'; description.textContent = `${label}: ${key === 'zoom' ? `${Number(crop[key]).toFixed(2)}×` : `${crop[key]}%`}`;
         const slider = document.createElement('input'); slider.type='range'; slider.min=min; slider.max=max; slider.step=step; slider.value=crop[key]; slider.setAttribute('aria-label', `${label} crop for ${person.name}`);
+        if (key === 'x' || key === 'y') slider.title = 'At low zoom, there may be little room to pan. Increase Zoom to move a square portrait within the frame.';
         slider.oninput = () => {
           crop[key] = Number(slider.value);
           image.style.setProperty('--zoom', crop.zoom);
@@ -132,13 +135,15 @@ campaignSelect.onchange = async () => { state.campaign = campaignSelect.value; a
 $('#manageCampaigns').onclick = () => { renderManager(); manager.showModal(); };
 $('#newCampaign').onclick = () => beginEdit({ id: '', label: '', title: '', channelId: '', people: [{ id: 'gm', name: 'Game Master', role: 'GM', image: 'assets/portrait-placeholder.svg', discordId: '' }] });
 $('#cancelEdit').onclick = () => { editor.hidden = true; editingId = null; renderManager(); };
-$('#addPerson').onclick = () => addPersonRow({ name: '', role: 'Player Character', image: 'assets/portrait-placeholder.svg', discordId: '' });
+$('#addPerson').onclick = async () => { addPersonRow({ name: '', role: 'Player Character', image: 'assets/portrait-placeholder.svg', discordId: '' }); await refreshPortraitOptions(); };
 $('#saveCampaign').onclick = async () => {
   const label = $('#campaignLabel').value.trim();
   if (!label) return $('#campaignLabel').focus();
   const people = [...peopleEditor.querySelectorAll('.person-row')].map(row => {
-    const [name, role, image, foundryActorUuid] = [...row.querySelectorAll('input')].map(input => input.value.trim());
-    const discordId = row.querySelector('select').value;
+    const [name, role] = [...row.querySelectorAll('input')].map(input => input.value.trim());
+    const foundryActorUuid = row.querySelector('.foundry-actor').value.trim();
+    const image = row.querySelector('.portrait-select').value;
+    const discordId = row.querySelector('.discord-select').value;
     const id = row.dataset.id || slug(name) || 'participant';
     return { id, name, role, image, discordId, foundryActorUuid };
   }).filter(person => person.name);
@@ -175,10 +180,10 @@ $('#loadDiscordUsers').onclick = async () => {
   try {
     const response = await fetch('/api/discord/users', { cache: 'no-store' });
     discordUsers = await response.json();
-    if (!discordUsers.length) setNotice('No Discord users are available yet. Start the RPC bridge and have Discord joined to the campaign voice channel, then try again.');
+    if (!discordUsers.length) setNotice('No Discord users are available yet. Start an automatic Discord bridge and make sure it is connected to this campaign’s voice channel, then try again.');
     else setNotice(`Loaded ${discordUsers.length} Discord voice channel member${discordUsers.length === 1 ? '' : 's'}.`);
     for (const row of peopleEditor.querySelectorAll('.person-row')) {
-      const select = row.querySelector('select');
+      const select = row.querySelector('.discord-select');
       const selected = select.value;
       fillDiscordOptions(select, selected);
     }
@@ -196,7 +201,7 @@ function renderManager() {
     row.append(label,edit); list.append(row);
   }
 }
-function beginEdit(campaign) {
+async function beginEdit(campaign) {
   editingId = campaign.id || null;
   $('#formHeading').textContent = editingId ? 'Edit campaign' : 'Add campaign';
   $('#campaignLabel').value = campaign.label || '';
@@ -205,22 +210,65 @@ function beginEdit(campaign) {
   $('#foundryEnabled').checked=campaign.foundryEnabled===true;
   $('#foundryHealth').checked=campaign.foundryHealth!==false;
   $('#foundryTurn').checked=campaign.foundryTurn!==false;
+  updateAssetHint();
   $('#deleteCampaign').hidden = !editingId;
   peopleEditor.replaceChildren();
   (campaign.people || []).forEach(person => addPersonRow(person));
   editor.hidden = false;
+  await refreshPortraitOptions();
   $('#campaignLabel').focus();
 }
 function addPersonRow(person) {
   const row=document.createElement('div'); row.className='person-row'; row.dataset.id=person.id || '';
-  const fields=[['Name',person.name||'','Participant name'],['Role',person.role||'','Optional label'],['Portrait file',person.image||'assets/portrait-placeholder.svg','For example: assets/alex.png'],['Foundry actor UUID',person.foundryActorUuid||'','Actor.abc123 (optional)']];
-  fields.forEach(([label,value,placeholder])=>{const wrap=document.createElement('label');wrap.textContent=label;const input=document.createElement('input');input.value=value;input.placeholder=placeholder;if(label==='Foundry actor UUID')input.setAttribute('list','foundryActors');wrap.append(input);row.append(wrap)});
+  const fields=[['Name',person.name||'','Participant name'],['Role',person.role||'','Optional label']];
+  fields.forEach(([label,value,placeholder])=>{const wrap=document.createElement('label');wrap.textContent=label;const input=document.createElement('input');input.value=value;input.placeholder=placeholder;wrap.append(input);row.append(wrap)});
+  const portraitWrap=document.createElement('label');portraitWrap.textContent='Portrait';
+  const portraitSelect=document.createElement('select');portraitSelect.className='portrait-select';portraitSelect.dataset.selected=person.image||'assets/portrait-placeholder.svg';
+  portraitSelect.addEventListener('change',()=>{portraitSelect.dataset.selected=portraitSelect.value;});
+  portraitWrap.append(portraitSelect);row.append(portraitWrap);
   const discordWrap=document.createElement('label');discordWrap.textContent='Discord speaker';
-  const discordSelect=document.createElement('select');
+  const discordSelect=document.createElement('select');discordSelect.className='discord-select';
   fillDiscordOptions(discordSelect, person.discordId || '');
   discordWrap.append(discordSelect);row.append(discordWrap);
+  const actorWrap=document.createElement('label');actorWrap.textContent='Foundry actor UUID';const actorInput=document.createElement('input');actorInput.className='foundry-actor';actorInput.value=person.foundryActorUuid||'';actorInput.placeholder='Actor.abc123 (optional)';actorInput.setAttribute('list','foundryActors');actorWrap.append(actorInput);row.append(actorWrap);
   const remove=document.createElement('button');remove.type='button';remove.className='button danger remove-person';remove.textContent='Remove';remove.onclick=()=>row.remove();row.append(remove);peopleEditor.append(row);
 }
+function editorCampaignId() { return editingId || slug($('#campaignLabel').value.trim()); }
+function updateAssetHint() {
+  const campaignId=editorCampaignId();
+  $('#assetHint').textContent=campaignId ? `Add portrait images to assets/${campaignId}/, then select them from each Portrait dropdown.` : 'Enter a campaign name to see where to put its portrait images.';
+}
+async function refreshPortraitOptions() {
+  const campaignId=editorCampaignId();
+  const sequence=++assetRefreshSequence;
+  let assets=[];
+  let unavailable=false;
+  if (campaignId) {
+    try {
+      const response=await fetch(`/api/assets?campaign=${encodeURIComponent(campaignId)}`,{cache:'no-store'});
+      if (!response.ok) throw new Error('Asset list request failed');
+      assets=await response.json();
+    } catch { unavailable=true; }
+  }
+  if (sequence!==assetRefreshSequence || campaignId!==editorCampaignId()) return;
+  updateAssetHint();
+  if (unavailable) $('#assetHint').textContent += ' Restart the controller with npm start to load this folder.';
+  for (const row of peopleEditor.querySelectorAll('.person-row')) {
+    const select=row.querySelector('.portrait-select');
+    const selected=select.value || select.dataset.selected || 'assets/portrait-placeholder.svg';
+    select.replaceChildren();
+    const placeholder=document.createElement('option');placeholder.value='assets/portrait-placeholder.svg';placeholder.textContent='Default placeholder';select.append(placeholder);
+    if (selected && selected!=='assets/portrait-placeholder.svg' && !assets.includes(selected)) {
+      const existing=document.createElement('option');existing.value=selected;existing.textContent=`Saved image outside folder (${selected})`;select.append(existing);
+    }
+    for (const imagePath of assets) {
+      const option=document.createElement('option');option.value=imagePath;option.textContent=imagePath.split('/').pop();select.append(option);
+    }
+    select.value=selected || 'assets/portrait-placeholder.svg';
+  }
+}
+$('#campaignLabel').addEventListener('input', updateAssetHint);
+$('#campaignLabel').addEventListener('change', refreshPortraitOptions);
 function fillDiscordOptions(select, selectedId) {
   select.replaceChildren();
   const none=document.createElement('option');none.value='';none.textContent='Not assigned';select.append(none);
@@ -266,6 +314,7 @@ $('#loadFoundryActors').onclick=async()=>{
 };
 loadAll().then(() => {
   void refreshFoundry();setInterval(refreshFoundry,600);
+
   if (params.has('overlay')) campaignSelect.hidden = true;
   setInterval(async () => {
     if (!params.has('overlay') && manager.open) return;
