@@ -335,3 +335,27 @@ loadAll().then(() => {
     } catch {}
   }, 600);
 }).catch(error => setNotice(error.message));
+
+const obsRoles={intro:"Starting Soon",gameplay:"Gameplay",break:"Break",ending:"Ending",artwork:"Artwork",cinematic:"Cinematic"};
+let obsEditingCampaign=null;
+async function obsFetch(path,body){
+ const response=await fetch('/api/obs/'+path,body===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+ if(!response.ok)throw Error(await response.text());return response.status===204?null:response.json();
+}
+async function loadOBS({connection=false}={}){
+ const d=await obsFetch('config'),s=d.status;
+ if(connection){$('#obsEnabled').checked=d.enabled;$('#obsPort').value=d.port;$('#obsPassword').value='';$('#obsClearPassword').checked=false;}
+ $('#obsConnectionStatus').textContent=s.connected?'Connected — '+s.scene+' · '+(s.streaming?'LIVE':'Not streaming')+' · '+(s.recording?'REC':'Not recording'):d.enabled?'Waiting for OBS — '+(s.error||'connecting'):'OBS integration disabled';
+ const list=$('#obsMappings');list.replaceChildren();
+ const current=d.campaigns[obsEditingCampaign]||{};
+ for(const [role,label] of Object.entries(obsRoles)){
+  const row=document.createElement('label');row.textContent=label;const select=document.createElement('select');select.dataset.role=role;
+  for(const scene of ['',...new Set([...(s.scenes||[]),...(current[role]?[current[role]]:[])])]){const opt=document.createElement('option');opt.value=scene;opt.textContent=scene||'Not mapped';select.append(opt);}
+  select.value=current[role]||'';row.append(select);list.append(row);
+ }
+ $('#obsSaveMappings').disabled=!s.connected||!obsEditingCampaign;
+}
+$('#obsSetup').onclick=async()=>{try{const campaign=activeCampaign();obsEditingCampaign=campaign?.id||null;$('#obsCampaignLabel').textContent=campaign?.label||'No campaign';await loadOBS({connection:true});$('#obsDialog').showModal();}catch(e){setNotice(e.message);}};
+$('#obsSave').onclick=async()=>{try{await obsFetch('config',{enabled:$('#obsEnabled').checked,port:Number($('#obsPort').value),password:$('#obsPassword').value,clearPassword:$('#obsClearPassword').checked});await loadOBS({connection:true});}catch(e){$('#obsConnectionStatus').textContent=e.message;}};
+$('#obsRefresh').onclick=async()=>{try{await loadOBS();}catch(e){$('#obsConnectionStatus').textContent=e.message;}};
+$('#obsSaveMappings').onclick=async()=>{try{await obsFetch('mapping',{campaign:obsEditingCampaign,mappings:Object.fromEntries([...$('#obsMappings').querySelectorAll('select')].map(s=>[s.dataset.role,s.value]))});$('#obsConnectionStatus').textContent='Scene mappings saved';}catch(e){$('#obsConnectionStatus').textContent=e.message;}};

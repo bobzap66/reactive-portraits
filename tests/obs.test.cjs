@@ -1,0 +1,5 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {authentication,mapping,targetFor}=require('../obs.cjs');
+test('authentication produces deterministic SHA256 base64 response',()=>{assert.equal(authentication('p','s','c').length,44);assert.notEqual(authentication('p','s','c'),authentication('q','s','c'));});
+test('only known scene names and roles can be mapped',()=>{assert.deepEqual(mapping({gameplay:'Game',bad:'Other'},['Game']),{gameplay:'Game'});assert.throws(()=>mapping({gameplay:'Missing'},['Game']));});
+test('manual scene switch requires matching active campaign and expected current program scene',()=>{const args={enabled:true,activeCampaign:'a',campaign:'a',mappings:{gameplay:'Game'},status:{connected:true,scene:'Intro',scenes:['Intro','Game']},role:'gameplay',expectedScene:'Intro'};assert.equal(targetFor(args),'Game');for(const override of [{enabled:false},{campaign:'b'},{expectedScene:'Break'},{role:'StartStream'},{mappings:{gameplay:'Missing'}},{status:{...args.status,connected:false}}])assert.throws(()=>targetFor({...args,...override}));});

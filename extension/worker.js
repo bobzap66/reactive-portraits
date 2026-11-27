@@ -1,5 +1,11 @@
 // Persistent, explicitly authorized origins and world-to-campaign mappings.
 const endpoint="http://127.0.0.1:8766/api/foundry";
+const obsEndpoint="http://127.0.0.1:8766/api/obs";
+async function obsRequest(b,role,expectedScene){
+ const headers={"Authorization":"Bearer "+b.secret};
+ const response=await fetch(role?obsEndpoint+"/scene":obsEndpoint+"/status?campaign="+encodeURIComponent(b.campaign),{headers:{...headers,...(role?{"Content-Type":"application/json"}:{})},...(role?{method:"POST",body:JSON.stringify({campaign:b.campaign,role,expectedScene})}:{}),signal:AbortSignal.timeout(5000)});
+ if(!response.ok)throw Error((await response.text()).slice(0,200));return response.json();
+}
 let queue=Promise.resolve();
 const serial=fn=>{const task=queue.catch(()=>{}).then(fn);queue=task;return task;};
 async function saved(){return (await chrome.storage.local.get("pairings")).pairings||[];}
@@ -21,8 +27,13 @@ async function install(b){
  await chrome.scripting.executeScript({target:{tabId:b.tabId},world:"ISOLATED",func:(channel)=>{
   globalThis.__rpRelayCleanup?.();
   const relay=e=>{if(e.source===window&&e.data?.kind==="rp-foundry"&&e.data.channel===channel)chrome.runtime.sendMessage({kind:"snapshot",channel,world:e.data.world,snapshot:e.data.snapshot}).catch(()=>{});};
-  window.addEventListener("message",relay);
-  globalThis.__rpRelayCleanup=()=>window.removeEventListener("message",relay);
+  const obsRelay=e=>{if(e.source!==window||e.origin!==location.origin||e.data?.kind!=="rp-obs-request"||e.data.channel!==channel)return;
+   const {id,world,role,expectedScene}=e.data;
+   if(typeof id!=="string"||id.length>100)return;
+   chrome.runtime.sendMessage({kind:"obs",channel,world,role,expectedScene}).then(result=>window.postMessage({kind:"rp-obs-response",channel,id,result},location.origin)).catch(()=>{});
+  };
+  window.addEventListener("message",relay);window.addEventListener("message",obsRelay);
+  globalThis.__rpRelayCleanup=()=>{window.removeEventListener("message",relay);window.removeEventListener("message",obsRelay);};
  },args:[b.channel]});
  await chrome.scripting.executeScript({target:{tabId:b.tabId},world:"MAIN",func:(channel,world)=>{
   globalThis.__rpFoundryCleanup?.();
@@ -31,7 +42,16 @@ async function install(b){
   const emit=snapshot=>{if(globalThis.game?.user?.isGM&&String(globalThis.game?.world?.id)===world)window.postMessage({kind:"rp-foundry",channel,world,snapshot},location.origin);};
   const stop=api.subscribe(emit);
   const heartbeat=setInterval(()=>emit(api.getSnapshot()),3000);
-  globalThis.__rpFoundryCleanup=()=>{stop();clearInterval(heartbeat);};
+  const production=g.modules.get("greene-gaming-stream-director")?.api?.obsProduction;
+  const detachProduction=production?.attach?.({request:({role,expectedScene}={})=>new Promise((resolve,reject)=>{
+   if(!globalThis.game?.user?.isGM||String(globalThis.game?.world?.id)!==world){reject(Error("Wrong GM world"));return;}
+   const id=crypto.randomUUID();
+   const cleanup=()=>{clearTimeout(timeout);window.removeEventListener("message",response);};
+   const response=e=>{if(e.source!==window||e.origin!==location.origin||e.data?.kind!=="rp-obs-response"||e.data.channel!==channel||e.data.id!==id)return;cleanup();const result=e.data.result;if(result?.error)reject(Error(result.error));else resolve(result?.status);};
+   const timeout=setTimeout(()=>{cleanup();reject(Error("OBS bridge timed out"));},6000);
+   window.addEventListener("message",response);window.postMessage({kind:"rp-obs-request",channel,id,world,role,expectedScene},location.origin);
+  })});
+  globalThis.__rpFoundryCleanup=()=>{stop();clearInterval(heartbeat);detachProduction?.();};
  },args:[b.channel,b.world]});
 }
 async function detach(b){
@@ -91,10 +111,11 @@ chrome.tabs.onRemoved.addListener(tabId=>void serial(()=>removeWhere(b=>b.tabId=
 chrome.runtime.onMessage.addListener((msg,sender,reply)=>{
  if(sender.id!==chrome.runtime.id)return;
  if(sender.tab){
-  if(msg.kind!=="snapshot"||sender.frameId!==0)return;
+  if(!["snapshot","obs"].includes(msg.kind)||sender.frameId!==0)return;
   serial(async()=>{
    const b=(await live()).find(b=>b.tabId===sender.tab.id&&b.channel===msg.channel&&b.world===msg.world&&sender.origin===b.origin);
-   if(!b)return {ok:false};
+   if(!b)return {error:"GM bridge unavailable"};
+   if(msg.kind==="obs"){const identity=await read(b.tabId);if(!identity?.snapshot?.available||identity.origin!==b.origin||identity.world!==b.world)return {error:"GM bridge unavailable"};return {status:await obsRequest(b,msg.role,msg.expectedScene)};}
    try{await send(b,msg.snapshot);return {ok:true};}catch(e){await removeWhere(x=>x.channel===b.channel);return {error:e.message};}
   }).then(reply,e=>reply({error:e.message}));return true;
  }
