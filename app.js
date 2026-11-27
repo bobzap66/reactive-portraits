@@ -337,7 +337,7 @@ loadAll().then(() => {
 }).catch(error => setNotice(error.message));
 
 const obsRoles={standby:"Starting Soon — Standby",intro:"Starting Soon",gameplay:"Gameplay",break:"Break",technical:"Technical Difficulties",ending:"Ending",artwork:"Artwork",cinematic:"Cinematic"};
-let obsEditingCampaign=null,obsPoll=null,obsRevision=0,obsSaving=false;
+let obsEditingCampaign=null,obsPoll=null,obsRevision=0,obsSaving=false,obsPolling=false;
 async function obsFetch(path,body){
  const response=await fetch('/api/obs/'+path,body===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
  if(!response.ok)throw Error(await response.text());return response.status===204?null:response.json();
@@ -364,7 +364,7 @@ async function loadOBS({connection=false,preserve=false}={}){
 }
 function startOBSPoll(){
  clearInterval(obsPoll);
- obsPoll=setInterval(()=>{if($('#obsDialog').open&&!obsSaving)void loadOBS({preserve:true}).catch(e=>{$('#obsConnectionStatus').textContent=e.message;$('#obsSaveMappings').disabled=true;});},1500);
+ obsPoll=setInterval(()=>{if($('#obsDialog').open&&!obsSaving&&!obsPolling){obsPolling=true;void loadOBS({preserve:true}).catch(e=>{if($('#obsDialog').open&&!obsSaving){$('#obsConnectionStatus').textContent=e.message;$('#obsSaveMappings').disabled=true;}}).finally(()=>{obsPolling=false;});}},1500);
 }
 $('#obsDialog').addEventListener('close',()=>{clearInterval(obsPoll);obsPoll=null;obsRevision++;$('#obsPassword').value='';});
 $('#obsSetup').onclick=async()=>{try{const campaign=activeCampaign();obsEditingCampaign=campaign?.id||null;$('#obsCampaignLabel').textContent=campaign?.label||'No campaign';await loadOBS({connection:true});$('#obsDialog').showModal();startOBSPoll();}catch(e){setNotice(e.message);}};
