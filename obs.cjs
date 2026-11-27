@@ -26,8 +26,9 @@ function createOBS({WebSocketImpl=WebSocket}={}){
  async function refresh(){
   if(!identified||refreshing)return;refreshing=true;const gen=generation,epoch=sceneEpoch;
   try{const [sc,st,rec]=await Promise.all([request('GetSceneList'),request('GetStreamStatus'),request('GetRecordStatus')]);if(gen!==generation)return;
-   if(status.scene!==sc.currentProgramSceneName&&epoch===sceneEpoch)sceneEpoch++;
-   status={connected:true,scene:epoch===sceneEpoch?sc.currentProgramSceneName:status.scene,scenes:sc.scenes.map(s=>s.sceneName),streaming:st.outputActive===true,recording:rec.outputActive===true,error:''};lastRefresh=Date.now();
+   const nextScene=epoch===sceneEpoch?sc.currentProgramSceneName:status.scene;
+   if(status.scene!==nextScene)sceneEpoch++;
+   status={connected:true,scene:nextScene,scenes:sc.scenes.map(s=>s.sceneName),streaming:st.outputActive===true,recording:rec.outputActive===true,error:''};lastRefresh=Date.now();
   }catch(e){if(gen===generation){close();status.error=e.message;}}finally{if(gen===generation)refreshing=false;}
  }
  function connect(){
