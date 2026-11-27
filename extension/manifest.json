@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Reactive Portraits — Foundry Bridge",
   "version": "1.0.0",
-  "description": "Send approved Stream Director data to your local Reactive Portraits server.",
+  "description": "Send approved GM Stream Director data to your local Reactive Portraits server.",
   "permissions": [
     "activeTab",
     "scripting",
