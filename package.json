@@ -10,10 +10,13 @@
     "bridge": "node discord-bridge.cjs",
     "rpc": "node rpc-bridge.cjs"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@discordjs/voice": "^0.19.2",
     "@snazzah/davey": "^0.1.6",
-    "discord.js": "^14.24.2"
+    "discord.js": "^14.24.2",
+    "ws": "^8.23.0"
   }
 }
