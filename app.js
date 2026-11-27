@@ -283,6 +283,8 @@ function fillDiscordOptions(select, selectedId) {
 
 function renderFoundry(){
  const campaign=activeCampaign();
+ const status=$('#foundryStatus');
+ if(status){const connected=foundryCampaign===campaign?.id&&foundryState?.available;status.textContent=!campaign?.foundryEnabled?'Foundry: disabled':connected?'Foundry: connected':'Foundry: waiting for GM bridge';status.dataset.connected=String(!!connected);}
  const data=campaign?.foundryEnabled&&foundryCampaign===campaign.id&&foundryState?.available?foundryState:null;
  for(const card of cards.querySelectorAll('.portrait-card')){
   const person=campaign?.people.find(p=>p.id===card.dataset.personId);
@@ -308,9 +310,9 @@ async function refreshFoundry(){
 $('#foundryPair').onclick=async()=>{
  try{const response=await fetch('/api/foundry/pair');if(!response.ok)throw Error('Pairing unavailable');const data=await response.json();$('#pairCampaign').value=data.campaign;$('#pairKey').value=data.key;$('#pairDialog').showModal();}catch(e){setNotice(e.message);}
 };
-$('#rotatePair').onclick=async()=>{const response=await fetch('/api/foundry/pair',{method:'POST'});if(response.ok){$('#pairDialog').close();$('#foundryPair').click();}};
+$('#rotatePair').onclick=async()=>{if(!confirm('Revoke all saved Foundry bridge credentials? Each campaign will need to be paired again.'))return;const response=await fetch('/api/foundry/pair',{method:'POST'});if(response.ok){$('#pairDialog').close();$('#foundryPair').click();}};
 $('#loadFoundryActors').onclick=async()=>{
- try{const response=await fetch('/api/foundry?campaign='+encodeURIComponent(editingId||state.campaign));const data=await response.json();const list=$('#foundryActors');list.replaceChildren();for(const actor of data.characters||[]){const option=document.createElement('option');option.value=actor.actorUuid;option.label=actor.name;list.append(option);}setNotice(data.characters?.length?'Foundry actors loaded. Select a UUID in each participant row.':'No Foundry actor data. Connect the observer bridge first.');}catch(e){setNotice(e.message);}
+ try{const response=await fetch('/api/foundry?campaign='+encodeURIComponent(editingId||state.campaign));const data=await response.json();const list=$('#foundryActors');list.replaceChildren();for(const actor of data.characters||[]){const option=document.createElement('option');option.value=actor.actorUuid;option.label=actor.name;list.append(option);}setNotice(data.characters?.length?'Foundry actors loaded. Select a UUID in each participant row.':'No Foundry actor data. Connect the GM bridge first.');}catch(e){setNotice(e.message);}
 };
 loadAll().then(() => {
   void refreshFoundry();setInterval(refreshFoundry,600);
