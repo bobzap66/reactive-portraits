@@ -67,6 +67,8 @@ async function reconcile(){
    const identity=await read(b.tabId);
    if(!identity?.snapshot?.available||identity.origin!==b.origin||identity.world!==b.world){await removeWhere(x=>x.channel===b.channel);continue;}
    await send(b,identity.snapshot);
+   // A reload can destroy the page subscription without changing the tab ID.
+   await install(b);
   }catch{await removeWhere(x=>x.channel===b.channel);}
  }
  for(const tab of tabs){
@@ -106,6 +108,7 @@ chrome.runtime.onMessage.addListener((msg,sender,reply)=>{
    if(!identity?.snapshot?.available)throw Error("Open the GM browser and enable Stream Director GM portrait integration first");
    if(!await chrome.permissions.contains({origins:[identity.origin+"/*"]}))throw Error("Allow access to this Foundry site for automatic reconnection");
    const b={origin:identity.origin,world:identity.world,campaign:msg.campaign,secret:msg.secret};
+   // Verify the credential before replacing any saved mapping.
    await send(b,identity.snapshot);
    await removeWhere(x=>x.campaign===b.campaign||x.origin===b.origin&&x.world===b.world);
    const pairings=(await saved()).filter(p=>p.campaign!==b.campaign&&!(p.origin===b.origin&&p.world===b.world));
