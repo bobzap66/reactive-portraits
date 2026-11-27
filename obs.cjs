@@ -42,6 +42,6 @@ function createOBS({WebSocketImpl=WebSocket}={}){
   ws.on('error',()=>failed('Cannot connect to OBS WebSocket'));ws.on('close',code=>failed('OBS disconnected ('+code+')'));
  }
  const timer=setInterval(()=>{if(!settings.enabled)return;if(!socket)connect();else if(identified)void refresh();},2000);timer.unref?.();
- return {configure(next){close();settings={...next};if(settings.enabled)connect();},getStatus(){return {...status,connected:status.connected&&Date.now()-lastRefresh<7000,scenes:[...status.scenes]};},async switchScene(scene){await request('SetCurrentProgramScene',{sceneName:scene});await refresh();},close};
+ return {configure(next){close();settings={...next};if(settings.enabled)connect();},getStatus(){return {...status,connected:status.connected&&Date.now()-lastRefresh<7000,scenes:[...status.scenes]};},async switchScene(scene,expectedScene,stillAllowed=()=>true){const current=await request('GetCurrentProgramScene');if(current.currentProgramSceneName!==expectedScene||!stillAllowed())throw Error('Production state changed; review and try again');await request('SetCurrentProgramScene',{sceneName:scene});await refresh();},close};
 }
 module.exports={roles,authentication,mapping,targetFor,createOBS};
