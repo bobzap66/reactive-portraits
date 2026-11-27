@@ -38,7 +38,7 @@ function createOBS({WebSocketImpl=WebSocket}={}){
   ws.on('message',raw=>{if(gen!==generation)return;try{const {op,d}=JSON.parse(raw.toString());
    if(op===0){const auth=d.authentication;ws.send(JSON.stringify({op:1,d:{rpcVersion:1,eventSubscriptions:4,...(auth?{authentication:authentication(settings.password||'',auth.salt,auth.challenge)}:{})}}));}
    if(op===2){clearTimeout(timeout);identified=true;connecting=false;void refresh();}
-   if(op===5&&d.eventType==='CurrentProgramSceneChanged'){sceneEpoch++;status.scene=d.eventData?.sceneName||null;}
+   if(op===5&&d.eventType==='CurrentProgramSceneChanged'){const next=d.eventData?.sceneName||null;if(status.scene!==next){sceneEpoch++;status.scene=next;}}
    if(op===7){const p=pending.get(d.requestId);if(!p)return;pending.delete(d.requestId);clearTimeout(p.timer);if(d.requestStatus?.result)p.resolve(d.responseData||{});else p.reject(Error(d.requestStatus?.comment||'OBS rejected request'));}
   }catch{close();status.error='Invalid OBS response';}});
   const failed=message=>{clearTimeout(timeout);if(gen!==generation)return;generation++;socket=null;reset(message);try{ws.terminate();}catch{}};
