@@ -131,10 +131,10 @@ const server = http.createServer(async (req, res) => {
         const next={...obsConfig,campaigns:{...obsConfig.campaigns,[v.campaign]:mapping(v.mappings,s.scenes)}};
         fs.writeFileSync(obsFile,JSON.stringify(next,null,2),{mode:0o600});obsConfig=next;return send(res,204);
       }
-      if(pathname==='/api/obs/cue/intro-complete'&&req.method==='POST'){
+      if(['/api/obs/cue/intro-complete','/api/obs/cue/intro-countdown'].includes(pathname)&&req.method==='POST'){
         if(origin!==undefined||req.headers['sec-fetch-site']||!matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),obsConfig.cueKey))return send(res,403,'Local automation credential required');
         const v=await readBody(req,4096),s=cueState();
-        if(v.campaign!==s.campaign||v.scene!==s.scene||!cues.complete(s))return send(res,409,'Intro scene or campaign no longer active');
+        if(v.campaign!==s.campaign||v.scene!==s.scene||!(pathname.endsWith('intro-complete')?cues.complete(s):cues.countdown(s,v.remainingMs)))return send(res,409,'Intro scene or campaign no longer active');
         return send(res,204);
       }
       if(!bridge)return send(res,403,'Paired bridge only');
