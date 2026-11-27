@@ -97,7 +97,7 @@ function staticFile(urlPath, res) {
   catch { return send(res, 400, 'Bad path'); }
   if (decoded === '/') decoded = '/index.html';
   const file = path.resolve(root, `.${decoded}`);
-  if (!['/index.html','/app.js','/styles.css'].includes(decoded) && !file.startsWith(assetsRoot + path.sep)) return send(res, 404, 'Not found');
+  if (!['/index.html','/app.js','/styles.css','/break-overlay.html'].includes(decoded) && !file.startsWith(assetsRoot + path.sep)) return send(res, 404, 'Not found');
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'Not found');
   const ext = path.extname(file).toLowerCase();
   const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.avif': 'image/avif' };
@@ -137,7 +137,17 @@ const server = http.createServer(async (req, res) => {
         if(v.campaign!==s.campaign||v.scene!==s.scene||!(pathname.endsWith('intro-complete')?cues.complete(s):cues.countdown(s,v.remainingMs)))return send(res,409,'Intro scene or campaign no longer active');
         return send(res,204);
       }
+      if(pathname==='/api/obs/break-overlay'&&req.method==='GET'&&local){
+        const campaign=new URL(req.url,'http://127.0.0.1').searchParams.get('campaign'),s=cueState();
+        const timer=campaign===s.campaign&&s.enabled&&s.connected&&s.scene===s.mappings.break?cues.snapshot(s)?.breakTimer:null;
+        return json({timer:timer||null});
+      }
       if(!bridge)return send(res,403,'Paired bridge only');
+      if(pathname==='/api/obs/break'&&req.method==='POST'){
+        const v=await readBody(req,4096),s=cueState();
+        if(v.campaign!==s.campaign||!foundryStore.get(v.campaign).available||v.expectedScene!==s.scene||v.cueId!==cues.snapshot(s)?.id||!cues.controlBreak(s,v.action,v.minutes))return send(res,409,'Break state changed or invalid timer command');
+        return json(obsStatus(v.campaign));
+      }
       if(pathname==='/api/obs/status'&&req.method==='GET'){
         const campaign=new URL(req.url,'http://127.0.0.1').searchParams.get('campaign');
         if(!config.campaigns.some(c=>c.id===campaign))throw Error('Unknown campaign');return json(obsStatus(campaign));
@@ -146,7 +156,10 @@ const server = http.createServer(async (req, res) => {
         const v=await readBody(req,4096);if(!config.campaigns.some(c=>c.id===v.campaign))throw Error('Unknown campaign');
         if(!foundryStore.get(v.campaign).available)throw Error('GM bridge unavailable');
         const target=targetFor({enabled:obsConfig.enabled,activeCampaign:state.campaign,campaign:v.campaign,mappings:obsConfig.campaigns[v.campaign],status:obs.getStatus(),role:v.role,expectedScene:v.expectedScene});
-        await obs.switchScene(target,v.expectedScene,()=>obsConfig.enabled&&state.campaign===v.campaign&&foundryStore.get(v.campaign).available&&obsConfig.campaigns[v.campaign]?.[v.role]===target&&matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),pairingKey));return json(obsStatus(v.campaign));
+        if(v.role==='break'&&v.breakMinutes!==undefined&&v.breakMinutes!==null&&(!Number.isInteger(v.breakMinutes)||v.breakMinutes<1||v.breakMinutes>120))return send(res,400,'Invalid break duration');
+        await obs.switchScene(target,v.expectedScene,()=>obsConfig.enabled&&state.campaign===v.campaign&&foundryStore.get(v.campaign).available&&obsConfig.campaigns[v.campaign]?.[v.role]===target&&matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),pairingKey));
+        if(v.role==='break'&&v.breakMinutes!==undefined){const s=cueState();if(s.campaign!==v.campaign||s.scene!==target||!cues.controlBreak(s,'start',v.breakMinutes))return send(res,409,'Scene changed before timer could start');}
+        return json(obsStatus(v.campaign));
       }
       return send(res,404,'Not found');
     }
