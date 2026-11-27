@@ -24,7 +24,7 @@ function currentSession(campaignId = state.campaign) {
   current.crops ||= {};
   return current;
 }
-function defaultCrop(person) { return { zoom: 1, x: 50, y: 18, ...(person.crop || {}) }; }
+function defaultCrop(person) { return { zoom: 1.25, x: 50, y: 18, ...(person.crop || {}) }; }
 function setNotice(message = '') { notice.textContent = message; }
 async function loadAll() {
   const [configResponse, stateResponse] = await Promise.all([fetch('/api/config'), fetch('/api/state')]);
@@ -105,6 +105,7 @@ function render() {
       for (const [key, label, min, max, step] of [['zoom','Zoom',1,3.5,.05],['x','Horizontal',0,100,1],['y','Vertical',0,100,1]]) {
         const description = document.createElement('label'); description.className='tool-label'; description.textContent = `${label}: ${key === 'zoom' ? `${Number(crop[key]).toFixed(2)}×` : `${crop[key]}%`}`;
         const slider = document.createElement('input'); slider.type='range'; slider.min=min; slider.max=max; slider.step=step; slider.value=crop[key]; slider.setAttribute('aria-label', `${label} crop for ${person.name}`);
+        if (key === 'x' || key === 'y') slider.title = 'At low zoom, there may be little room to pan. Increase Zoom to move a square portrait within the frame.';
         slider.oninput = () => {
           crop[key] = Number(slider.value);
           image.style.setProperty('--zoom', crop.zoom);
