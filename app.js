@@ -227,20 +227,24 @@ async function refreshPortraitOptions() {
   const campaignId=editorCampaignId();
   const sequence=++assetRefreshSequence;
   let assets=[];
+  let unavailable=false;
   if (campaignId) {
     try {
       const response=await fetch(`/api/assets?campaign=${encodeURIComponent(campaignId)}`,{cache:'no-store'});
-      if (response.ok) assets=await response.json();
-    } catch {}
+      if (!response.ok) throw new Error('Asset list request failed');
+      assets=await response.json();
+    } catch { unavailable=true; }
   }
   if (sequence!==assetRefreshSequence || campaignId!==editorCampaignId()) return;
+  updateAssetHint();
+  if (unavailable) $('#assetHint').textContent += ' Restart the controller with npm start to load this folder.';
   for (const row of peopleEditor.querySelectorAll('.person-row')) {
     const select=row.querySelector('.portrait-select');
     const selected=select.value || select.dataset.selected || 'assets/portrait-placeholder.svg';
     select.replaceChildren();
     const placeholder=document.createElement('option');placeholder.value='assets/portrait-placeholder.svg';placeholder.textContent='Default placeholder';select.append(placeholder);
     if (selected && selected!=='assets/portrait-placeholder.svg' && !assets.includes(selected)) {
-      const existing=document.createElement('option');existing.value=selected;existing.textContent=`Current image (${selected})`;select.append(existing);
+      const existing=document.createElement('option');existing.value=selected;existing.textContent=`Saved image outside folder (${selected})`;select.append(existing);
     }
     for (const imagePath of assets) {
       const option=document.createElement('option');option.value=imagePath;option.textContent=imagePath.split('/').pop();select.append(option);
