@@ -167,7 +167,7 @@ $('#loadDiscordUsers').onclick = async () => {
   try {
     const response = await fetch('/api/discord/users', { cache: 'no-store' });
     discordUsers = await response.json();
-    if (!discordUsers.length) setNotice('No Discord users are available yet. Start the RPC bridge and have Discord joined to the campaign voice channel, then try again.');
+    if (!discordUsers.length) setNotice('No Discord users are available yet. Start an automatic Discord bridge and make sure it is connected to this campaign’s voice channel, then try again.');
     else setNotice(`Loaded ${discordUsers.length} Discord voice channel member${discordUsers.length === 1 ? '' : 's'}.`);
     for (const row of peopleEditor.querySelectorAll('.person-row')) {
       const select = row.querySelector('select');
