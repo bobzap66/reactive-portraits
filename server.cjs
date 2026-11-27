@@ -7,6 +7,7 @@ const foundryStore = createStore();
 const {createOBS,roles,mapping,targetFor}=require('./obs.cjs');
 const obs=createOBS();
 const {createCues}=require('./production-cues.cjs');
+const {allowOverlayRead}=require('./overlay-access.cjs');
 const cues=createCues();
 
 const root = __dirname;
@@ -137,7 +138,7 @@ const server = http.createServer(async (req, res) => {
         if(v.campaign!==s.campaign||v.scene!==s.scene||!(pathname.endsWith('intro-complete')?cues.complete(s):cues.countdown(s,v.remainingMs)))return send(res,409,'Intro scene or campaign no longer active');
         return send(res,204);
       }
-      if(pathname==='/api/obs/break-overlay'&&req.method==='GET'&&(origin===undefined||localOrigins.includes(origin))&&[undefined,'none','same-origin'].includes(req.headers['sec-fetch-site'])){
+      if(pathname==='/api/obs/break-overlay'&&req.method==='GET'&&allowOverlayRead(req.headers,localOrigins)){
         const campaign=new URL(req.url,'http://127.0.0.1').searchParams.get('campaign'),s=cueState();
         const timer=campaign===s.campaign&&s.enabled&&s.connected&&s.scene===s.mappings.break?cues.snapshot(s)?.breakTimer:null;
         return json({timer:timer||null});
