@@ -1,0 +1,19 @@
+name: Production regression checks
+on:
+  pull_request:
+  push:
+    branches:
+      - feature/production-cues-061
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: node --test tests/*.test.cjs
+      - run: node --check server.cjs && node --check obs.cjs && node --check app.js && node --check extension/worker.js
