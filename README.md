@@ -118,3 +118,7 @@ The application source is released under the MIT License. Portrait images you ad
 ## Optional OBS production control
 
 Requires OBS WebSocket v5 and Stream Director v0.6.0. Enable WebSocket Server Settings in OBS (default port 4455; use authentication). In Reactive Portraits select the campaign, click OBS setup, save the connection and refresh scenes, then select existing OBS scenes for each role and save. Repeat per campaign. Credentials and mappings are stored locally in ignored obs-config.json; do not publish it. Reload the unpacked Chrome bridge (v1.2.0) and keep the existing Foundry pairing. Enable the GM OBS toolbar in Foundry. Only the active local campaign may issue explicitly confirmed mapped scene changes. Program scene is checked before switching; OBS and server restart recovery use polling. No streaming/recording start or stop, automatic transitions, media control or audio changes. Foundry modules in the paired GM page must be trusted; the bridge is not a security sandbox for other page scripts. Test off-stream first.
+
+### Production polish for Stream Director v0.6.0.1
+
+Two optional roles are available: Starting Soon — Standby (a static holding scene before intro music/countdown) and Technical Difficulties. Existing mappings remain valid. The setup dialog refreshes connection status and scene choices while open, retaining unsaved selections. OBS authentication failures have clearer diagnostics. The existing Chrome bridge v1.2.0 works unchanged. Restart the local server and reload the controller after updating.
