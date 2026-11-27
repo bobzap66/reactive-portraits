@@ -73,6 +73,18 @@ Do not share `discord-bridge.config.json` or commit it. It is excluded from Git.
 
 The bridge follows whichever campaign is selected in the controller and switches to that campaign's channel. If the bridge is stopped, manual speaker selection still works.
 
+## Optional Foundry combat indicators
+
+Requires Greene Gaming Stream Director v0.4.9 (v0.4.8 works for visible characters) and Chrome on the same computer as this local server. The integration is opt-in per campaign and does not modify Discord speaker detection. Health and active-turn indicators appear only for mapped characters participating in active combat, and clear when combat ends or data expires.
+
+1. Start the local controller at its default port 8766. Select the campaign, open Manage campaigns and enable Foundry integration, with health bars and active-turn indicators as desired. Save.
+2. In Foundry GM settings, enable the Stream Director integration API and optionally health. For a persistent roster, enable approved roster mode and select the PCs; grant the designated observer Observer permission.
+3. In Chrome, open chrome://extensions, enable Developer mode, choose Load unpacked and select this project's extension folder.
+4. On the local controller click Pair Foundry. Copy the campaign ID and pairing key. On the designated observer tab open the extension popup, paste both values and click Connect this observer tab.
+5. In the campaign editor click Load Foundry actors. In each participant's Foundry actor UUID field select the matching UUID (or paste manually). Save the campaign. Leave the GM unmapped.
+
+The extension accesses only the explicitly selected browser tab, uses Stream Director's event subscription and sends a short heartbeat to the loopback server. Data expires after 12 seconds without updates; no HP is saved to disk. The extension pairing is session-local; reconnect after Chrome or server restarts, navigation/refresh if the permission is lost, or switching campaigns. Rotate the key in the pairing dialog to revoke previous bridges. No external service, remote server or Foundry account credential is used. The extension is unpacked development software, not a Chrome Web Store release. Live testing on Forge and OBS is required.
+
 ## Configuration and files
 
 | File | Purpose | Tracked in Git? |
