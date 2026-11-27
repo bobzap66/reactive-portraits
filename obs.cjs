@@ -1,6 +1,6 @@
 const WebSocket=require('ws');
 const {createHash,randomUUID}=require('node:crypto');
-const roles=Object.freeze(['intro','gameplay','break','ending','artwork','cinematic']);
+const roles=Object.freeze(['standby','intro','gameplay','break','technical','ending','artwork','cinematic']);
 const hash=s=>createHash('sha256').update(s).digest('base64');
 function authentication(password,salt,challenge){return hash(hash(password+salt)+challenge);}
 function mapping(value,scenes){
@@ -38,8 +38,8 @@ function createOBS({WebSocketImpl=WebSocket}={}){
    if(op===2){clearTimeout(timeout);identified=true;connecting=false;void refresh();}
    if(op===7){const p=pending.get(d.requestId);if(!p)return;pending.delete(d.requestId);clearTimeout(p.timer);if(d.requestStatus?.result)p.resolve(d.responseData||{});else p.reject(Error(d.requestStatus?.comment||'OBS rejected request'));}
   }catch{close();status.error='Invalid OBS response';}});
-  const failed=message=>{clearTimeout(timeout);if(gen!==generation)return;socket=null;reset(message);try{ws.terminate();}catch{}};
-  ws.on('error',()=>failed('Cannot connect to OBS WebSocket'));ws.on('close',code=>failed('OBS disconnected ('+code+')'));
+  const failed=message=>{clearTimeout(timeout);if(gen!==generation)return;generation++;socket=null;reset(message);try{ws.terminate();}catch{}};
+  ws.on('error',()=>failed('Cannot connect to OBS WebSocket'));ws.on('close',code=>failed(code===4009?'Authentication failed — check the OBS password':code===4010?'OBS RPC version incompatible':'OBS disconnected ('+code+')'));
  }
  const timer=setInterval(()=>{if(!settings.enabled)return;if(!socket)connect();else if(identified)void refresh();},2000);timer.unref?.();
  return {configure(next){close();settings={...next};if(settings.enabled)connect();},getStatus(){return {...status,connected:status.connected&&Date.now()-lastRefresh<7000,scenes:[...status.scenes]};},async switchScene(scene,expectedScene,stillAllowed=()=>true){const current=await request('GetCurrentProgramScene');if(current.currentProgramSceneName!==expectedScene||!stillAllowed())throw Error('Production state changed; review and try again');await request('SetCurrentProgramScene',{sceneName:scene});await refresh();},close};
