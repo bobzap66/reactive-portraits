@@ -14,19 +14,21 @@ function targetFor({enabled,activeCampaign,campaign,mappings,status,role,expecte
  const scene=mappings?.[role];if(!scene||!status.scenes.includes(scene))throw Error('Scene is not mapped or no longer exists');return scene;
 }
 function createOBS({WebSocketImpl=WebSocket}={}){
- let socket=null,settings={},identified=false,connecting=false,refreshing=false,generation=0,lastRefresh=0;
+ let socket=null,settings={},identified=false,connecting=false,refreshing=false,generation=0,lastRefresh=0,sceneEpoch=0;
  let status={connected:false,scene:null,scenes:[],streaming:false,recording:false,error:''};
  const pending=new Map();
- const reset=error=>{identified=false;connecting=false;refreshing=false;lastRefresh=0;status={connected:false,scene:null,scenes:[],streaming:false,recording:false,error};for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error(error||'OBS disconnected'));}pending.clear();};
+ const reset=error=>{sceneEpoch++;identified=false;connecting=false;refreshing=false;lastRefresh=0;status={connected:false,scene:null,scenes:[],streaming:false,recording:false,error};for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error(error||'OBS disconnected'));}pending.clear();};
  function close(){generation++;const old=socket;socket=null;reset('');try{old?.terminate();}catch{}}
  function request(type,data={}){
   if(!identified||socket?.readyState!==WebSocketImpl.OPEN)return Promise.reject(Error('OBS disconnected'));
   return new Promise((resolve,reject)=>{const requestId=randomUUID(),timer=setTimeout(()=>{pending.delete(requestId);reject(Error('OBS request timed out'));},3000);pending.set(requestId,{resolve,reject,timer});try{socket.send(JSON.stringify({op:6,d:{requestType:type,requestId,requestData:data}}));}catch(e){clearTimeout(timer);pending.delete(requestId);reject(e);}});
  }
  async function refresh(){
-  if(!identified||refreshing)return;refreshing=true;const gen=generation;
+  if(!identified||refreshing)return;refreshing=true;const gen=generation,epoch=sceneEpoch;
   try{const [sc,st,rec]=await Promise.all([request('GetSceneList'),request('GetStreamStatus'),request('GetRecordStatus')]);if(gen!==generation)return;
-   status={connected:true,scene:sc.currentProgramSceneName,scenes:sc.scenes.map(s=>s.sceneName),streaming:st.outputActive===true,recording:rec.outputActive===true,error:''};lastRefresh=Date.now();
+   const nextScene=epoch===sceneEpoch?sc.currentProgramSceneName:status.scene;
+   if(status.scene!==nextScene)sceneEpoch++;
+   status={connected:true,scene:nextScene,scenes:sc.scenes.map(s=>s.sceneName),streaming:st.outputActive===true,recording:rec.outputActive===true,error:''};lastRefresh=Date.now();
   }catch(e){if(gen===generation){close();status.error=e.message;}}finally{if(gen===generation)refreshing=false;}
  }
  function connect(){
@@ -34,14 +36,15 @@ function createOBS({WebSocketImpl=WebSocket}={}){
   const ws=new WebSocketImpl('ws://127.0.0.1:'+settings.port,{handshakeTimeout:3000,maxPayload:1024*1024});socket=ws;
   const timeout=setTimeout(()=>{if(gen===generation&&!identified){close();status.error='OBS handshake timed out';}},5000);
   ws.on('message',raw=>{if(gen!==generation)return;try{const {op,d}=JSON.parse(raw.toString());
-   if(op===0){const auth=d.authentication;ws.send(JSON.stringify({op:1,d:{rpcVersion:1,eventSubscriptions:0,...(auth?{authentication:authentication(settings.password||'',auth.salt,auth.challenge)}:{})}}));}
+   if(op===0){const auth=d.authentication;ws.send(JSON.stringify({op:1,d:{rpcVersion:1,eventSubscriptions:4,...(auth?{authentication:authentication(settings.password||'',auth.salt,auth.challenge)}:{})}}));}
    if(op===2){clearTimeout(timeout);identified=true;connecting=false;void refresh();}
+   if(op===5&&d.eventType==='CurrentProgramSceneChanged'){sceneEpoch++;status.scene=d.eventData?.sceneName||null;}
    if(op===7){const p=pending.get(d.requestId);if(!p)return;pending.delete(d.requestId);clearTimeout(p.timer);if(d.requestStatus?.result)p.resolve(d.responseData||{});else p.reject(Error(d.requestStatus?.comment||'OBS rejected request'));}
   }catch{close();status.error='Invalid OBS response';}});
   const failed=message=>{clearTimeout(timeout);if(gen!==generation)return;generation++;socket=null;reset(message);try{ws.terminate();}catch{}};
   ws.on('error',()=>failed('Cannot connect to OBS WebSocket'));ws.on('close',code=>failed(code===4009?'Authentication failed — check the OBS password':code===4010?'OBS RPC version incompatible':'OBS disconnected ('+code+')'));
  }
  const timer=setInterval(()=>{if(!settings.enabled)return;if(!socket)connect();else if(identified)void refresh();},2000);timer.unref?.();
- return {configure(next){close();settings={...next};if(settings.enabled)connect();},getStatus(){return {...status,connected:status.connected&&Date.now()-lastRefresh<7000,scenes:[...status.scenes]};},async switchScene(scene,expectedScene,stillAllowed=()=>true){const current=await request('GetCurrentProgramScene');if(current.currentProgramSceneName!==expectedScene||!stillAllowed())throw Error('Production state changed; review and try again');await request('SetCurrentProgramScene',{sceneName:scene});await refresh();},close};
+ return {configure(next){close();settings={...next};if(settings.enabled)connect();},getStatus(){return {...status,connected:status.connected&&Date.now()-lastRefresh<7000,scenes:[...status.scenes],sceneEpoch};},async switchScene(scene,expectedScene,stillAllowed=()=>true){const current=await request('GetCurrentProgramScene');if(current.currentProgramSceneName!==expectedScene||!stillAllowed())throw Error('Production state changed; review and try again');await request('SetCurrentProgramScene',{sceneName:scene});const currentAfter=await request('GetCurrentProgramScene');if(currentAfter.currentProgramSceneName!==scene)throw Error('OBS scene changed before confirmation');if(status.scene!==scene){sceneEpoch++;status.scene=scene;}await refresh();},close};
 }
 module.exports={roles,authentication,mapping,targetFor,createOBS};

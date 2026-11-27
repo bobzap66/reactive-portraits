@@ -6,6 +6,8 @@ const { matchesSecret, createStore } = require('./foundry-state.cjs');
 const foundryStore = createStore();
 const {createOBS,roles,mapping,targetFor}=require('./obs.cjs');
 const obs=createOBS();
+const {createCues}=require('./production-cues.cjs');
+const cues=createCues();
 
 const root = __dirname;
 const port = Number(process.env.PORT || 8766);
@@ -26,9 +28,12 @@ let state = readJson(stateFile, { campaign: config.campaigns[0]?.id || '', sessi
 let discordUsers = [];
 const obsFile=path.join(root,'obs-config.json');
 let obsConfig=readJson(obsFile,{enabled:false,port:4455,password:'',campaigns:{}});
-obsConfig={enabled:obsConfig.enabled===true,port:Number.isInteger(obsConfig.port)&&obsConfig.port>0&&obsConfig.port<65536?obsConfig.port:4455,password:typeof obsConfig.password==='string'?obsConfig.password:'',campaigns:obsConfig.campaigns||{}};
+obsConfig={enabled:obsConfig.enabled===true,port:Number.isInteger(obsConfig.port)&&obsConfig.port>0&&obsConfig.port<65536?obsConfig.port:4455,password:typeof obsConfig.password==='string'?obsConfig.password:'',campaigns:obsConfig.campaigns||{},cueKey:typeof obsConfig.cueKey==='string'&&/^[a-f0-9]{64}$/.test(obsConfig.cueKey)?obsConfig.cueKey:randomBytes(32).toString('hex')};
+fs.writeFileSync(obsFile,JSON.stringify(obsConfig,null,2),{mode:0o600});
 obs.configure(obsConfig);
-const obsStatus=campaign=>{const s=obs.getStatus();return {enabled:obsConfig.enabled,connected:s.connected,scene:s.scene,streaming:s.streaming,recording:s.recording,mappings:obsConfig.campaigns[campaign]||{},active:state.campaign===campaign};};
+const cueState=()=>{const s=obs.getStatus(),campaign=state.campaign;return {enabled:obsConfig.enabled,connected:s.connected,scene:s.scene,sceneEpoch:s.sceneEpoch,campaign,mappings:obsConfig.campaigns[campaign]||{},active:true};};
+const cueTimer=setInterval(()=>cues.snapshot(cueState()),500);cueTimer.unref();
+const obsStatus=campaign=>{const s=obs.getStatus(),active=state.campaign===campaign;return {enabled:obsConfig.enabled,connected:s.connected,scene:s.scene,streaming:s.streaming,recording:s.recording,mappings:obsConfig.campaigns[campaign]||{},active,cue:active?cues.snapshot(cueState()):null};};
 
 function campaignAssetDir(campaignId) {
   if (typeof campaignId !== 'string' || !/^[a-z0-9][a-z0-9_-]*$/i.test(campaignId)) throw new Error('Campaign ID must use letters, numbers, underscores, or hyphens.');
@@ -92,7 +97,7 @@ function staticFile(urlPath, res) {
   catch { return send(res, 400, 'Bad path'); }
   if (decoded === '/') decoded = '/index.html';
   const file = path.resolve(root, `.${decoded}`);
-  if (!['/index.html','/app.js','/styles.css'].includes(decoded) && !file.startsWith(assetsRoot + path.sep)) return send(res, 404, 'Not found');
+  if (!['/index.html','/app.js','/styles.css','/break-overlay.html'].includes(decoded) && !file.startsWith(assetsRoot + path.sep)) return send(res, 404, 'Not found');
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'Not found');
   const ext = path.extname(file).toLowerCase();
   const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.avif': 'image/avif' };
@@ -112,7 +117,7 @@ const server = http.createServer(async (req, res) => {
       const bridge=(!origin||/^chrome-extension:\/\/[a-p]{32}$/.test(origin))&&matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),pairingKey);
       const json=value=>send(res,200,JSON.stringify(value),'application/json; charset=utf-8');
       if(pathname==='/api/obs/config'&&local){
-        if(req.method==='GET')return json({enabled:obsConfig.enabled,port:obsConfig.port,hasPassword:!!obsConfig.password,campaigns:obsConfig.campaigns,status:obs.getStatus()});
+        if(req.method==='GET')return json({enabled:obsConfig.enabled,port:obsConfig.port,hasPassword:!!obsConfig.password,campaigns:obsConfig.campaigns,cueKey:obsConfig.cueKey,status:obs.getStatus()});
         if(req.method==='POST'){
           const v=await readBody(req,65536);
           if(typeof v.enabled!=='boolean'||!Number.isInteger(v.port)||v.port<1||v.port>65535||typeof v.password!=='string'||v.password.length>256)throw Error('Invalid OBS connection settings');
@@ -126,7 +131,23 @@ const server = http.createServer(async (req, res) => {
         const next={...obsConfig,campaigns:{...obsConfig.campaigns,[v.campaign]:mapping(v.mappings,s.scenes)}};
         fs.writeFileSync(obsFile,JSON.stringify(next,null,2),{mode:0o600});obsConfig=next;return send(res,204);
       }
+      if(['/api/obs/cue/intro-complete','/api/obs/cue/intro-countdown'].includes(pathname)&&req.method==='POST'){
+        if(origin!==undefined||req.headers['sec-fetch-site']||!matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),obsConfig.cueKey))return send(res,403,'Local automation credential required');
+        const v=await readBody(req,4096),s=cueState();
+        if(v.campaign!==s.campaign||v.scene!==s.scene||!(pathname.endsWith('intro-complete')?cues.complete(s):cues.countdown(s,v.remainingMs)))return send(res,409,'Intro scene or campaign no longer active');
+        return send(res,204);
+      }
+      if(pathname==='/api/obs/break-overlay'&&req.method==='GET'&&local){
+        const campaign=new URL(req.url,'http://127.0.0.1').searchParams.get('campaign'),s=cueState();
+        const timer=campaign===s.campaign&&s.enabled&&s.connected&&s.scene===s.mappings.break?cues.snapshot(s)?.breakTimer:null;
+        return json({timer:timer||null});
+      }
       if(!bridge)return send(res,403,'Paired bridge only');
+      if(pathname==='/api/obs/break'&&req.method==='POST'){
+        const v=await readBody(req,4096),s=cueState();
+        if(v.campaign!==s.campaign||!foundryStore.get(v.campaign).available||v.expectedScene!==s.scene||typeof v.cueId!=='string'||v.cueId!==cues.snapshot(s)?.id||!cues.controlBreak(s,v.action,v.minutes))return send(res,409,'Break state changed or invalid timer command');
+        return json(obsStatus(v.campaign));
+      }
       if(pathname==='/api/obs/status'&&req.method==='GET'){
         const campaign=new URL(req.url,'http://127.0.0.1').searchParams.get('campaign');
         if(!config.campaigns.some(c=>c.id===campaign))throw Error('Unknown campaign');return json(obsStatus(campaign));
@@ -135,7 +156,10 @@ const server = http.createServer(async (req, res) => {
         const v=await readBody(req,4096);if(!config.campaigns.some(c=>c.id===v.campaign))throw Error('Unknown campaign');
         if(!foundryStore.get(v.campaign).available)throw Error('GM bridge unavailable');
         const target=targetFor({enabled:obsConfig.enabled,activeCampaign:state.campaign,campaign:v.campaign,mappings:obsConfig.campaigns[v.campaign],status:obs.getStatus(),role:v.role,expectedScene:v.expectedScene});
-        await obs.switchScene(target,v.expectedScene,()=>obsConfig.enabled&&state.campaign===v.campaign&&foundryStore.get(v.campaign).available&&obsConfig.campaigns[v.campaign]?.[v.role]===target&&matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),pairingKey));return json(obsStatus(v.campaign));
+        if(v.role==='break'&&v.breakMinutes!==undefined&&v.breakMinutes!==null&&(!Number.isInteger(v.breakMinutes)||v.breakMinutes<1||v.breakMinutes>120))return send(res,400,'Invalid break duration');
+        await obs.switchScene(target,v.expectedScene,()=>obsConfig.enabled&&state.campaign===v.campaign&&foundryStore.get(v.campaign).available&&obsConfig.campaigns[v.campaign]?.[v.role]===target&&matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),pairingKey));
+        if(v.role==='break'&&v.breakMinutes!==undefined){const s=cueState();if(s.campaign!==v.campaign||s.scene!==target||!cues.controlBreak(s,'start',v.breakMinutes))return send(res,409,'Scene changed before timer could start');}
+        return json(obsStatus(v.campaign));
       }
       return send(res,404,'Not found');
     }

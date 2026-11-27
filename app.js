@@ -349,6 +349,11 @@ async function loadOBS({connection=false,preserve=false}={}){
  if(connection){$('#obsEnabled').checked=d.enabled;$('#obsPort').value=d.port;$('#obsPassword').value='';$('#obsClearPassword').checked=false;}
  $('#obsConnectionStatus').textContent=s.connected?'Connected — '+s.scene+' · '+(s.streaming?'LIVE':'Not streaming')+' · '+(s.recording?'REC':'Not recording'):d.enabled?'Waiting for OBS — '+(s.error||'connecting'):'OBS integration disabled';
  const list=$('#obsMappings'),current=d.campaigns[campaign]||{};
+ const quote=x=>"'"+String(x).replaceAll("'","''")+"'";
+ for(const [id,endpoint,extra] of [['obsCueCountdown','intro-countdown',{remainingMs:120000}],['obsCueComplete','intro-complete',{}]]){
+  const field=$('#'+id);if(!field)continue;
+  field.value=current.intro&&d.cueKey?'Invoke-RestMethod -Method Post -Uri '+quote(location.origin+'/api/obs/cue/'+endpoint)+' -Headers @{Authorization='+quote('Bearer '+d.cueKey)+'} -ContentType application/json -Body '+quote(JSON.stringify({campaign,scene:current.intro,...extra})):'Save an intro scene mapping first.';
+ }
  const draft=preserve?Object.fromEntries([...list.querySelectorAll('select')].map(x=>[x.dataset.role,x.value])):current;
  const signature=JSON.stringify([s.scenes,current,campaign]);
  if(!preserve||list.dataset.signature!==signature){
