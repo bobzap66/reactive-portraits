@@ -1,2 +1,280 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíçýN‹Z–‹­¦ëeŠw¬Õ½¹ÍÐ€€ôÍ•±•Ñ½È€ôø‘½Õµ•¹Ð¹ÅÕ•ÉåM•±•Ñ½È¡Í•±•Ñ½È¤ì)½¹ÍÐ…µÁ…¥¹M•±•Ð€ô€ œ…µÁ…¥¹M•±•Ðœ¤ì)½¹ÍÐ…É‘Ì€ô€ œ…É‘Ìœ¤ì)½¹ÍÐµ…¹…•È€ô€ œµ…¹…•Èœ¤ì)½¹ÍÐ•‘¥Ñ½È€ô€ œ•‘¥Ñ½Èœ¤ì)½¹ÍÐÁ•½Á±•‘¥Ñ½È€ô€ œÁ•½Á±•‘¥Ñ½Èœ¤ì)½¹ÍÐ¹½Ñ¥”€ô€ œ¹½Ñ¥”œ¤ì)½¹ÍÐÁ…É…µÌ€ô¹•ÜUI1M•…É¡A…É…µÌ¡±½…Ñ¥½¸¹Í•…É ¤ì)¥˜€¡Á…É…µÌ¹¡…Ì ½Ù•É±…äœ¤¤‘½Õµ•¹Ð¹‰½‘ä¹±…ÍÍ1¥ÍÐ¹…‘ ½Ù•É±…äœ¤ì()±•Ð½¹™¥œ€ôì…µÁ…¥¹Ìèmtôì)±•ÐÍÑ…Ñ”€ôì…µÁ…¥¸è€œœ°Í•ÍÍ¥½¹Ìèíôôì)±•Ð•‘¥Ñ¥¹%€ô¹Õ±°ì)±•ÐÍ…Ù•Q¥µ•È€ô¹Õ±°ì)±•Ð‘¥Í½É‘UÍ•ÉÌ€ômtì)±•Ð…ÍÍ•ÑI•™É•Í¡M•ÅÕ•¹”€ô€Àì()™Õ¹Ñ¥½¸…Ñ¥Ù•…µÁ…¥¸ ¤ìÉ•ÑÕÉ¸½¹™¥œ¹…µÁ…¥¹Ì¹™¥¹¡¥Ñ•´€ôø¥Ñ•´¹¥€ôôôÍÑ…Ñ”¹…µÁ…¥¸¤ñð½¹™¥œ¹…µÁ…¥¹ÍlÁtìô)™Õ¹Ñ¥½¸ÕÉÉ•¹ÑM•ÍÍ¥½¸¡…µÁ…¥¹%€ôÍÑ…Ñ”¹…µÁ…¥¸¤ì(€ÍÑ…Ñ”¹Í•ÍÍ¥½¹Ìñðôíôì(€ÍÑ…Ñ”¹Í•ÍÍ¥½¹Ím…µÁ…¥¹%‘tñðôì…Ñ¥Ù”è¹Õ±°°…‰Í•¹Ðèíô°É½ÁÌèíôôì(€½¹ÍÐÕÉÉ•¹Ð€ôÍÑ…Ñ”¹Í•ÍÍ¥½¹Ím…µÁ…¥¹%‘tì(€ÕÉÉ•¹Ð¹…‰Í•¹Ðñðôíôì(€ÕÉÉ•¹Ð¹É½ÁÌñðôíôì(€É•ÑÕÉ¸ÕÉÉ•¹Ðì)ô)™Õ¹Ñ¥½¸‘•™…Õ±ÑÉ½À¡Á•ÉÍ½¸¤ìÉ•ÑÕÉ¸ìé½½´è€Ä°àè€ÔÀ°äè€Äà°€¸¸¸¡Á•ÉÍ½¸¹É½Àñðíô¤ôìô)™Õ¹Ñ¥½¸Í•Ñ9½Ñ¥”¡µ•ÍÍ…”€ô€œœ¤ì¹½Ñ¥”¹Ñ•áÑ½¹Ñ•¹Ð€ôµ•ÍÍ…”ìô)…Íå¹Œ™Õ¹Ñ¥½¸±½…‘±° ¤ì(€½¹ÍÐm½¹™¥I•ÍÁ½¹Í”°ÍÑ…Ñ•I•ÍÁ½¹Í•t€ô…Ý…¥ÐAÉ½µ¥Í”¹…±°¡m™•Ñ  œ½…Á¤½½¹™¥œœ¤°™•Ñ  œ½…Á¤½ÍÑ…Ñ”œ¥t¤ì(€¥˜€ …½¹™¥I•ÍÁ½¹Í”¹½¬ñð€…ÍÑ…Ñ•I•ÍÁ½¹Í”¹½¬¤Ñ¡É½Ü¹•ÜÉÉ½È ½Õ±¹½Ð±½…Ñ¡”Í…Ù•…µÁ…¥¸Í•ÑÕÀ¸œ¤ì(€½¹™¥œ€ô…Ý…¥Ð½¹™¥I•ÍÁ½¹Í”¹©Í½¸ ¤ì(€ÍÑ…Ñ”€ô…Ý…¥ÐÍÑ…Ñ•I•ÍÁ½¹Í”¹©Í½¸ ¤ì(€½¹ÍÐÉ•ÅÕ•ÍÑ•€ôÁ…É…µÌ¹•Ð …µÁ…¥¸œ¤ì(€¥˜€¡É•ÅÕ•ÍÑ•€˜˜½¹™¥œ¹…µÁ…¥¹Ì¹Í½µ”¡¥Ñ•´€ôø¥Ñ•´¹¥€ôôôÉ•ÅÕ•ÍÑ•¤¤ÍÑ…Ñ”¹…µÁ…¥¸€ôÉ•ÅÕ•ÍÑ•ì(€¥˜€ …½¹™¥œ¹…µÁ…¥¹Ì¹Í½µ”¡¥Ñ•´€ôø¥Ñ•´¹¥€ôôôÍÑ…Ñ”¹…µÁ…¥¸¤¤ÍÑ…Ñ”¹…µÁ…¥¸€ô½¹™¥œ¹…µÁ…¥¹ÍlÁtü¹¥ñð€œœì(€¥˜€¡Á…É…µÌ¹¡…Ì ½Ù•É±…äœ¤€˜˜É•ÅÕ•ÍÑ•¤…Ý…¥ÐÍ…Ù•MÑ…Ñ” ¤ì(€É•¹‘•È ¤ì)ô)…Íå¹Œ™Õ¹Ñ¥½¸Í…Ù•MÑ…Ñ” ¤ì(€…Ý…¥Ð™•Ñ  œ½…Á¤½ÍÑ…Ñ”œ°ìµ•Ñ¡½è€A=MPœ°¡•…‘•ÉÌèì€½¹Ñ•¹ÐµQåÁ”œè€…ÁÁ±¥…Ñ¥½¸½©Í½¸œô°‰½‘äè)M=8¹ÍÑÉ¥¹¥™ä¡ÍÑ…Ñ”¤ô¤ì)ô)™Õ¹Ñ¥½¸ÅÕ•Õ•MÑ…Ñ•M…Ù” ¤ì(€±•…ÉQ¥µ•½ÕÐ¡Í…Ù•Q¥µ•È¤ì(€Í…Ù•Q¥µ•È€ôÍ•ÑQ¥µ•½ÕÐ  ¤€ôøÍ…Ù•MÑ…Ñ” ¤¹…Ñ   ¤€ôøíô¤°€ÄàÀ¤ì)ô)…Íå¹Œ™Õ¹Ñ¥½¸Í…Ù•½¹™¥œ ¤ì(€½¹ÍÐÉ•ÍÁ½¹Í”€ô…Ý…¥Ð™•Ñ  œ½…Á¤½½¹™¥œœ°ìµ•Ñ¡½è€A=MPœ°¡•…‘•ÉÌèì€½¹Ñ•¹ÐµQåÁ”œè€…ÁÁ±¥…Ñ¥½¸½©Í½¸œô°‰½‘äè)M=8¹ÍÑÉ¥¹¥™ä¡½¹™¥œ¤ô¤ì(€¥˜€ …É•ÍÁ½¹Í”¹½¬¤Ñ¡É½Ü¹•ÜÉÉ½È¡…Ý…¥ÐÉ•ÍÁ½¹Í”¹Ñ•áÐ ¤¤ì(€…Ý…¥ÐÍ…Ù•MÑ…Ñ” ¤ì)ô()™Õ¹Ñ¥½¸É•¹‘•È ¤ì(€…µÁ…¥¹M•±•Ð¹É•Á±…•¡¥±‘É•¸ ¤ì(€™½È€¡½¹ÍÐ…µÁ…¥¸½˜½¹™¥œ¹…µÁ…¥¹Ì¤ì(€€€½¹ÍÐ½ÁÑ¥½¸€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ½ÁÑ¥½¸œ¤ì(€€€½ÁÑ¥½¸¹Ù…±Õ”€ô…µÁ…¥¸¹¥ì(€€€½ÁÑ¥½¸¹Ñ•áÑ½¹Ñ•¹Ð€ô…µÁ…¥¸¹±…‰•°ì(€€€…µÁ…¥¹M•±•Ð¹…ÁÁ•¹¡½ÁÑ¥½¸¤ì(€ô(€½¹ÍÐ…µÁ…¥¸€ô…Ñ¥Ù•…µÁ…¥¸ ¤ì(€¥˜€ ……µÁ…¥¸¤ì(€€€…É‘Ì¹¥¹¹•É!Q50€ô€œñÀ±…ÍÌô‰µ…¹…•Èµ•µÁÑäˆùÉ•…Ñ”„…µÁ…¥¸Ñ¼•ÐÍÑ…ÉÑ•¸ð½Àøœì(€€€€ œ½Ù•É±…å1¥¹¬œ¤¹¡É•˜€ô€œý½Ù•É±…äœì(€€€É•ÑÕÉ¸ì(€ô(€ÍÑ…Ñ”¹…µÁ…¥¸€ô…µÁ…¥¸¹¥ì(€…µÁ…¥¹M•±•Ð¹Ù…±Õ”€ô…µÁ…¥¸¹¥ì(€½¹ÍÐ½Ù•É±…åUÉ°€ô¹•ÜUI0¡±½…Ñ¥½¸¹¡É•˜¤ì(€½Ù•É±…åUÉ°¹Í•…É €ô¹•ÜUI1M•…É¡A…É…µÌ¡ì½Ù•É±…äè€œœ°…µÁ…¥¸è…µÁ…¥¸¹¥ô¤¹Ñ½MÑÉ¥¹œ ¤ì(€€ œ½Ù•É±…å1¥¹¬œ¤¹¡É•˜€ô½Ù•É±…åUÉ°¹¡É•˜ì(€¥˜€ …Á…É…µÌ¹¡…Ì ½Ù•É±…äœ¤¤…µÁ…¥¹M•±•Ð¹¡¥‘‘•¸€ô™…±Í”ì(€½¹ÍÐÍ•ÍÍ¥½¸€ôÕÉÉ•¹ÑM•ÍÍ¥½¸¡…µÁ…¥¸¹¥¤ì(€…É‘Ì¹ÍÑå±”¹Í•ÑAÉ½Á•ÉÑä œ´µ½±Õµ¹Ìœ°5…Ñ ¹µ…à Ä°5…Ñ ¹µ¥¸ à°…µÁ…¥¸¹Á•½Á±”¹±•¹Ñ ¤¤¤ì(€…É‘Ì¹É•Á±…•¡¥±‘É•¸ ¤ì(€…µÁ…¥¸¹Á•½Á±”¹™½É… ¡Á•ÉÍ½¸€ôøì(€€€½¹ÍÐÉ½À€ôÍ•ÍÍ¥½¸¹É½ÁÍmÁ•ÉÍ½¸¹¥‘tñðô‘•™…Õ±ÑÉ½À¡Á•ÉÍ½¸¤ì(€€€½¹ÍÐ…É€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð …ÉÑ¥±”œ¤ì(€€€…É¹±…ÍÍ9…µ”€ôÁ½ÉÑÉ…¥Ðµ…É‘íÍ•ÍÍ¥½¸¹…Ñ¥Ù”€ôôôÁ•ÉÍ½¸¹¥€ü€œÍÁ•…­¥¹œœ€è€œô‘íÍ•ÍÍ¥½¸¹…‰Í•¹ÑmÁ•ÉÍ½¸¹¥‘t€ü€œ…‰Í•¹Ðœ€è€œõ€ì(€€€½¹ÍÐ‰ÕÑÑ½¸€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‰ÕÑÑ½¸œ¤ì(€€€‰ÕÑÑ½¸¹±…ÍÍ9…µ”€ô€Á½ÉÑÉ…¥Ðµ‰ÕÑÑ½¸œì(€€€‰ÕÑÑ½¸¹ÑåÁ”€ô€‰ÕÑÑ½¸œì(€€€‰ÕÑÑ½¸¹Ñ¥Ñ±”€ô5…É¬€‘íÁ•ÉÍ½¸¹¹…µ•ô…ÌÑ¡”ÕÉÉ•¹ÐÍÁ•…­•É€ì(€€€½¹ÍÐ¥µ…”€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ¥µœœ¤ì(€€€¥µ…”¹ÍÉŒ€ôÁ•ÉÍ½¸¹¥µ…”ñð€…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœì(€€€¥µ…”¹…±Ð€ôÁ•ÉÍ½¸¹¹…µ”ì(€€€¥µ…”¹ÍÑå±”¹Í•ÑAÉ½Á•ÉÑä œ´µé½½´œ°É½À¹é½½´¤ì(€€€¥µ…”¹ÍÑå±”¹Í•ÑAÉ½Á•ÉÑä œ´µàœ°€‘íÉ½À¹áô•€¤ì(€€€¥µ…”¹ÍÑå±”¹Í•ÑAÉ½Á•ÉÑä œ´µäœ°€‘íÉ½À¹åô•€¤ì(€€€¥µ…”¹½¹•ÉÉ½È€ô€ ¤€ôøì¥µ…”¹ÍÉŒ€ô€…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœìôì(€€€½¹ÍÐÍ¡…‘”€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ÍÁ…¸œ¤ìÍ¡…‘”¹±…ÍÍ9…µ”€ô€Á½ÉÑÉ…¥ÐµÍ¡…‘”œì(€€€½¹ÍÐ¹…µ”€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ÍÁ…¸œ¤ì¹…µ”¹±…ÍÍ9…µ”€ô€Á½ÉÑÉ…¥Ðµ¹…µ”œì¹…µ”¹Ñ•áÑ½¹Ñ•¹Ð€ôÁ•ÉÍ½¸¹¹…µ”ì(€€€½¹ÍÐÉ½±”€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ÍÁ…¸œ¤ìÉ½±”¹±…ÍÍ9…µ”€ô€Á½ÉÑÉ…¥ÐµÉ½±”œìÉ½±”¹Ñ•áÑ½¹Ñ•¹Ð€ôÁ•ÉÍ½¸¹É½±”ñð€œœì(€€€‰ÕÑÑ½¸¹…ÁÁ•¹¡¥µ…”°Í¡…‘”°¹…µ”°É½±”¤ì(€€€‰ÕÑÑ½¸¹½¹±¥¬€ô…Íå¹Œ€ ¤€ôøìÍ•ÍÍ¥½¸¹…Ñ¥Ù”€ôÍ•ÍÍ¥½¸¹…Ñ¥Ù”€ôôôÁ•ÉÍ½¸¹¥€ü¹Õ±°€èÁ•ÉÍ½¸¹¥ìÉ•¹‘•È ¤ì…Ý…¥ÐÍ…Ù•MÑ…Ñ” ¤ìôì(€€€…É¹…ÁÁ•¹¡‰ÕÑÑ½¸¤ì(€€€¥˜€ …Á…É…µÌ¹¡…Ì ½Ù•É±…äœ¤¤ì(€€€€€½¹ÍÐÑ½½±Ì€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‘¥Øœ¤ìÑ½½±Ì¹±…ÍÍ9…µ”€ô€…ÉµÑ½½±Ìœì(€€€€€½¹ÍÐ…‰Í•¹Ð€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‰ÕÑÑ½¸œ¤ì…‰Í•¹Ð¹±…ÍÍ9…µ”€ô€‰ÕÑÑ½¸Í•½¹‘…Éäœì…‰Í•¹Ð¹Ñ•áÑ½¹Ñ•¹Ð€ôÍ•ÍÍ¥½¸¹…‰Í•¹ÑmÁ•ÉÍ½¸¹¥‘t€ü€M¡½Üœ€è€¥´œì(€€€€€…‰Í•¹Ð¹½¹±¥¬€ô…Íå¹Œ€ ¤€ôøìÍ•ÍÍ¥½¸¹…‰Í•¹ÑmÁ•ÉÍ½¸¹¥‘t€ô€…Í•ÍÍ¥½¸¹…‰Í•¹ÑmÁ•ÉÍ½¸¹¥‘tìÉ•¹‘•È ¤ì…Ý…¥ÐÍ…Ù•MÑ…Ñ” ¤ìôì(€€€€€Ñ½½±Ì¹…ÁÁ•¹¡…‰Í•¹Ð¤ì(€€€€€½¹ÍÐÉ•Í•Ð€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‰ÕÑÑ½¸œ¤ìÉ•Í•Ð¹±…ÍÍ9…µ”€ô€‰ÕÑÑ½¸Í•½¹‘…ÉäœìÉ•Í•Ð¹Ñ•áÑ½¹Ñ•¹Ð€ô€I•Í•ÐÉ½Àœì(€€€€€É•Í•Ð¹½¹±¥¬€ô…Íå¹Œ€ ¤€ôøìÍ•ÍÍ¥½¸¹É½ÁÍmÁ•ÉÍ½¸¹¥‘t€ô‘•™…Õ±ÑÉ½À¡íô¤ìÉ•¹‘•È ¤ì…Ý…¥ÐÍ…Ù•MÑ…Ñ” ¤ìôì(€€€€€Ñ½½±Ì¹…ÁÁ•¹¡É•Í•Ð¤ì(€€€€€™½È€¡½¹ÍÐm­•ä°±…‰•°°µ¥¸°µ…à°ÍÑ•Át½˜mlé½½´œ°i½½´œ°Ä°Ì¸Ô°¸ÀÕt±làœ°!½É¥é½¹Ñ…°œ°À°ÄÀÀ°Åt±läœ°Y•ÉÑ¥…°œ°À°ÄÀÀ°Åut¤ì(€€€€€€€½¹ÍÐ‘•ÍÉ¥ÁÑ¥½¸€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ±…‰•°œ¤ì‘•ÍÉ¥ÁÑ¥½¸¹±…ÍÍ9…µ”ôÑ½½°µ±…‰•°œì‘•ÍÉ¥ÁÑ¥½¸¹Ñ•áÑ½¹Ñ•¹Ð€ô€‘í±…‰•±ôè€‘í­•ä€ôôô€é½½´œ€ü€‘í9Õµ‰•È¡É½Ám­•åt¤¹Ñ½¥á• È¥÷]€€è€‘íÉ½Ám­•åuô•õ€ì(€€€€€€€½¹ÍÐÍ±¥‘•È€ô‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ¥¹ÁÕÐœ¤ìÍ±¥‘•È¹ÑåÁ”ôÉ…¹”œìÍ±¥‘•È¹µ¥¸õµ¥¸ìÍ±¥‘•È¹µ…àõµ…àìÍ±¥‘•È¹ÍÑ•ÀõÍÑ•ÀìÍ±¥‘•È¹Ù…±Õ”õÉ½Ám­•åtìÍ±¥‘•È¹Í•ÑÑÑÉ¥‰ÕÑ” …É¥„µ±…‰•°œ°€‘í±…‰•±ôÉ½À™½È€‘íÁ•ÉÍ½¸¹¹…µ•õ€¤ì(€€€€€€€Í±¥‘•È¹½¹¥¹ÁÕÐ€ô€ ¤€ôøì(€€€€€€€€€É½Ám­•åt€ô9Õµ‰•È¡Í±¥‘•È¹Ù…±Õ”¤ì(€€€€€€€€€¥µ…”¹ÍÑå±”¹Í•ÑAÉ½Á•ÉÑä œ´µé½½´œ°É½À¹é½½´¤ì(€€€€€€€€€¥µ…”¹ÍÑå±”¹Í•ÑAÉ½Á•ÉÑä œ´µàœ°€‘íÉ½À¹áô•€¤ì(€€€€€€€€€¥µ…”¹ÍÑå±”¹Í•ÑAÉ½Á•ÉÑä œ´µäœ°€‘íÉ½À¹åô•€¤ì(€€€€€€€€€‘•ÍÉ¥ÁÑ¥½¸¹Ñ•áÑ½¹Ñ•¹Ð€ô€‘í±…‰•±ôè€‘í­•ä€ôôô€é½½´œ€ü€‘í9Õµ‰•È¡É½Ám­•åt¤¹Ñ½¥á• È¥õá€€è€‘íÉ½Ám­•åuô•õ€ì(€€€€€€€€€ÅÕ•Õ•MÑ…Ñ•M…Ù” ¤ì(€€€€€€€ôì(€€€€€€€Ñ½½±Ì¹…ÁÁ•¹¡‘•ÍÉ¥ÁÑ¥½¸°Í±¥‘•È¤ì(€€€€€ô(€€€€€…É¹…ÁÁ•¹¡Ñ½½±Ì¤ì(€€€ô(€€€…É‘Ì¹…ÁÁ•¹¡…É¤ì(€ô¤ì)ô()…µÁ…¥¹M•±•Ð¹½¹¡…¹”€ô…Íå¹Œ€ ¤€ôøìÍÑ…Ñ”¹…µÁ…¥¸€ô…µÁ…¥¹M•±•Ð¹Ù…±Õ”ì…Ý…¥ÐÍ…Ù•MÑ…Ñ” ¤ìÉ•¹‘•È ¤ìôì( œµ…¹…•…µÁ…¥¹Ìœ¤¹½¹±¥¬€ô€ ¤€ôøìÉ•¹‘•É5…¹…•È ¤ìµ…¹…•È¹Í¡½Ý5½‘…° ¤ìôì( œ¹•Ý…µÁ…¥¸œ¤¹½¹±¥¬€ô€ ¤€ôø‰•¥¹‘¥Ð¡ì¥è€œœ°±…‰•°è€œœ°Ñ¥Ñ±”è€œœ°¡…¹¹•±%è€œœ°Á•½Á±”èmì¥è€´œ°¹…µ”è€…µ”5…ÍÑ•Èœ°É½±”è€4œ°¥µ…”è€…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœ°‘¥Í½É‘%è€œœõtô¤ì( œ…¹•±‘¥Ðœ¤¹½¹±¥¬€ô€ ¤€ôøì•‘¥Ñ½È¹¡¥‘‘•¸€ôÑÉÕ”ì•‘¥Ñ¥¹%€ô¹Õ±°ìÉ•¹‘•É5…¹…•È ¤ìôì( œ…‘‘A•ÉÍ½¸œ¤¹½¹±¥¬€ô…Íå¹Œ€ ¤€ôøì…‘‘A•ÉÍ½¹I½Ü¡ì¹…µ”è€œœ°É½±”è€A±…å•È¡…É…Ñ•Èœ°¥µ…”è€…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœ°‘¥Í½É‘%è€œœô¤ì…Ý…¥ÐÉ•™É•Í¡A½ÉÑÉ…¥Ñ=ÁÑ¥½¹Ì ¤ìôì( œÍ…Ù•…µÁ…¥¸œ¤¹½¹±¥¬€ô…Íå¹Œ€ ¤€ôøì(€½¹ÍÐ±…‰•°€ô€ œ…µÁ…¥¹1…‰•°œ¤¹Ù…±Õ”¹ÑÉ¥´ ¤ì(€¥˜€ …±…‰•°¤É•ÑÕÉ¸€ œ…µÁ…¥¹1…‰•°œ¤¹™½ÕÌ ¤ì(€½¹ÍÐÁ•½Á±”€ôl¸¸¹Á•½Á±•‘¥Ñ½È¹ÅÕ•ÉåM•±•Ñ½É±° œ¹Á•ÉÍ½¸µÉ½Üœ¥t¹µ…À¡É½Ü€ôøì(€€€½¹ÍÐm¹…µ”°É½±•t€ôl¸¸¹É½Ü¹ÅÕ•ÉåM•±•Ñ½É±° ¥¹ÁÕÐœ¥t¹µ…À¡¥¹ÁÕÐ€ôø¥¹ÁÕÐ¹Ù…±Õ”¹ÑÉ¥´ ¤¤ì(€€€½¹ÍÐ¥µ…”€ôÉ½Ü¹ÅÕ•ÉåM•±•Ñ½È œ¹Á½ÉÑÉ…¥ÐµÍ•±•Ðœ¤¹Ù…±Õ”ì(€€€½¹ÍÐ‘¥Í½É‘%€ôÉ½Ü¹ÅÕ•ÉåM•±•Ñ½È œ¹‘¥Ïý¶‰žËkºwµçUÍÍ…•õ€¤ìô)ôì( œ‘•±•Ñ•…µÁ…¥¸œ¤¹½¹±¥¬€ô…Íå¹Œ€ ¤€ôøì(€½¹ÍÐ…µÁ…¥¸€ô½¹™¥œ¹…µÁ…¥¹Ì¹™¥¹¡¥Ñ•´€ôø¥Ñ•´¹¥€ôôô•‘¥Ñ¥¹%¤ì(€¥˜€ ……µÁ…¥¸ñð€…½¹™¥É´¡I•µ½Ù”ƒŠp‘í…µÁ…¥¸¹±…‰•±÷Št…¹¥ÑÌÍ…Ù•Á½ÉÑÉ…¥ÐÍ•ÑÑ¥¹Ìý€¤¤É•ÑÕÉ¸ì(€½¹™¥œ¹…µÁ…¥¹Ì€ô½¹™¥œ¹…µÁ…¥¹Ì¹™¥±Ñ•È¡¥Ñ•´€ôø¥Ñ•´¹¥€„ôô•‘¥Ñ¥¹%¤ì(€‘•±•Ñ”ÍÑ…Ñ”¹Í•ÍÍ¥½¹Ím•‘¥Ñ¥¹%‘tì(€ÍÑ…Ñ”¹…µÁ…¥¸€ô½¹™¥œ¹…µÁ…¥¹ÍlÁtü¹¥ñð€œœì(€ÑÉäì…Ý…¥ÐÍ…Ù•½¹™¥œ ¤ì•‘¥Ñ½È¹¡¥‘‘•¸€ôÑÉÕ”ì•‘¥Ñ¥¹%€ô¹Õ±°ìµ…¹…•È¹±½Í” ¤ìÉ•¹‘•È ¤ìô(€…Ñ €¡•ÉÉ½È¤ì…±•ÉÐ¡½Õ±¹½ÐÉ•µ½Ù”…µÁ…¥¸è€‘í•ÉÉ½È¹µ•ÍÍ…•õ€¤ìô)ôì( œ±½…‘¥Í½É‘UÍ•ÉÌœ¤¹½¹±¥¬€ô…Íå¹Œ€ ¤€ôøì(€ÑÉäì(€€€½¹ÍÐÉ•ÍÁ½¹Í”€ô…Ý…¥Ð™•Ñ  œ½…Á¤½‘¥Í½É½ÕÍ•ÉÌœ°ì…¡”è€¹¼µÍÑ½É”œô¤ì(€€€‘¥Í½É‘UÍ•ÉÌ€ô…Ý…¥ÐÉ•ÍÁ½¹Í”¹©Í½¸ ¤ì(€€€¥˜€ …‘¥Í½É‘UÍ•ÉÌ¹±•¹Ñ ¤Í•Ñ9½Ñ¥” 9¼¥Í½ÉÕÍ•ÉÌ…É”…Ù…¥±…‰±”å•Ð¸MÑ…ÉÐ…¸…ÕÑ½µ…Ñ¥Œ¥Í½É‰É¥‘”…¹µ…­”ÍÕÉ”¥Ð¥Ì½¹¹•Ñ•Ñ¼Ñ¡¥Ì…µÁ…¥»ŠeÌÙ½¥”¡…¹¹•°°Ñ¡•¸ÑÉä……¥¸¸œ¤ì(€€€•±Í”Í•Ñ9½Ñ¥”¡1½…‘•€‘í‘¥Í½É‘UÍ•ÉÌ¹±•¹Ñ¡ô¥Í½ÉÙ½¥”¡…¹¹•°µ•µ‰•È‘í‘¥Í½É‘UÍ•ÉÌ¹±•¹Ñ €ôôô€Ä€ü€œœ€è€Ìô¹€¤ì(€€€™½È€¡½¹ÍÐÉ½Ü½˜Á•½Á±•‘¥Ñ½È¹ÅÕ•ÉåM•±•Ñ½É±° œ¹Á•ÉÍ½¸µÉ½Üœ¤¤ì(€€€€€½¹ÍÐÍ•±•Ð€ôÉ½Ü¹ÅÕ•ÉåM•±•Ñ½È œ¹‘¥Í½ÉµÍ•±•Ðœ¤ì(€€€€€½¹ÍÐÍ•±•Ñ•€ôÍ•±•Ð¹Ù…±Õ”ì(€€€€€™¥±±¥Í½É‘=ÁÑ¥½¹Ì¡Í•±•Ð°Í•±•Ñ•¤ì(€€€ô(€ô…Ñ €¡•ÉÉ½È¤ìÍ•Ñ9½Ñ¥”¡½Õ±¹½Ð±½…¥Í½ÉÕÍ•ÉÌè€‘í•ÉÉ½È¹µ•ÍÍ…•õ€¤ìô)ôì()™Õ¹Ñ¥½¸Í±Õœ¡Ù…±Õ”¤ìÉ•ÑÕÉ¸Ù…±Õ”¹Ñ½1½Ý•É…Í” ¤¹¹½Éµ…±¥é” 9-œ¤¹É•Á±…” ½my„µèÀ´åt¬½œ°œ´œ¤¹É•Á±…” ½xµð´½œ°œœ¤ìô)™Õ¹Ñ¥½¸É•¹‘•É5…¹…•È ¤ì(€½¹ÍÐ±¥ÍÐ€ô€ œµ…¹…•É1¥ÍÐœ¤ì±¥ÍÐ¹É•Á±…•¡¥±‘É•¸ ¤ì(€¥˜€ …½¹™¥œ¹…µÁ…¥¹Ì¹±•¹Ñ ¤ì½¹ÍÐ•µÁÑäõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð Àœ¤ì•µÁÑä¹±…ÍÍ9…µ”ôµ…¹…•Èµ•µÁÑäœì•µÁÑä¹Ñ•áÑ½¹Ñ•¹Ðô9¼…µÁ…¥¹Ìå•Ð¸‘½¹”Ñ¼•ÐÍÑ…ÉÑ•¸œì±¥ÍÐ¹…ÁÁ•¹¡•µÁÑä¤ìô(€™½È€¡½¹ÍÐ…µÁ…¥¸½˜½¹™¥œ¹…µÁ…¥¹Ì¤ì(€€€½¹ÍÐÉ½Üõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‘¥Øœ¤ìÉ½Ü¹±…ÍÍ9…µ”ô…µÁ…¥¸µÉ½Üœì(€€€½¹ÍÐ±…‰•°õ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ÍÑÉ½¹œœ¤ì±…‰•°¹Ñ•áÑ½¹Ñ•¹Ðõ€‘í…µÁ…¥¸¹±…‰•±ôƒ
-Ü€‘í…µÁ…¥¸¹Á•½Á±”¹±•¹Ñ¡ôÁ…ÉÑ¥¥Á…¹Ð‘í…µÁ…¥¸¹Á•½Á±”¹±•¹Ñ ôôôÄüœœèÌõ€ì(€€€½¹ÍÐ•‘¥Ðõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‰ÕÑÑ½¸œ¤ì•‘¥Ð¹±…ÍÍ9…µ”ô‰ÕÑÑ½¸Í•½¹‘…Éäœì•‘¥Ð¹ÑåÁ”ô‰ÕÑÑ½¸œì•‘¥Ð¹Ñ•áÑ½¹Ñ•¹Ðô‘¥Ðœì•‘¥Ð¹½¹±¥¬ô ¤ôù‰•¥¹‘¥Ð¡…µÁ…¥¸¤ì(€€€É½Ü¹…ÁÁ•¹¡±…‰•°±•‘¥Ð¤ì±¥ÍÐ¹…ÁÁ•¹¡É½Ü¤ì(€ô)ô)…Íå¹Œ™Õ¹Ñ¥½¸‰•¥¹‘¥Ð¡…µÁ…¥¸¤ì(€•‘¥Ñ¥¹%€ô…µÁ…¥¸¹¥ñð¹Õ±°ì(€€ œ™½Éµ!•…‘¥¹œœ¤¹Ñ•áÑ½¹Ñ•¹Ð€ô•‘¥Ñ¥¹%€ü€‘¥Ð…µÁ…¥¸œ€è€‘…µÁ…¥¸œì(€€ œ…µÁ…¥¹1…‰•°œ¤¹Ù…±Õ”€ô…µÁ…¥¸¹±…‰•°ñð€œœì(€€ œ…µÁ…¥¹Q¥Ñ±”œ¤¹Ù…±Õ”€ô…µÁ…¥¸¹Ñ¥Ñ±”ñð€œœì(€€ œ¡…¹¹•±%œ¤¹Ù…±Õ”€ô…µÁ…¥¸¹¡…¹¹•±%ñð€œœì(€ÕÁ‘…Ñ•ÍÍ•Ñ!¥¹Ð ¤ì(€€ œ‘•±•Ñ•…µÁ…¥¸œ¤¹¡¥‘‘•¸€ô€…•‘¥Ñ¥¹%ì(€Á•½Á±•‘¥Ñ½È¹É•Á±…•¡¥±‘É•¸ ¤ì(€€¡…µÁ…¥¸¹Á•½Á±”ñðmt¤¹™½É… ¡Á•ÉÍ½¸€ôø…‘‘A•ÉÍ½¹I½Ü¡Á•ÉÍ½¸¤¤ì(€•‘¥Ñ½È¹¡¥‘‘•¸€ô™…±Í”ì(€…Ý…¥ÐÉ•™É•Í¡A½ÉÑÉ…¥Ñ=ÁÑ¥½¹Ì ¤ì(€€ œ…µÁ…¥¹1…‰•°œ¤¹™½ÕÌ ¤ì)ô)™Õ¹Ñ¥½¸…‘‘A•ÉÍ½¹I½Ü¡Á•ÉÍ½¸¤ì(€½¹ÍÐÉ½Üõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‘¥Øœ¤ìÉ½Ü¹±…ÍÍ9…µ”ôÁ•ÉÍ½¸µÉ½ÜœìÉ½Ü¹‘…Ñ…Í•Ð¹¥õÁ•ÉÍ½¸¹¥ñð€œœì(€½¹ÍÐ™¥•±‘Ìõml9…µ”œ±Á•ÉÍ½¸¹¹…µ•ñðœœ°A…ÉÑ¥¥Á…¹Ð¹…µ”t±lI½±”œ±Á•ÉÍ½¸¹É½±•ñðœœ°=ÁÑ¥½¹…°±…‰•°utì(€™¥•±‘Ì¹™½É…  ¡m±…‰•°±Ù…±Õ”±Á±…•¡½±‘•Ét¤ôùí½¹ÍÐÝÉ…Àõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ±…‰•°œ¤íÝÉ…À¹Ñ•áÑ½¹Ñ•¹Ðõ±…‰•°í½¹ÍÐ¥¹ÁÕÐõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ¥¹ÁÕÐœ¤í¥¹ÁÕÐ¹Ù…±Õ”õÙ…±Õ”í¥¹ÁÕÐ¹Á±…•¡½±‘•ÈõÁ±…•¡½±‘•ÈíÝÉ…À¹…ÁÁ•¹¡¥¹ÁÕÐ¤íÉ½Ü¹…ÁÁ•¹¡ÝÉ…À¥ô¤ì(€½¹ÍÐÁ½ÉÑÉ…¥Ñ]É…Àõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ±…‰•°œ¤íÁ½ÉÑÉ…¥Ñ]É…À¹Ñ•áÑ½¹Ñ•¹ÐôA½ÉÑÉ…¥Ðœì(€½¹ÍÐÁ½ÉÑÉ…¥ÑM•±•Ðõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð Í•±•Ðœ¤íÁ½ÉÑÉ…¥ÑM•±•Ð¹±…ÍÍ9…µ”ôÁ½ÉÑÉ…¥ÐµÍ•±•ÐœíÁ½ÉÑÉ…¥ÑM•±•Ð¹‘…Ñ…Í•Ð¹Í•±•Ñ•õÁ•ÉÍ½¸¹¥µ…•ñð…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœì(€Á½ÉÑÉ…¥ÑM•±•Ð¹…‘‘Ù•¹Ñ1¥ÍÑ•¹•È ¡…¹”œ° ¤ôùíÁ½ÉÑÉ…¥ÑM•±•Ð¹‘…Ñ…Í•Ð¹Í•±•Ñ•õÁ½ÉÑÉ…¥ÑM•±•Ð¹Ù…±Õ”íô¤ì(€Á½ÉÑÉ…¥Ñ]É…À¹…ÁÁ•¹¡Á½ÉÑÉ…¥ÑM•±•Ð¤íÉ½Ü¹…ÁÁ•¹¡Á½ÉÑÉ…¥Ñ]É…À¤ì(€½¹ÍÐ‘¥Í½É‘]É…Àõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ±…‰•°œ¤í‘¥Í½É‘]É…À¹Ñ•áÑ½¹Ñ•¹Ðô¥Í½ÉÍÁ•…­•Èœì(€½¹ÍÐ‘¥Í½É‘M•±•Ðõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð Í•±•Ðœ¤í‘¥Í½É‘M•±•Ð¹±…ÍÍ9…µ”ô‘¥Í½ÉµÍ•±•Ðœì(€™¥±±¥Í½É‘=ÁÑ¥½¹Ì¡‘¥Í½É‘M•±•Ð°Á•ÉÍ½¸¹‘¥Í½É‘%ñð€œœ¤ì(€‘¥Í½É‘]É…À¹…ÁÁ•¹¡‘¥Í½É‘M•±•Ð¤íÉ½Ü¹…ÁÁ•¹¡‘¥Í½É‘]É…À¤ì(€½¹ÍÐÉ•µ½Ù”õ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ‰ÕÑÑ½¸œ¤íÉ•µ½Ù”¹ÑåÁ”ô‰ÕÑÑ½¸œíÉ•µ½Ù”¹±…ÍÍ9…µ”ô‰ÕÑÑ½¸‘…¹•ÈÉ•µ½Ù”µÁ•ÉÍ½¸œíÉ•µ½Ù”¹Ñ•áÑ½¹Ñ•¹ÐôI•µ½Ù”œíÉ•µ½Ù”¹½¹±¥¬ô ¤ôùÉ½Ü¹É•µ½Ù” ¤íÉ½Ü¹…ÁÁ•¹¡É•µ½Ù”¤íÁ•½Á±•‘¥Ñ½È¹…ÁÁ•¹¡É½Ü¤ì)ô)™Õ¹Ñ¥½¸•‘¥Ñ½É…µÁ…¥¹% ¤ìÉ•ÑÕÉ¸•‘¥Ñ¥¹%ñðÍ±Õœ  œ…µÁ…¥¹1…‰•°œ¤¹Ù…±Õ”¹ÑÉ¥´ ¤¤ìô)™Õ¹Ñ¥½¸ÕÁ‘…Ñ•ÍÍ•Ñ!¥¹Ð ¤ì(€½¹ÍÐ…µÁ…¥¹%õ•‘¥Ñ½É…µÁ…¥¹% ¤ì(€€ œ…ÍÍ•Ñ!¥¹Ðœ¤¹Ñ•áÑ½¹Ñ•¹Ðõ…µÁ…¥¹%€ü‘Á½ÉÑÉ…¥Ð¥µ…•ÌÑ¼…ÍÍ•ÑÌ¼‘í…µÁ…¥¹%‘ô¼°Ñ¡•¸Í•±•ÐÑ¡•´™É½´•… A½ÉÑÉ…¥Ð‘É½Á‘½Ý¸¹€€è€¹Ñ•È„…µÁ…¥¸¹…µ”Ñ¼Í•”Ý¡•É”Ñ¼ÁÕÐ¥ÑÌÁ½ÉÑÉ…¥Ð¥µ…•Ì¸œì)ô)…Íå¹Œ™Õ¹Ñ¥½¸É•™É•Í¡A½ÉÑÉ…¥Ñ=ÁÑ¥½¹Ì ¤ì(€½¹ÍÐ…µÁ…¥¹%õ•‘¥Ñ½É…µÁ…¥¹% ¤ì(€½¹ÍÐÍ•ÅÕ•¹”ô¬­…ÍÍ•ÑI•™É•Í¡M•ÅÕ•¹”ì(€±•Ð…ÍÍ•ÑÌõmtì(€±•ÐÕ¹…Ù…¥±…‰±”õ™…±Í”ì(€¥˜€¡…µÁ…¥¹%¤ì(€€€ÑÉäì(€€€€€½¹ÍÐÉ•ÍÁ½¹Í”õ…Ý…¥Ð™•Ñ ¡€½…Á¤½…ÍÍ•ÑÌý…µÁ…¥¸ô‘í•¹½‘•UI%½µÁ½¹•¹Ð¡…µÁ…¥¹%¥õ€±í…¡”è¹¼µÍÑ½É”ô¤ì(€€€€€¥˜€ …É•ÍÁ½¹Í”¹½¬¤Ñ¡É½Ü¹•ÜÉÉ½È ÍÍ•Ð±¥ÍÐÉ•ÅÕ•ÍÐ™…¥±•œ¤ì(€€€€€…ÍÍ•ÑÌõ…Ý…¥ÐÉ•ÍÁ½¹Í”¹©Í½¸ ¤ì(€€€ô…Ñ ìÕ¹…Ù…¥±…‰±”õÑÉÕ”ìô(€ô(€¥˜€¡Í•ÅÕ•¹”„ôõ…ÍÍ•ÑI•™É•Í¡M•ÅÕ•¹”ñð…µÁ…¥¹%„ôõ•‘¥Ñ½É…µÁ…¥¹% ¤¤É•ÑÕÉ¸ì(€ÕÁ‘…Ñ•ÍÍ•Ñ!¥¹Ð ¤ì(€¥˜€¡Õ¹…Ù…¥±…‰±”¤€ œ…ÍÍ•Ñ!¥¹Ðœ¤¹Ñ•áÑ½¹Ñ•¹Ð€¬ô€œI•ÍÑ…ÉÐÑ¡”½¹ÑÉ½±±•ÈÝ¥Ñ ¹Á´ÍÑ…ÉÐÑ¼±½…Ñ¡¥Ì™½±‘•È¸œì(€™½È€¡½¹ÍÐÉ½Ü½˜Á•½Á±•‘¥Ñ½È¹ÅÕ•ÉåM•±•Ñ½É±° œ¹Á•ÉÍ½¸µÉ½Üœ¤¤ì(€€€½¹ÍÐÍ•±•ÐõÉ½Ü¹ÅÕ•ÉåM•±•Ñ½È œ¹Á½ÉÑÉ…¥ÐµÍ•±•Ðœ¤ì(€€€½¹ÍÐÍ•±•Ñ•õÍ•±•Ð¹Ù…±Õ”ñðÍ•±•Ð¹‘…Ñ…Í•Ð¹Í•±•Ñ•ñð€…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœì(€€€Í•±•Ð¹É•Á±…•¡¥±‘É•¸ ¤ì(€€€½¹ÍÐÁ±…•¡½±‘•Èõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ½ÁÑ¥½¸œ¤íÁ±…•¡½±‘•È¹Ù…±Õ”ô…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœíÁ±…•¡½±‘•È¹Ñ•áÑ½¹Ñ•¹Ðô•™…Õ±ÐÁ±…•¡½±‘•ÈœíÍ•±•Ð¹…ÁÁ•¹¡Á±…•¡½±‘•È¤ì(€€€¥˜€¡Í•±•Ñ•€˜˜Í•±•Ñ•„ôô…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœ€˜˜€……ÍÍ•ÑÌ¹¥¹±Õ‘•Ì¡Í•±•Ñ•¤¤ì(€€€€€½¹ÍÐ•á¥ÍÑ¥¹œõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ½ÁÑ¥½¸œ¤í•á¥ÍÑ¥¹œ¹Ù…±Õ”õÍ•±•Ñ•í•á¥ÍÑ¥¹œ¹Ñ•áÑ½¹Ñ•¹ÐõM…Ù•¥µ…”½ÕÑÍ¥‘”™½±‘•È€ ‘íÍ•±•Ñ•‘ô¥€íÍ•±•Ð¹…ÁÁ•¹¡•á¥ÍÑ¥¹œ¤ì(€€€ô(€€€™½È€¡½¹ÍÐ¥µ…•A…Ñ ½˜…ÍÍ•ÑÌ¤ì(€€€€€½¹ÍÐ½ÁÑ¥½¸õ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ½ÁÑ¥½¸œ¤í½ÁÑ¥½¸¹Ù…±Õ”õ¥µ…•A…Ñ í½ÁÑ¥½¸¹Ñ•áÑ½¹Ñ•¹Ðõ¥µ…•A…Ñ ¹ÍÁ±¥Ð œ¼œ¤¹Á½À ¤íÍ•±•Ð¹…ÁÁ•¹¡½ÁÑ¥½¸¤ì(€€€ô(€€€Í•±•Ð¹Ù…±Õ”õÍ•±•Ñ•ñð€…ÍÍ•ÑÌ½Á½ÉÑÉ…¥ÐµÁ±…•¡½±‘•È¹ÍÙœœì(€ô)ô( œ…µÁ…¥¹1…‰•°œ¤¹…‘‘Ù•¹Ñ1¥ÍÑ•¹•È ¥¹ÁÕÐœ°ÕÁ‘…Ñ•ÍÍ•Ñ!¥¹Ð¤ì( œ…µÁ…¥¹1…‰•°œ¤¹…‘‘Ù•¹Ñ1¥ÍÑ•¹•È ¡…¹”œ°É•™É•Í¡A½ÉÑÉ…¥Ñ=ÁÑ¥½¹Ì¤ì)™Õ¹Ñ¥½¸™¥±±¥Í½É‘=ÁÑ¥½¹Ì¡Í•±•Ð°Í•±•Ñ•‘%¤ì(€Í•±•Ð¹É•Á±…•¡¥±‘É•¸ ¤ì(€½¹ÍÐ¹½¹”õ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ½ÁÑ¥½¸œ¤í¹½¹”¹Ù…±Õ”ôœœí¹½¹”¹Ñ•áÑ½¹Ñ•¹Ðô9½Ð…ÍÍ¥¹•œíÍ•±•Ð¹…ÁÁ•¹¡¹½¹”¤ì(€¥˜€¡Í•±•Ñ•‘%€˜˜€…‘¥Í½É‘UÍ•ÉÌ¹Í½µ”¡ÕÍ•È€ôøÕÍ•È¹¥€ôôôÍ•±•Ñ•‘%¤¤ì(€€€½¹ÍÐÕÉÉ•¹Ðõ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ½ÁÑ¥½¸œ¤íÕÉÉ•¹Ð¹Ù…±Õ”õÍ•±•Ñ•‘%íÕÉÉ•¹Ð¹Ñ•áÑ½¹Ñ•¹ÐõM…Ù•¥Í½É%€‘íÍ•±•Ñ•‘%‘õ€íÍ•±•Ð¹…ÁÁ•¹¡ÕÉÉ•¹Ð¤ì(€ô(€™½È€¡½¹ÍÐÕÍ•È½˜‘¥Í½É‘UÍ•ÉÌ¤ì(€€€½¹ÍÐ½ÁÑ¥½¸õ‘½Õµ•¹Ð¹É•…Ñ•±•µ•¹Ð ½ÁÑ¥½¸œ¤í½ÁÑ¥½¸¹Ù…±Õ”õÕÍ•È¹¥í½ÁÑ¥½¸¹Ñ•áÑ½¹Ñ•¹ÐõÕÍ•È¹±…‰•°íÍ•±•Ð¹…ÁÁ•¹¡½ÁÑ¥½¸¤ì(€ô(€Í•±•Ð¹Ù…±Õ”õÍ•±•Ñ•‘%ñð€œœì)ô()±½…‘±° ¤¹Ñ¡•¸  ¤€ôøì(€¥˜€¡Á…É…µÌ¹¡…Ì ½Ù•É±…äœ¤¤…µÁ…¥¹M•±•Ð¹¡¥‘‘•¸€ôÑÉÕ”ì(€Í•Ñ%¹Ñ•ÉÙ…°¡…Íå¹Œ€ ¤€ôøì(€€€¥˜€ …Á…É…µÌ¹¡…Ì ½Ù•É±…äœ¤€˜˜µ…¹…•È¹½Á•¸¤É•ÑÕÉ¸ì(€€€ÑÉäì(€€€€€½¹ÍÐÉ•ÍÁ½¹Í”€ô…Ý…¥Ð™•Ñ  œ½…Á¤½ÍÑ…Ñ”œ°ì…¡”è€¹¼µÍÑ½É”œô¤ì(€€€€€½¹ÍÐ¹•áÐ€ô…Ý…¥ÐÉ•ÍÁ½¹Í”¹©Í½¸ ¤ì(€€€€€¥˜€¡)M=8¹ÍÑÉ¥¹¥™ä¡¹•áÐ¤€„ôô)M=8¹ÍÑÉ¥¹¥™ä¡ÍÑ…Ñ”¤¤ìÍÑ…Ñ”€ô¹•áÐìÉ•¹‘•È ¤ìô(€€€ô…Ñ íô(€ô°€ØÀÀ¤ì)ô¤¹…Ñ ¡•ÉÉ½È€ôøÍ•Ñ9½Ñ¥”¡•ÉÉ½È¹µ•ÍÍ…”¤¤ì
+const $ = selector => document.querySelector(selector);
+const campaignSelect = $('#campaignSelect');
+const cards = $('#cards');
+const manager = $('#manager');
+const editor = $('#editor');
+const peopleEditor = $('#peopleEditor');
+const notice = $('#notice');
+const params = new URLSearchParams(location.search);
+if (params.has('overlay')) document.body.classList.add('overlay');
+
+let config = { campaigns: [] };
+let state = { campaign: '', sessions: {} };
+let editingId = null;
+let saveTimer = null;
+let discordUsers = [];
+let assetRefreshSequence = 0;
+
+function activeCampaign() { return config.campaigns.find(item => item.id === state.campaign) || config.campaigns[0]; }
+function currentSession(campaignId = state.campaign) {
+  state.sessions ||= {};
+  state.sessions[campaignId] ||= { active: null, absent: {}, crops: {} };
+  const current = state.sessions[campaignId];
+  current.absent ||= {};
+  current.crops ||= {};
+  return current;
+}
+function defaultCrop(person) { return { zoom: 1.25, x: 50, y: 18, ...(person.crop || {}) }; }
+function setNotice(message = '') { notice.textContent = message; }
+async function loadAll() {
+  const [configResponse, stateResponse] = await Promise.all([fetch('/api/config'), fetch('/api/state')]);
+  if (!configResponse.ok || !stateResponse.ok) throw new Error('Could not load the saved campaign setup.');
+  config = await configResponse.json();
+  state = await stateResponse.json();
+  const requested = params.get('campaign');
+  if (requested && config.campaigns.some(item => item.id === requested)) state.campaign = requested;
+  if (!config.campaigns.some(item => item.id === state.campaign)) state.campaign = config.campaigns[0]?.id || '';
+  if (params.has('overlay') && requested) await saveState();
+  render();
+}
+async function saveState() {
+  await fetch('/api/state', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state) });
+}
+function queueStateSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => saveState().catch(() => {}), 180);
+}
+async function saveConfig() {
+  const response = await fetch('/api/config', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(config) });
+  if (!response.ok) throw new Error(await response.text());
+  await saveState();
+}
+
+function render() {
+  campaignSelect.replaceChildren();
+  for (const campaign of config.campaigns) {
+    const option = document.createElement('option');
+    option.value = campaign.id;
+    option.textContent = campaign.label;
+    campaignSelect.append(option);
+  }
+  const campaign = activeCampaign();
+  if (!campaign) {
+    cards.innerHTML = '<p class="manager-empty">Create a campaign to get started.</p>';
+    $('#overlayLink').href = '?overlay';
+    return;
+  }
+  state.campaign = campaign.id;
+  campaignSelect.value = campaign.id;
+  const overlayUrl = new URL(location.href);
+  overlayUrl.search = new URLSearchParams({ overlay: '', campaign: campaign.id }).toString();
+  $('#overlayLink').href = overlayUrl.href;
+  if (!params.has('overlay')) campaignSelect.hidden = false;
+  const session = currentSession(campaign.id);
+  cards.style.setProperty('--columns', Math.max(1, Math.min(8, campaign.people.length)));
+  cards.replaceChildren();
+  campaign.people.forEach(person => {
+    const crop = session.crops[person.id] ||= defaultCrop(person);
+    const card = document.createElement('article');
+    card.className = `portrait-card${session.active === person.id ? ' speaking' : ''}${session.absent[person.id] ? ' absent' : ''}`;
+    const button = document.createElement('button');
+    button.className = 'portrait-button';
+    button.type = 'button';
+    button.title = `Mark ${person.name} as the current speaker`;
+    const image = document.createElement('img');
+    image.src = person.image || 'assets/portrait-placeholder.svg';
+    image.alt = person.name;
+    image.style.setProperty('--zoom', crop.zoom);
+    image.style.setProperty('--x', `${crop.x}%`);
+    image.style.setProperty('--y', `${crop.y}%`);
+    image.onerror = () => { image.src = 'assets/portrait-placeholder.svg'; };
+    const shade = document.createElement('span'); shade.className = 'portrait-shade';
+    const name = document.createElement('span'); name.className = 'portrait-name'; name.textContent = person.name;
+    const role = document.createElement('span'); role.className = 'portrait-role'; role.textContent = person.role || '';
+    button.append(image, shade, name, role);
+    button.onclick = async () => { session.active = session.active === person.id ? null : person.id; render(); await saveState(); };
+    card.append(button);
+    if (!params.has('overlay')) {
+      const tools = document.createElement('div'); tools.className = 'card-tools';
+      const absent = document.createElement('button'); absent.className = 'button secondary'; absent.textContent = session.absent[person.id] ? 'Show' : 'Dim';
+      absent.onclick = async () => { session.absent[person.id] = !session.absent[person.id]; render(); await saveState(); };
+      tools.append(absent);
+      const reset = document.createElement('button'); reset.className = 'button secondary'; reset.textContent = 'Reset crop';
+      reset.onclick = async () => { session.crops[person.id] = defaultCrop({}); render(); await saveState(); };
+      tools.append(reset);
+      for (const [key, label, min, max, step] of [['zoom','Zoom',1,3.5,.05],['x','Horizontal',0,100,1],['y','Vertical',0,100,1]]) {
+        const description = document.createElement('label'); description.className='tool-label'; description.textContent = `${label}: ${key === 'zoom' ? `${Number(crop[key]).toFixed(2)}Ã—` : `${crop[key]}%`}`;
+        const slider = document.createElement('input'); slider.type='range'; slider.min=min; slider.max=max; slider.step=step; slider.value=crop[key]; slider.setAttribute('aria-label', `${label} crop for ${person.name}`);
+        if (key === 'x' || key === 'y') slider.title = 'At low zoom, there may be little room to pan. Increase Zoom to move a square portrait within the frame.';
+        slider.oninput = () => {
+          crop[key] = Number(slider.value);
+          image.style.setProperty('--zoom', crop.zoom);
+          image.style.setProperty('--x', `${crop.x}%`);
+          image.style.setProperty('--y', `${crop.y}%`);
+          description.textContent = `${label}: ${key === 'zoom' ? `${Number(crop[key]).toFixed(2)}x` : `${crop[key]}%`}`;
+          queueStateSave();
+        };
+        tools.append(description, slider);
+      }
+      card.append(tools);
+    }
+    cards.append(card);
+  });
+}
+
+campaignSelect.onchange = async () => { state.campaign = campaignSelect.value; await saveState(); render(); };
+$('#manageCampaigns').onclick = () => { renderManager(); manager.showModal(); };
+$('#newCampaign').onclick = () => beginEdit({ id: '', label: '', title: '', channelId: '', people: [{ id: 'gm', name: 'Game Master', role: 'GM', image: 'assets/portrait-placeholder.svg', discordId: '' }] });
+$('#cancelEdit').onclick = () => { editor.hidden = true; editingId = null; renderManager(); };
+$('#addPerson').onclick = async () => { addPersonRow({ name: '', role: 'Player Character', image: 'assets/portrait-placeholder.svg', discordId: '' }); await refreshPortraitOptions(); };
+$('#saveCampaign').onclick = async () => {
+  const label = $('#campaignLabel').value.trim();
+  if (!label) return $('#campaignLabel').focus();
+  const people = [...peopleEditor.querySelectorAll('.person-row')].map(row => {
+    const [name, role] = [...row.querySelectorAll('input')].map(input => input.value.trim());
+    const image = row.querySelector('.portrait-select').value;
+    const discordId = row.querySelector('.discord-select').value;
+    const id = row.dataset.id || slug(name) || 'participant';
+    return { id, name, role, image, discordId };
+  }).filter(person => person.name);
+  if (!people.length) return alert('Add at least one participant.');
+  const campaign = { id: editingId || slug(label), label, title: $('#campaignTitle').value.trim(), channelId: $('#channelId').value.trim(), people };
+  if (!campaign.id) campaign.id = `campaign-${Date.now()}`;
+  if (!editingId && config.campaigns.some(item => item.id === campaign.id)) campaign.id = `${campaign.id}-${Date.now().toString(36)}`;
+  if (config.campaigns.some(item => item.id !== editingId && item.id === campaign.id)) return alert('A campaign with that name already exists.');
+  try {
+    const uniqueIds = new Set();
+    people.forEach((person, index) => {
+      if (uniqueIds.has(person.id)) person.id = `${person.id}-${index + 1}`;
+      uniqueIds.add(person.id);
+    });
+    config.campaigns = editingId ? config.campaigns.map(item => item.id === editingId ? campaign : item) : [...config.campaigns, campaign];
+    state.campaign = campaign.id;
+    const session = currentSession(campaign.id);
+    for (const personId of Object.keys(session.crops)) if (!people.some(person => person.id === personId)) delete session.crops[personId];
+    for (const personId of Object.keys(session.absent)) if (!people.some(person => person.id === personId)) delete session.absent[personId];
+    await saveConfig();
+    editor.hidden = true; editingId = null; manager.close(); setNotice('Campaign saved.'); render();
+  } catch (error) { alert(`Could not save campaign: ${error.message}`); }
+};
+$('#deleteCampaign').onclick = async () => {
+  const campaign = config.campaigns.find(item => item.id === editingId);
+  if (!campaign || !confirm(`Remove â€œ${campaign.label}â€ and its saved portrait settings?`)) return;
+  config.campaigns = config.campaigns.filter(item => item.id !== editingId);
+  delete state.sessions[editingId];
+  state.campaign = config.campaigns[0]?.id || '';
+  try { await saveConfig(); editor.hidden = true; editingId = null; manager.close(); render(); }
+  catch (error) { alert(`Could not remove campaign: ${error.message}`); }
+};
+$('#loadDiscordUsers').onclick = async () => {
+  try {
+    const response = await fetch('/api/discord/users', { cache: 'no-store' });
+    discordUsers = await response.json();
+    if (!discordUsers.length) setNotice('No Discord users are available yet. Start an automatic Discord bridge and make sure it is connected to this campaignâ€™s voice channel, then try again.');
+    else setNotice(`Loaded ${discordUsers.length} Discord voice channel member${discordUsers.length === 1 ? '' : 's'}.`);
+    for (const row of peopleEditor.querySelectorAll('.person-row')) {
+      const select = row.querySelector('.discord-select');
+      const selected = select.value;
+      fillDiscordOptions(select, selected);
+    }
+  } catch (error) { setNotice(`Could not load Discord users: ${error.message}`); }
+};
+
+function slug(value) { return value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function renderManager() {
+  const list = $('#managerList'); list.replaceChildren();
+  if (!config.campaigns.length) { const empty=document.createElement('p'); empty.className='manager-empty'; empty.textContent='No campaigns yet. Add one to get started.'; list.append(empty); }
+  for (const campaign of config.campaigns) {
+    const row=document.createElement('div'); row.className='campaign-row';
+    const label=document.createElement('strong'); label.textContent=`${campaign.label} Â· ${campaign.people.length} participant${campaign.people.length===1?'':'s'}`;
+    const edit=document.createElement('button'); edit.className='button secondary'; edit.type='button'; edit.textContent='Edit'; edit.onclick=()=>beginEdit(campaign);
+    row.append(label,edit); list.append(row);
+  }
+}
+async function beginEdit(campaign) {
+  editingId = campaign.id || null;
+  $('#formHeading').textContent = editingId ? 'Edit campaign' : 'Add campaign';
+  $('#campaignLabel').value = campaign.label || '';
+  $('#campaignTitle').value = campaign.title || '';
+  $('#channelId').value = campaign.channelId || '';
+  updateAssetHint();
+  $('#deleteCampaign').hidden = !editingId;
+  peopleEditor.replaceChildren();
+  (campaign.people || []).forEach(person => addPersonRow(person));
+  editor.hidden = false;
+  await refreshPortraitOptions();
+  $('#campaignLabel').focus();
+}
+function addPersonRow(person) {
+  const row=document.createElement('div'); row.className='person-row'; row.dataset.id=person.id || '';
+  const fields=[['Name',person.name||'','Participant name'],['Role',person.role||'','Optional label']];
+  fields.forEach(([label,value,placeholder])=>{const wrap=document.createElement('label');wrap.textContent=label;const input=document.createElement('input');input.value=value;input.placeholder=placeholder;wrap.append(input);row.append(wrap)});
+  const portraitWrap=document.createElement('label');portraitWrap.textContent='Portrait';
+  const portraitSelect=document.createElement('select');portraitSelect.className='portrait-select';portraitSelect.dataset.selected=person.image||'assets/portrait-placeholder.svg';
+  portraitSelect.addEventListener('change',()=>{portraitSelect.dataset.selected=portraitSelect.value;});
+  portraitWrap.append(portraitSelect);row.append(portraitWrap);
+  const discordWrap=document.createElement('label');discordWrap.textContent='Discord speaker';
+  const discordSelect=document.createElement('select');discordSelect.className='discord-select';
+  fillDiscordOptions(discordSelect, person.discordId || '');
+  discordWrap.append(discordSelect);row.append(discordWrap);
+  const remove=document.createElement('button');remove.type='button';remove.className='button danger remove-person';remove.textContent='Remove';remove.onclick=()=>row.remove();row.append(remove);peopleEditor.append(row);
+}
+function editorCampaignId() { return editingId || slug($('#campaignLabel').value.trim()); }
+function updateAssetHint() {
+  const campaignId=editorCampaignId();
+  $('#assetHint').textContent=campaignId ? `Add portrait images to assets/${campaignId}/, then select them from each Portrait dropdown.` : 'Enter a campaign name to see where to put its portrait images.';
+}
+async function refreshPortraitOptions() {
+  const campaignId=editorCampaignId();
+  const sequence=++assetRefreshSequence;
+  let assets=[];
+  let unavailable=false;
+  if (campaignId) {
+    try {
+      const response=await fetch(`/api/assets?campaign=${encodeURIComponent(campaignId)}`,{cache:'no-store'});
+      if (!response.ok) throw new Error('Asset list request failed');
+      assets=await response.json();
+    } catch { unavailable=true; }
+  }
+  if (sequence!==assetRefreshSequence || campaignId!==editorCampaignId()) return;
+  updateAssetHint();
+  if (unavailable) $('#assetHint').textContent += ' Restart the controller with npm start to load this folder.';
+  for (const row of peopleEditor.querySelectorAll('.person-row')) {
+    const select=row.querySelector('.portrait-select');
+    const selected=select.value || select.dataset.selected || 'assets/portrait-placeholder.svg';
+    select.replaceChildren();
+    const placeholder=document.createElement('option');placeholder.value='assets/portrait-placeholder.svg';placeholder.textContent='Default placeholder';select.append(placeholder);
+    if (selected && selected!=='assets/portrait-placeholder.svg' && !assets.includes(selected)) {
+      const existing=document.createElement('option');existing.value=selected;existing.textContent=`Saved image outside folder (${selected})`;select.append(existing);
+    }
+    for (const imagePath of assets) {
+      const option=document.createElement('option');option.value=imagePath;option.textContent=imagePath.split('/').pop();select.append(option);
+    }
+    select.value=selected || 'assets/portrait-placeholder.svg';
+  }
+}
+$('#campaignLabel').addEventListener('input', updateAssetHint);
+$('#campaignLabel').addEventListener('change', refreshPortraitOptions);
+function fillDiscordOptions(select, selectedId) {
+  select.replaceChildren();
+  const none=document.createElement('option');none.value='';none.textContent='Not assigned';select.append(none);
+  if (selectedId && !discordUsers.some(user => user.id === selectedId)) {
+    const current=document.createElement('option');current.value=selectedId;current.textContent=`Saved Discord ID ${selectedId}`;select.append(current);
+  }
+  for (const user of discordUsers) {
+    const option=document.createElement('option');option.value=user.id;option.textContent=user.label;select.append(option);
+  }
+  select.value=selectedId || '';
+}
+
+loadAll().then(() => {
+  if (params.has('overlay')) campaignSelect.hidden = true;
+  setInterval(async () => {
+    if (!params.has('overlay') && manager.open) return;
+    try {
+      const response = await fetch('/api/state', { cache: 'no-store' });
+      const next = await response.json();
+      if (JSON.stringify(next) !== JSON.stringify(state)) { state = next; render(); }
+    } catch {}
+  }, 600);
+}).catch(error => setNotice(error.message));
