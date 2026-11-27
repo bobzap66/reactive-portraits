@@ -1,0 +1,45 @@
+// One explicitly paired observer tab. Secrets stay in extension session storage.
+const endpoint="http://127.0.0.1:8766/api/foundry";
+let queue=Promise.resolve();
+async function send(b,snapshot){
+ const response=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+b.secret},body:JSON.stringify({campaign:b.campaign,snapshot}),signal:AbortSignal.timeout(4000)});
+ if(!response.ok)throw Error("Local controller rejected bridge: "+response.status);
+}
+async function read(tabId){
+ const [r]=await chrome.scripting.executeScript({target:{tabId},world:"MAIN",func:()=>{
+  const g=globalThis.game,api=g?.modules?.get("greene-gaming-stream-director")?.api?.integration;
+  return api?.getSnapshot?.()??null;
+ }});
+ return r?.result;
+}
+async function detach(b){
+ if(!b)return;
+ try{await send(b,{apiVersion:1,available:false});}catch{}
+}
+async function tick(){
+ const {bridge:b}=await chrome.storage.session.get("bridge");if(!b)return;
+ try{
+  const s=await read(b.tabId);if(!s)throw Error("Stream Director API unavailable");
+  await send(b,s);
+  b.status=s.available?"Connected":"Observer API unavailable";
+ }catch(e){b.status=e.message;await detach(b);}
+ await chrome.storage.session.set({bridge:b});
+}
+function serial(fn){const task=queue.catch(()=>{}).then(fn);queue=task;return task;}
+chrome.runtime.onMessage.addListener((msg,sender,reply)=>{
+ if(sender.id!==chrome.runtime.id||sender.tab)return;
+ serial(async()=>{
+  if(msg.kind==="connect"){
+   const s=await read(msg.tabId);if(!s?.available)throw Error("Open the designated observer and enable the Stream Director API first");
+   const {bridge:old}=await chrome.storage.session.get("bridge");await detach(old);
+   const b={tabId:msg.tabId,campaign:msg.campaign,secret:msg.secret,status:"Connected"};
+   await send(b,s);await chrome.storage.session.set({bridge:b});
+   await chrome.alarms.create("heartbeat",{periodInMinutes:0.5});
+   return {status:"Connected"};
+  }
+  if(msg.kind==="disconnect"){const {bridge}=await chrome.storage.session.get("bridge");await detach(bridge);await chrome.storage.session.remove("bridge");await chrome.alarms.clear("heartbeat");return {status:"Disconnected"};}
+  return {error:"Unknown request"};
+ }).then(reply,e=>reply({error:e.message}));return true;
+});
+chrome.alarms.onAlarm.addListener(a=>{if(a.name==="heartbeat")void serial(tick);});
+chrome.tabs.onRemoved.addListener(tabId=>void serial(async()=>{const {bridge}=await chrome.storage.session.get("bridge");if(bridge?.tabId===tabId){await detach(bridge);await chrome.storage.session.remove("bridge");await chrome.alarms.clear("heartbeat");}}));
