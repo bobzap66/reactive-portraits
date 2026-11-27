@@ -12,6 +12,7 @@
       <div><h1>Reactive Portraits</h1><p>Campaign portrait controller and OBS overlay</p></div>
       <div class="header-actions">
         <label class="campaign-label">Campaign <select id="campaignSelect"></select></label>
+        <button id="foundryPair" class="button secondary">Pair Foundry</button>
         <button id="manageCampaigns" class="button secondary">Manage campaigns</button>
         <a id="overlayLink" class="button" target="_blank" rel="noreferrer">Open OBS overlay</a>
       </div>
@@ -21,6 +22,8 @@
     <footer>Click a portrait to mark the speaker. Use the controls below each portrait to dim absent players and adjust crops.</footer>
   </main>
 
+  <dialog id="pairDialog"><form method="dialog"><h2>Foundry bridge pairing</h2><p>Copy these values into the Reactive Portraits Chrome extension on the observer tab. Keep the key private; it changes when the server restarts.</p><label>Campaign ID<input id="pairCampaign" readonly></label><label>Pairing key<input id="pairKey" readonly></label><div class="dialog-actions"><button type="button" id="rotatePair">Rotate key</button><button>Close</button></div></form></dialog>
+  <datalist id="foundryActors"></datalist>
   <dialog id="manager">
     <form id="campaignForm" method="dialog">
       <div class="dialog-heading"><div><h2 id="formHeading">Manage campaigns</h2><p>Campaigns and portraits stay on this computer.</p></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div>
@@ -33,6 +36,7 @@
           <label>Overlay heading<input id="campaignTitle" maxlength="100"></label>
           <label>Discord voice channel ID <span class="optional">(optional)</span><input id="channelId" inputmode="numeric" placeholder="Used by automatic speaker detection"></label>
         </div>
+        <div class="foundry-options"><label><input type="checkbox" id="foundryEnabled"> Enable Foundry integration</label><label><input type="checkbox" id="foundryHealth"> Combat health bars</label><label><input type="checkbox" id="foundryTurn"> Active-turn indicator</label><button type="button" id="loadFoundryActors">Load Foundry actors</button></div>
         <div class="people-heading"><h3>Participants</h3><div><button type="button" id="loadDiscordUsers" class="button secondary small">Load Discord users</button> <button type="button" id="addPerson" class="button secondary small">Add participant</button></div></div>
         <div id="peopleEditor" class="people-editor"></div>
         <div class="dialog-actions"><button type="button" id="deleteCampaign" class="button danger">Remove campaign</button><span class="spacer"></span><button type="button" id="cancelEdit" class="button secondary">Cancel</button><button type="button" id="saveCampaign" class="button">Save campaign</button></div>
