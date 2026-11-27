@@ -4,6 +4,8 @@ const http = require('node:http');
 const { randomBytes } = require('node:crypto');
 const { matchesSecret, createStore } = require('./foundry-state.cjs');
 const foundryStore = createStore();
+const {createOBS,roles,mapping,targetFor}=require('./obs.cjs');
+const obs=createOBS();
 
 const root = __dirname;
 const port = Number(process.env.PORT || 8766);
@@ -22,6 +24,11 @@ if (!config) {
 }
 let state = readJson(stateFile, { campaign: config.campaigns[0]?.id || '', sessions: {} });
 let discordUsers = [];
+const obsFile=path.join(root,'obs-config.json');
+let obsConfig=readJson(obsFile,{enabled:false,port:4455,password:'',campaigns:{}});
+obsConfig={enabled:obsConfig.enabled===true,port:Number.isInteger(obsConfig.port)&&obsConfig.port>0&&obsConfig.port<65536?obsConfig.port:4455,password:typeof obsConfig.password==='string'?obsConfig.password:'',campaigns:obsConfig.campaigns||{}};
+obs.configure(obsConfig);
+const obsStatus=campaign=>{const s=obs.getStatus();return {enabled:obsConfig.enabled,connected:s.connected,scene:s.scene,streaming:s.streaming,recording:s.recording,mappings:obsConfig.campaigns[campaign]||{},active:state.campaign===campaign};};
 
 function campaignAssetDir(campaignId) {
   if (typeof campaignId !== 'string' || !/^[a-z0-9][a-z0-9_-]*$/i.test(campaignId)) throw new Error('Campaign ID must use letters, numbers, underscores, or hyphens.');
@@ -100,6 +107,38 @@ const server = http.createServer(async (req, res) => {
     const localOrigins = ['http://127.0.0.1:'+port, 'http://localhost:'+port];
     const localHost = ['127.0.0.1:'+port, 'localhost:'+port].includes(req.headers.host);
     if (!localHost) return send(res, 403, 'Local host only');
+    if (pathname.startsWith('/api/obs/')) {
+      const local=(origin===undefined||localOrigins.includes(origin))&&req.headers['sec-fetch-site']==='same-origin';
+      const bridge=(!origin||/^chrome-extension:\/\/[a-p]{32}$/.test(origin))&&matchesSecret(req.headers.authorization?.replace(/^Bearer /,''),pairingKey);
+      const json=value=>send(res,200,JSON.stringify(value),'application/json; charset=utf-8');
+      if(pathname==='/api/obs/config'&&local){
+        if(req.method==='GET')return json({enabled:obsConfig.enabled,port:obsConfig.port,hasPassword:!!obsConfig.password,campaigns:obsConfig.campaigns,status:obs.getStatus()});
+        if(req.method==='POST'){
+          const v=await readBody(req,65536);
+          if(typeof v.enabled!=='boolean'||!Number.isInteger(v.port)||v.port<1||v.port>65535||typeof v.password!=='string'||v.password.length>256)throw Error('Invalid OBS connection settings');
+          const next={...obsConfig,enabled:v.enabled,port:v.port,password:v.clearPassword===true?'':v.password||obsConfig.password};
+          fs.writeFileSync(obsFile,JSON.stringify(next,null,2),{mode:0o600});obsConfig=next;obs.configure(obsConfig);return send(res,204);
+        }
+      }
+      if(pathname==='/api/obs/mapping'&&local&&req.method==='POST'){
+        const v=await readBody(req,65536);if(!config.campaigns.some(c=>c.id===v.campaign))throw Error('Unknown campaign');
+        const s=obs.getStatus();if(!s.connected)throw Error('Connect OBS before mapping scenes');
+        const next={...obsConfig,campaigns:{...obsConfig.campaigns,[v.campaign]:mapping(v.mappings,s.scenes)}};
+        fs.writeFileSync(obsFile,JSON.stringify(next,null,2),{mode:0o600});obsConfig=next;return send(res,204);
+      }
+      if(!bridge)return send(res,403,'Paired bridge only');
+      if(pathname==='/api/obs/status'&&req.method==='GET'){
+        const campaign=new URL(req.url,'http://127.0.0.1').searchParams.get('campaign');
+        if(!config.campaigns.some(c=>c.id===campaign))throw Error('Unknown campaign');return json(obsStatus(campaign));
+      }
+      if(pathname==='/api/obs/scene'&&req.method==='POST'){
+        const v=await readBody(req,4096);if(!config.campaigns.some(c=>c.id===v.campaign))throw Error('Unknown campaign');
+        if(!foundryStore.get(v.campaign).available)throw Error('GM bridge unavailable');
+        const target=targetFor({enabled:obsConfig.enabled,activeCampaign:state.campaign,campaign:v.campaign,mappings:obsConfig.campaigns[v.campaign],status:obs.getStatus(),role:v.role,expectedScene:v.expectedScene});
+        await obs.switchScene(target);return json(obsStatus(v.campaign));
+      }
+      return send(res,404,'Not found');
+    }
     if (pathname === '/api/foundry' && req.method === 'POST') {
       if (origin && !/^chrome-extension:\/\/[a-p]{32}$/.test(origin)) return send(res, 403, 'Extension requests only');
       if (!matchesSecret(req.headers.authorization?.replace(/^Bearer /,''), pairingKey)) return send(res, 401, 'Invalid pairing key');
