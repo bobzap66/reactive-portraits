@@ -145,7 +145,7 @@ const server = http.createServer(async (req, res) => {
       if(!bridge)return send(res,403,'Paired bridge only');
       if(pathname==='/api/obs/break'&&req.method==='POST'){
         const v=await readBody(req,4096),s=cueState();
-        if(v.campaign!==s.campaign||!foundryStore.get(v.campaign).available||v.expectedScene!==s.scene||v.cueId!==cues.snapshot(s)?.id||!cues.controlBreak(s,v.action,v.minutes))return send(res,409,'Break state changed or invalid timer command');
+        if(v.campaign!==s.campaign||!foundryStore.get(v.campaign).available||v.expectedScene!==s.scene||typeof v.cueId!=='string'||v.cueId!==cues.snapshot(s)?.id||!cues.controlBreak(s,v.action,v.minutes))return send(res,409,'Break state changed or invalid timer command');
         return json(obsStatus(v.campaign));
       }
       if(pathname==='/api/obs/status'&&req.method==='GET'){
