@@ -1,0 +1,7 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {createCues}=require('../production-cues.cjs');
+const base={enabled:true,connected:true,active:true,campaign:'cc',scene:'Intro',sceneEpoch:1,mappings:{intro:'Intro',break:'Break',technical:'Trouble'}};
+test('countdown follows supplied actual remaining time; zero alone is not completion',()=>{let n=100;const c=createCues({now:()=>n});assert.equal(c.countdown(base,2000),true);n+=3000;assert.equal(c.snapshot(base).introRemainingMs,0);assert.equal(c.snapshot(base).introReady,false);assert.equal(c.complete(base),true);assert.equal(c.snapshot(base).introReady,true);});
+test('scene changes, campaign changes, reconnect and rapid return invalidate cues',()=>{const c=createCues();for(const s of [{...base,sceneEpoch:2},{...base,campaign:'other'},{...base,connected:false},{...base,scene:'Break'}]){c.reset();assert.equal(c.complete(base),true);c.snapshot(s);assert.equal(c.snapshot(base).introReady,false);}});
+test('reject unrelated scenes, disconnected state and invalid durations',()=>{const c=createCues();assert.equal(c.complete({...base,scene:'Break'}),false);assert.equal(c.complete({...base,connected:false}),false);for(const n of [-1,Infinity,NaN,'123'])assert.equal(c.countdown(base,n),false);});
+test('elapsed timer resets on scene entry',()=>{let n=0;const c=createCues({now:()=>n});c.snapshot(base);n=5000;assert.equal(c.snapshot(base).elapsedMs,5000);assert.equal(c.snapshot({...base,scene:'Break'}).elapsedMs,0);});
