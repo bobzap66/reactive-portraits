@@ -6,6 +6,7 @@ const root = __dirname;
 const port = Number(process.env.PORT || 8766);
 const configFile = path.join(root, 'campaigns.json');
 const stateFile = path.join(root, 'reactive-state.json');
+const assetsRoot = path.join(root, 'assets');
 const defaultConfig = { campaigns: [] };
 let config = readJson(configFile, null);
 if (!config) {
@@ -14,6 +15,17 @@ if (!config) {
 }
 let state = readJson(stateFile, { campaign: config.campaigns[0]?.id || '', sessions: {} });
 let discordUsers = [];
+
+function campaignAssetDir(campaignId) {
+  if (typeof campaignId !== 'string' || !/^[a-z0-9][a-z0-9_-]*$/i.test(campaignId)) throw new Error('Campaign ID must use letters, numbers, underscores, or hyphens.');
+  const directory = path.resolve(assetsRoot, campaignId);
+  if (!directory.startsWith(assetsRoot + path.sep)) throw new Error('Invalid campaign asset folder.');
+  return directory;
+}
+function ensureCampaignAssetDirs(campaigns) {
+  for (const campaign of campaigns) fs.mkdirSync(campaignAssetDir(campaign.id), { recursive: true });
+}
+ensureCampaignAssetDirs(config.campaigns);
 
 function readJson(file, fallback) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
@@ -45,6 +57,7 @@ function validateConfig(value) {
   const ids = new Set();
   for (const campaign of value.campaigns) {
     if (!campaign.id || !campaign.label || !Array.isArray(campaign.people)) throw new Error('Each campaign needs an ID, label, and people list.');
+    campaignAssetDir(campaign.id);
     if (ids.has(campaign.id)) throw new Error(`Campaign ID “${campaign.id}” is used more than once.`);
     ids.add(campaign.id);
     const personIds = new Set();
@@ -79,13 +92,26 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && origin && !['http://127.0.0.1:8766', 'http://localhost:8766'].includes(origin)) return send(res, 403, 'Local requests only');
     if (pathname === '/api/config' && req.method === 'GET') return send(res, 200, JSON.stringify(config), 'application/json; charset=utf-8');
     if (pathname === '/api/config' && req.method === 'POST') {
-      config = validateConfig(await readBody(req));
+      const nextConfig = validateConfig(await readBody(req));
+      ensureCampaignAssetDirs(nextConfig.campaigns);
+      config = nextConfig;
       writeJson(configFile, config);
       const validCampaigns = new Set(config.campaigns.map(campaign => campaign.id));
       if (!validCampaigns.has(state.campaign)) state.campaign = config.campaigns[0]?.id || '';
       for (const id of Object.keys(state.sessions || {})) if (!validCampaigns.has(id)) delete state.sessions[id];
       writeJson(stateFile, state);
       return send(res, 204);
+    }
+    if (pathname === '/api/assets' && req.method === 'GET') {
+      const campaignId = new URL(req.url, 'http://127.0.0.1').searchParams.get('campaign');
+      const directory = campaignAssetDir(campaignId);
+      fs.mkdirSync(directory, { recursive: true });
+      const extensions = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.avif', '.svg']);
+      const files = fs.readdirSync(directory, { withFileTypes: true })
+        .filter(entry => entry.isFile() && extensions.has(path.extname(entry.name).toLowerCase()))
+        .map(entry => `assets/${campaignId}/${entry.name}`)
+        .sort((a, b) => a.localeCompare(b));
+      return send(res, 200, JSON.stringify(files), 'application/json; charset=utf-8');
     }
     if (pathname === '/api/state' && req.method === 'GET') return send(res, 200, JSON.stringify(state), 'application/json; charset=utf-8');
     if (pathname === '/api/discord/users' && req.method === 'GET') return send(res, 200, JSON.stringify(discordUsers), 'application/json; charset=utf-8');

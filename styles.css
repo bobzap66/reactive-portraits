@@ -11,3 +11,5 @@
 .overlay .portrait-role{top:10px;left:10px;padding:4px 9px;border:1px solid #e1bd726b;border-radius:999px;background:#130e17e8;font-size:clamp(9px,.85vw,12px)}
 .overlay .portrait-card.speaking{transform:translateY(-3px) scale(1.025);border-color:var(--gold);box-shadow:0 0 0 2px #e1bd727a,0 0 24px #e1bd725c,0 14px 30px #000b}
 .overlay .portrait-card.speaking:after{inset:4px;border-radius:13px}
+
+.asset-hint{color:var(--muted);font-size:13px;margin:8px 0 10px}
